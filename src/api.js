@@ -95,7 +95,6 @@ export const postTeam = (teamData) => {
 };
 
 export const postPlayer = (playerData) => {
-  console.log("anseo")
   const accessToken = Cookies.get("jwt");
   return api
   .post("/players", playerData, {

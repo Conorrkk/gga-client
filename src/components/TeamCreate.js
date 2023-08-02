@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getUserClub } from "../api";
-import Cookies from "js-cookie";
 import { postTeam } from "../api";
 
 function TeamCreate() {
@@ -13,8 +12,6 @@ function TeamCreate() {
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
-    const accessToken = Cookies.get("jwt");
-    console.log(accessToken, "here");
     getUserClub()
       .then((club) => setUserClub(club))
       .catch((error) => {
@@ -98,9 +95,6 @@ function TeamCreate() {
           >
             <Form.Label>Level</Form.Label>
             <Form.Select value={teamLevel} onChange={handleLevelChange}>
-              {/* <option value="Senior">Senior</option>
-              <option value="u20s">u20s</option>
-              <option value="Minor">Minor</option> */}
               {teamLevels.map((teamLevel) => (
                 <option key={teamLevel.value} value={teamLevel.value}>
                   {teamLevel.label}
