@@ -7,7 +7,7 @@ const api = axios.create({
 
 // Define API request functions
 export const getMatches = () => api.get("/matches");
-export const postMatch = (matchData) => api.post("/matches", matchData);
+// export const postMatch = (matchData) => api.post("/matches", matchData);
 export const updateMatch = (id) => api.put(`/matches/${id}`);
 export const deleteMatch = (id) => api.delete(`/matches/${id}`);
 
@@ -29,6 +29,7 @@ export const checkLogin = (loginData) => {
     .then((response) => {
       console.log(response);
       const token = response.data.token;
+      console.log(token);
       const tokenExpiry = 2 * 60 * 60;
       Cookies.set("jwt", token, { expires: tokenExpiry });
       return response.data;
@@ -68,7 +69,7 @@ export const getTeams = () => {
       },
     })
     .then((response) => {
-      console.log(response)
+      console.log(response);
       return response.data;
     })
     .catch((error) => {
@@ -97,16 +98,91 @@ export const postTeam = (teamData) => {
 export const postPlayer = (playerData) => {
   const accessToken = Cookies.get("jwt");
   return api
-  .post("/players", playerData, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  .then((response) => {
-    return response.data
-  })
-  .catch((error) => {
-    console.error("Error posting playerData:", error);
-    throw error;
-  });
+    .post("/players", playerData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error posting playerData:", error);
+      throw error;
+    });
+};
+
+export const getPlayers = async (team) => {
+  const accessToken = Cookies.get("jwt");
+  const teamId = team;
+  console.log(teamId);
+  return api
+    .get("/players", {
+      params: { teamId },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error fetching players:", error);
+    });
+};
+
+export const postMatch = (matchData) => {
+  const accessToken = Cookies.get("jwt");
+  return api
+    .post("/matches", matchData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error posting teamData:", error);
+      throw error;
+    });
+};
+
+export const updatePanel = (matchId, playerId) => {
+  const accessToken = Cookies.get("jwt");
+  console.log("from api:", matchId);
+  console.log("playerid:",playerId)
+  const data = {
+    playerId: [playerId]
+  }
+  return api
+    .patch(`/matches/${matchId}/addPlayers`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data
+    })
+    .catch();
+};
+
+export const getMatchById = async (matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const id = matchId;
+  console.log("id to search with",id);
+  return api
+    .get(`/matches/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      console.log(response)
+      console.log(response.data)
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error fetching match by id:", error);
+    });
 };

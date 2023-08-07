@@ -1,12 +1,12 @@
 import React from "react";
-import MatchCreate from "../components/MatchCreate";
+import SelectTeam from "../components/SelectTeam";
 
 
 function CreateMatchPage() {
 
   return (
     <div>
-      <MatchCreate />
+      <SelectTeam />
     </div>
   );
 }

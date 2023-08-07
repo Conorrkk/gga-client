@@ -30,30 +30,29 @@ function UserLogin({ onLogin }) {
     event.preventDefault();
 
     try {
-      const response = {
-        email: email,
-        password: password,
-      };
-      checkLogin(response)
+      const response = await checkLogin({
+        email,
+        password,
+      });
+      // for authentication provider
+      const accessToken = response?.token;
 
-      const accessToken = response?.data?.token;
-      console.log({accessToken})
+      // setting authentication
       setAuth({ email, password, accessToken });
       setEmail("");
       setPassword("");
       setSucces(true);
-      console.log(response);
-    //   onLogin(response);
+
     } catch (err) {
-        if (!err?.response) {
-            setErrMsg('No server response');
-        } else if (err.response?.status === 400){
-            setErrMsg('Issue with email or password');
-        } else if (err.response?.status === 401) {
-            setErrMsg('Unauthorised');
-        } else {
-            setErrMsg('Login failed');
-        }
+      if (!err?.response) {
+        setErrMsg("No server response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Issue with email or password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorised");
+      } else {
+        setErrMsg("Login failed");
+      }
     }
   };
 
@@ -69,10 +68,7 @@ function UserLogin({ onLogin }) {
       ) : (
         <div className="login d-flex justify-content-center align-items-center vh-100 bg-white">
           <div className="form_container p-5 rounded bg-white border border-dark border-2">
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-            >
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
               {errMsg}
             </p>
             <Form onSubmit={handleSubmit}>

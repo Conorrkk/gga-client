@@ -5,8 +5,10 @@ import Registration from "./pages/RegistrationPage";
 import Teams from "./pages/TeamsPage";
 import CreateTeam from "./pages/CreateTeamPage";
 import AddPanel from "./pages/AddPanelPage";
-import MatchCreate from "./components/MatchCreate";
 import Dashboard from "./pages/Dashboard";
+import CreateMatchPage from "./pages/CreateMatchPage";
+import ChoosePanel from "./pages/ChoosePanelPage";
+import RecordStats from "./pages/RecordStatsPage";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
       <Route path="/teams" element={<Teams/>}></Route>
       <Route path="/createTeam" element={<CreateTeam/>}></Route>
       <Route path="/addPanel/:teamId" element={<AddPanel/>}></Route>
-      <Route path="/createMatch" element={<MatchCreate/>}></Route>
+      <Route path="/createMatch" element={<CreateMatchPage/>}></Route>
+      <Route path="/match/:matchId/team/:teamId" element={<ChoosePanel />}></Route>
+      <Route path="/recordStats" element={<RecordStats />}></Route>
     </Routes>
     </BrowserRouter>
   )
