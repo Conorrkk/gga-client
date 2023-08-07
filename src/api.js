@@ -150,8 +150,6 @@ export const postMatch = (matchData) => {
 
 export const updatePanel = (matchId, playerId) => {
   const accessToken = Cookies.get("jwt");
-  console.log("from api:", matchId);
-  console.log("playerid:",playerId)
   const data = {
     playerId: [playerId]
   }
@@ -185,4 +183,82 @@ export const getMatchById = async (matchId) => {
     .catch((error) => {
       console.error("Error fetching match by id:", error);
     });
+};
+
+export const getPlayerById = async (playerId) => {
+  const accessToken = Cookies.get("jwt");
+  const id = playerId;
+  return api
+    .get(`/players/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data)
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error fetching player by id:", error);
+    });
+}
+
+export const addGoal = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+
+  const data = {
+    playerId
+  };
+  const id = matchId;
+
+  return api
+    .patch(`/matches/${id}/addGoal`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data
+    })
+    .catch();
+};
+
+export const addPoint = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+
+  const data = {
+    playerId
+  };
+  const id = matchId;
+
+  return api
+    .patch(`/matches/${id}/addPoint`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data
+    })
+    .catch();
+};
+
+export const addWide = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+
+  const data = {
+    playerId
+  };
+  const id = matchId;
+
+  return api
+    .patch(`/matches/${id}/addWide`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data
+    })
+    .catch();
 };

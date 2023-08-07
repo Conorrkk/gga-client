@@ -9,11 +9,13 @@ import Dashboard from "./pages/Dashboard";
 import CreateMatchPage from "./pages/CreateMatchPage";
 import ChoosePanel from "./pages/ChoosePanelPage";
 import RecordStats from "./pages/RecordStatsPage";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
     <BrowserRouter>
     <Routes>
+      <Route path="/landingPage" element={<LandingPage />}></Route>
       <Route path="/register" element={<Registration/>}></Route>
       <Route path="/login" element={<Login/>}></Route>
       <Route path="/dashboard" element={<Dashboard/>}></Route>

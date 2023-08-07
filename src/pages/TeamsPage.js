@@ -1,6 +1,7 @@
 import TeamList from "../components/TeamList";
 import { useState, useEffect } from "react";
 import { getTeams } from "../api";
+import NavBar from "../components/NavBar";
 
 function Teams() {
   const [teams, setTeams] = useState([])
@@ -15,6 +16,7 @@ function Teams() {
   
   return (
     <div>
+      <NavBar />
       <TeamList teams={teams} />
     </div>
   );
