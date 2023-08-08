@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getTeams, postMatch } from "../api";
 import { Form, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 
 // import SelectPanel from "./SelectPanel";
@@ -19,7 +19,6 @@ function SelectTeam() {
   useEffect(() => {
     getTeams()
       .then((response) => {
-        console.log(response);
         if (response && Array.isArray(response.teams)) {
           setUsersTeams(response.teams);
         } else {
@@ -35,7 +34,6 @@ function SelectTeam() {
     const selTeamId = event.target.value;
     const teamToSelect = usersTeams.find((team) => team._id === selTeamId);
     setTeam(teamToSelect);
-    console.log("team set:", teamToSelect);
   };
 
   const handleChangeOpponent = (event) => {
@@ -44,16 +42,12 @@ function SelectTeam() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const match = {
       team,
       opponent,
     };
-
-    console.log(match);
     postMatch(match)
     .then((response) => {
-      console.log("created match", response)
       // for setting current match so that stats can be recorded
       setCurrentMatch(response)
       navigate(`/match/${response._id}/team/${team._id}`)
@@ -62,10 +56,6 @@ function SelectTeam() {
       console.error("Error creating match:", error);
     });
   };
-
-  useEffect(() => {
-    console.log(currentMatch);
-  }, [currentMatch]);
 
   return (
     <div>

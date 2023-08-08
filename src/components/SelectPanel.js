@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import PlayerList from "./PlayerList";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -15,17 +15,12 @@ function SelectPanel({ matchId, teamId }) {
   const handleClick = async () => {
     getMatchById(matchId)
     .then((response) => {
-      console.log(response)
     setCurrentMatch(response)
     })
     .catch((error) => {
       console.error("Error getting match by id:", error)
     })
   };
-
-  useEffect(() => {
-    console.log("tha current ,aytch",currentMatch);
-  }, [currentMatch]);
 
   return (
     <div>

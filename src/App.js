@@ -10,6 +10,7 @@ import CreateMatchPage from "./pages/CreateMatchPage";
 import ChoosePanel from "./pages/ChoosePanelPage";
 import RecordStats from "./pages/RecordStatsPage";
 import LandingPage from "./pages/LandingPage";
+import MatchOverview from "./pages/MatchOverviewPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <Route path="/createMatch" element={<CreateMatchPage/>}></Route>
       <Route path="/match/:matchId/team/:teamId" element={<ChoosePanel />}></Route>
       <Route path="/recordStats" element={<RecordStats />}></Route>
+      <Route path="/matchOverview/:id" element={<MatchOverview />}></Route>
     </Routes>
     </BrowserRouter>
   )

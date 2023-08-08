@@ -2,11 +2,9 @@ import { Form, Card, Button } from "react-bootstrap";
 import { updatePanel } from "../api";
 
 function PlayerShow({ player, matchId }) {
-  console.log(player);
   const handleSubmit = (event) => {
     event.preventDefault();
     const playerId = player._id;
-    console.log(playerId);
     updatePanel(matchId, playerId);
   };
 

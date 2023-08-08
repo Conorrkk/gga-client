@@ -7,7 +7,6 @@ const api = axios.create({
 
 // Define API request functions
 export const getMatches = () => api.get("/matches");
-// export const postMatch = (matchData) => api.post("/matches", matchData);
 export const updateMatch = (id) => api.put(`/matches/${id}`);
 export const deleteMatch = (id) => api.delete(`/matches/${id}`);
 
@@ -27,9 +26,7 @@ export const checkLogin = (loginData) => {
       withCredentials: true,
     })
     .then((response) => {
-      console.log(response);
       const token = response.data.token;
-      console.log(token);
       const tokenExpiry = 2 * 60 * 60;
       Cookies.set("jwt", token, { expires: tokenExpiry });
       return response.data;
@@ -43,7 +40,6 @@ export const checkLogin = (loginData) => {
 export const getUserClub = () => {
   // gets jwt from client to be passed to backend and then be decoded
   const accessToken = Cookies.get("jwt");
-  console.log(accessToken, "here");
   return api
     .get("/users/club", {
       headers: {
@@ -51,7 +47,6 @@ export const getUserClub = () => {
       },
     })
     .then((response) => {
-      console.log(response);
       return response.data.club;
     })
     .catch((error) => {
@@ -69,7 +64,6 @@ export const getTeams = () => {
       },
     })
     .then((response) => {
-      console.log(response);
       return response.data;
     })
     .catch((error) => {
@@ -78,7 +72,6 @@ export const getTeams = () => {
 };
 
 export const postTeam = (teamData) => {
-  console.log("here");
   const accessToken = Cookies.get("jwt");
   return api
     .post("/teams", teamData, {
@@ -115,7 +108,6 @@ export const postPlayer = (playerData) => {
 export const getPlayers = async (team) => {
   const accessToken = Cookies.get("jwt");
   const teamId = team;
-  console.log(teamId);
   return api
     .get("/players", {
       params: { teamId },
@@ -151,8 +143,8 @@ export const postMatch = (matchData) => {
 export const updatePanel = (matchId, playerId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
-    playerId: [playerId]
-  }
+    playerId: [playerId],
+  };
   return api
     .patch(`/matches/${matchId}/addPlayers`, data, {
       headers: {
@@ -160,7 +152,7 @@ export const updatePanel = (matchId, playerId) => {
       },
     })
     .then((response) => {
-      return response.data
+      return response.data;
     })
     .catch();
 };
@@ -168,7 +160,6 @@ export const updatePanel = (matchId, playerId) => {
 export const getMatchById = async (matchId) => {
   const accessToken = Cookies.get("jwt");
   const id = matchId;
-  console.log("id to search with",id);
   return api
     .get(`/matches/${id}`, {
       headers: {
@@ -176,8 +167,6 @@ export const getMatchById = async (matchId) => {
       },
     })
     .then((response) => {
-      console.log(response)
-      console.log(response.data)
       return response.data;
     })
     .catch((error) => {
@@ -195,22 +184,36 @@ export const getPlayerById = async (playerId) => {
       },
     })
     .then((response) => {
-      console.log(response.data)
       return response.data;
     })
     .catch((error) => {
       console.error("Error fetching player by id:", error);
     });
-}
+};
+
+export const getTeamById = (teamId) => {
+  const accessToken = Cookies.get("jwt");
+  return api
+    .get("/teams/getTeamName", {
+      params: { teamId },
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error getting team by id:", error);
+    });
+};
 
 export const addGoal = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
-
   const data = {
-    playerId
+    playerId,
   };
   const id = matchId;
-
   return api
     .patch(`/matches/${id}/addGoal`, data, {
       headers: {
@@ -218,19 +221,19 @@ export const addGoal = (playerId, matchId) => {
       },
     })
     .then((response) => {
-      return response.data
+      return response.data;
     })
-    .catch();
+    .catch((error) => {
+      console.error("Error adding goal:", error);
+    });
 };
 
 export const addPoint = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
-
   const data = {
-    playerId
+    playerId,
   };
   const id = matchId;
-
   return api
     .patch(`/matches/${id}/addPoint`, data, {
       headers: {
@@ -238,19 +241,19 @@ export const addPoint = (playerId, matchId) => {
       },
     })
     .then((response) => {
-      return response.data
+      return response.data;
     })
-    .catch();
+    .catch((error) => {
+      console.error("Error adding point:", error);
+    });
 };
 
 export const addWide = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
-
   const data = {
-    playerId
+    playerId,
   };
   const id = matchId;
-
   return api
     .patch(`/matches/${id}/addWide`, data, {
       headers: {
@@ -258,7 +261,9 @@ export const addWide = (playerId, matchId) => {
       },
     })
     .then((response) => {
-      return response.data
+      return response.data;
     })
-    .catch();
+    .catch((error) => {
+      console.error("Error adding wide:", error);
+    });
 };

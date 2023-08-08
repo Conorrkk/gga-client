@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import "../styles.css";
-import { useRef, useEffect, useState, useContext } from "react";
+import { useRef, useEffect, useState} from "react";
 import { checkLogin } from "../api";
-import AuthContext from "../context/AuthProvider";
+// import AuthContext from "../context/AuthProvider";
 
 function UserLogin({ onLogin }) {
-  const { setAuth } = useContext(AuthContext);
+  // const { setAuth } = useContext(AuthContext);
   const errRef = useRef();
 
   const [email, setEmail] = useState("");
@@ -30,21 +30,17 @@ function UserLogin({ onLogin }) {
     event.preventDefault();
 
     try {
-      const response = await checkLogin({
+      await checkLogin({
         email,
         password,
       });
-      // for authentication provider
-      const accessToken = response?.token;
-
-      // setting authentication
-      setAuth({ email, password, accessToken });
       setEmail("");
       setPassword("");
       setSucces(true);
 
     } catch (err) {
-      if (!err?.response) {
+      console.log(err);
+      if (err?.response) {
         setErrMsg("No server response");
       } else if (err.response?.status === 400) {
         setErrMsg("Issue with email or password");

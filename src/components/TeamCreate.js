@@ -1,8 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { getUserClub } from "../api";
-import { postTeam } from "../api";
+import { getUserClub, postTeam } from "../api";
 
 function TeamCreate() {
   const errRef = useRef();
@@ -102,11 +100,6 @@ function TeamCreate() {
               ))}
             </Form.Select>
           </Form.Group>
-          <div className="d-grid mb-3">
-            <Link to="/addPanel">
-              <Button variant="success">Add players to panel</Button>
-            </Link>
-          </div>
           <div className="d-grid">
             <Button variant="success" type="submit">
               Create Team
