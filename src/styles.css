@@ -1,15 +1,44 @@
 .form_container {
-    width: 35%;
+  width: 35%;
 }
 
 @media screen and (max-width: 1000px) {
-    .form_container {
-        width: 40%;
-    }
+  .form_container {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 700px) {
-    .form_container {
-        width: 60%;
-    }
+  .form_container {
+    width: 60%;
+  }
+}
+
+.player-card {
+    border-radius: 0 !important;
+}
+
+.match-title {
+    font-size: 200%;
+    border-width: 0;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.scoreline-for {
+    padding-top: 6px;
+    font-size: 150%;
+    border-width: 0;
+    text-align: right;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.scoreline-against {
+  border-width: 0;
+}
+
+.scoreline-button {
+  border-radius: 0 !important;
 }

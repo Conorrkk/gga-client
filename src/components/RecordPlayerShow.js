@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Card, Button } from "react-bootstrap";
 import { addGoal, addPoint, addWide } from "../api";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
+import "../styles.css";
 
 function RecordPlayerShow({ player }) {
   // get the global match context and use it as currentMatch
@@ -27,10 +28,10 @@ function RecordPlayerShow({ player }) {
 
   return (
     <div>
-      <Card style={{ width: "18rem" }} className="mb-4">
+      <Card style={{ width: "18rem" }} className="player-card mb-4">
         <Card.Body>
-          <Card.Title>{player.playerName}</Card.Title>
           <Card.Text>{player.playerPosition}</Card.Text>
+          <Card.Title>{player.playerName}</Card.Title>
           <Button className="me-2" variant="success" onClick={handleGoal}>
             Goal
           </Button>

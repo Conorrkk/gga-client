@@ -2,10 +2,13 @@ import RecordPlayerShow from "./RecordPlayerShow";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { getTeamById } from "../api";
 import { Link } from "react-router-dom";
+import "../styles.css";
+import ScoreCounter from "./ScoreCounter";
 
 function RecordPlayerList({ loadedPlayers, match }) {
   const [teamName, setTeamName] = useState("");
@@ -36,15 +39,23 @@ function RecordPlayerList({ loadedPlayers, match }) {
   return (
     <div>
       <Container fluid>
-        <div className="match-title">
-          <h2>
-            {teamName} vs {match.teams.oppositionTeam}
-          </h2>
-        </div>
-        <div className="match-scoreline">score - line</div>
+        <Card className="match-title">
+          {teamName} vs {match.teams.oppositionTeam}
+        </Card>
+        <Row>
+          <Col sm={6} md={6} lg={6}>
+            <div className="scoreline-for">
+              {" "}
+              Score for &nbsp;&nbsp;&nbsp;&nbsp;:
+            </div>
+          </Col>
+          <Col sm={6} md={6} lg={6}>
+            <ScoreCounter />
+          </Col>
+        </Row>
         <Row>{playerCards}</Row>
         <Link to={`/matchOverview/${id}`}>
-          <Button className="outline-primary">Finish</Button>
+          <Button variant="outline-primary">Finish</Button>
         </Link>
       </Container>
     </div>
