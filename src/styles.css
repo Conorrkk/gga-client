@@ -42,3 +42,21 @@
 .scoreline-button {
   border-radius: 0 !important;
 }
+
+.Board {
+  width: 300px;
+  height: 500px;
+  border: 2px solid black;
+}
+
+.stats-section {
+  width: 25%;
+  float: left;
+  /* Add more styling here */
+}
+
+.player-section {
+  width: 75%;
+  float: left;
+  /* Add more styling here */
+}
