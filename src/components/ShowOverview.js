@@ -6,13 +6,12 @@ import PlayerOverview from "./PlayerOverview";
 
 function ShowOverview({ match, loadedPlayers }) {
   const [teamName, setTeamName] = useState("");
-  console.log(match);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [totalGoals, setTotalGoals] = useState(0);
+  const [totalWides, setTotalWides] = useState(0);
   const oppositionName = match.teams.oppositionTeam;
   const scoreFor = match.goalFor + ":" + match.pointFor;
   const scoreAgainst = match.goalAgainst + ":" + match.pointAgainst;
-  //   const totalPoints = match.teams.players.map((player)=>( key={player.playerId}
-  //     player.stats.point_from_play
-  //   ));
 
   const playerStatsCards = loadedPlayers?.map((player) => (
     <Col key={player._id} sm={4} md={4} lg={4}>
@@ -20,6 +19,25 @@ function ShowOverview({ match, loadedPlayers }) {
     </Col>
   ));
 
+  // loads the different stat totals
+  useEffect(() => {
+    const calculateTotals = () => {
+      let totalPoints = 0;
+      let totalGoals = 0;
+      let totalWides = 0;
+      match.teams.players.forEach((player) => {
+        totalPoints += player.stats.point_from_play;
+        totalGoals += player.stats.goal_from_play;
+        totalWides += player.stats.wide;
+      });
+      setTotalPoints(totalPoints);
+      setTotalGoals(totalGoals);
+      setTotalWides(totalWides);
+    };
+    calculateTotals();
+  }, [match]);
+
+  // loads the user's team name
   useEffect(() => {
     const getTeamName = async () => {
       try {
@@ -45,9 +63,9 @@ function ShowOverview({ match, loadedPlayers }) {
             <Card.Text>
               {/* Score: {scoreFor} - {scoreAgainst}<br></br> */}
               Score: 3:4 - 1:6<br></br>
-              Total Points Scored:<br></br> 
-              Total Goals Scored: <br></br>
-              Total Wides:<br></br>
+              Total Points Scored: {totalPoints}<br></br> 
+              Total Goals Scored: {totalGoals}<br></br>
+              Total Wides: {totalWides}<br></br>
               {/* Total goals: {totalPoints} */}
             </Card.Text>
           </Card.Body>

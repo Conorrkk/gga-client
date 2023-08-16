@@ -1,11 +1,11 @@
-import { useContext, useState, useEffect } from "react";
-import { Card, Button } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Card } from "react-bootstrap";
 import { addGoal, addPoint, addWide } from "../api";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 import "../styles.css";
 import { useDrop } from "react-dnd";
 
-function RecordPlayerShow({ player }) {
+function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
   // get the global match context and use it as currentMatch
   const [currentMatch] = useContext(CurrentMatchContext);
 
@@ -24,17 +24,30 @@ function RecordPlayerShow({ player }) {
   const matchId = currentMatch._id;
 
   const handleGoal = () => {
-    addGoal(playerId, matchId);
+    addGoal(playerId, matchId)
+    .then(() => {
+      onGoalScored()
+    })
+    .catch((error) => {
+      console.error("Error adding goal:", error);
+    });
   };
 
   const handlePoint = () => {
-    addPoint(playerId, matchId);
+    addPoint(playerId, matchId)
+    .then(() => {
+      onPointScored()
+    })
+    .catch((error) => {
+      console.error("Error adding point:", error);
+    });
   };
 
   const handleWide = () => {
     addWide(playerId, matchId);
   };
 
+  // allows items to be dropped (these items are the stats we wish to record)
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "button",
     drop: (item) => addStatToPlayer(item),
@@ -43,6 +56,7 @@ function RecordPlayerShow({ player }) {
     }),
   }));
 
+  // switch to check which stat(item) is going to be recorded
   const addStatToPlayer = (item) => {
     // post to backend and add stat
     switch(item.id) {
@@ -73,15 +87,6 @@ function RecordPlayerShow({ player }) {
           <Card.Text>{player.playerPosition}</Card.Text>
           <Card.Title>{player.playerName}</Card.Title>
           {goals} : {points} (Wides: {wides})
-          {/* <Button className="me-2" variant="success" onClick={handleGoal}>
-            {goals} Goal
-          </Button>
-          <Button className="me-2" variant="success" onClick={handlePoint}>
-            Point
-          </Button>
-          <Button variant="success" onClick={handleWide}>
-            Wide
-          </Button> */}
         </Card.Body>
       </Card>
     </div>

@@ -267,3 +267,39 @@ export const addWide = (playerId, matchId) => {
       console.error("Error adding wide:", error);
     });
 };
+
+// gets total goals scored by a team in a particular match
+export const getTotalGoals = (matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const id = matchId;
+  return api
+  .get(`/matches/${id}/totalGoals`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+  .then((response) => {
+    return response.data
+  })
+  .catch((error) => {
+    console.error("Error getting total goals:", error);
+  });
+};
+
+// gets total goals scored by a team in a particular match
+export const getTotalPoints = (matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const id = matchId;
+  return api
+  .get(`/matches/${id}/totalPoints`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+  .then((response) => {
+    return response.data
+  })
+  .catch((error) => {
+    console.error("Error getting total goals:", error);
+  });
+};

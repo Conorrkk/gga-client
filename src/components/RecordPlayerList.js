@@ -4,49 +4,50 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { getTeamById } from "../api";
+import { useEffect, useState, useContext } from "react";
+import { getTeamById, getTotalGoals, getTotalPoints } from "../api";
 import { Link } from "react-router-dom";
 import "../styles.css";
 import ScoreCounter from "./ScoreCounter";
 import Stack from "react-bootstrap/Stack";
 import Stat from "../components/Stat";
-import { useDrop } from "react-dnd";
+import CurrentMatchContext from "../context/CurrentMatchProvider";
 
-function RecordPlayerList({ loadedPlayers, match }) {
+// array of the different stats we want to record
+const statsToDisplay = [
+  {
+    id: 1,
+    stat: "goal",
+  },
+  {
+    id: 2,
+    stat: "point",
+  },
+  {
+    id: 3,
+    stat: "wide",
+  },
+];
+
+// function RecordPlayerList({ loadedPlayers, match }) {
+function RecordPlayerList({ loadedPlayers }) {
+  // get the global match context and use it as currentMatch
+  const [currentMatch] = useContext(CurrentMatchContext);
+  // state to store the user's team name
   const [teamName, setTeamName] = useState("");
+  // state to store user team's goals
+  const [goalsFor, setGoalsFor] = useState(0);
+  // state to store user team's points
+  const [pointsFor, setPointsFor] = useState(0);
 
-  const [board, setBoard] = useState([]);
+  // to drill the matchId when loading match overview page - currentMatch would be null upon 'finish' so context prov wouldn't work
+  const id = currentMatch._id;
 
-  // for loading the match overview still with the id of the current match as currentmatchstate should be
-  // set to nothing when finish is clicked
-  const id = match._id;
-
-  const statsToDisplay = [
-    {
-      id: 1,
-      stat: "goal",
-    },
-    {
-      id: 2,
-      stat: "point",
-    },
-    {
-      id: 3,
-      stat: "wide",
-    },
-  ];
-
-  const playerCards = loadedPlayers?.map((player) => (
-      <Col key={player._id} sm={4} md={4} lg={4}>
-      <RecordPlayerShow player={player} />
-    </Col>
-  ));
-
+  // sets the users teamName at the top of the screen by fetching it from the database
   useEffect(() => {
     const getTeamName = async () => {
       try {
-        const teamId = match.teams.teamId;
+        const teamId = currentMatch.teams.teamId;
         const response = await getTeamById(teamId);
         setTeamName(response);
       } catch (error) {
@@ -54,19 +55,58 @@ function RecordPlayerList({ loadedPlayers, match }) {
       }
     };
     getTeamName();
-  }, [match]);
+  }, [currentMatch]);
+
+  // when a user records a player this method will also trigger and update the teams total goals
+  const handleGoalScored = async () => {
+    try {
+      const matchId = currentMatch._id;
+      const res = await getTotalGoals(matchId);
+      if (res != null) {
+        setGoalsFor(res.totalGoals);
+      } else {
+        let value = 0;
+        setGoalsFor(value);
+      }
+    } catch (error) {
+      console.error("Error getting total goals scored:", error);
+    }
+  };
+
+  // when a user records a player this method will also trigger and update the teams total goals
+  const handlePointScored = async () => {
+    try {
+      const matchId = currentMatch._id;
+      const res = await getTotalPoints(matchId);
+      if (res != null) {
+        setPointsFor(res.totalPoints);
+      } else {
+        let value = 0;
+        setPointsFor(value);
+      }
+    } catch (error) {
+      console.error("Error getting total goals scored:", error);
+    }
+  };
+
+  // maps through the loaded player cards, rendering the recordPlayerShow component for each player
+  const playerCards = loadedPlayers?.map((player) => (
+    <Col key={player._id} sm={4} md={4} lg={4}>
+      <RecordPlayerShow player={player} onGoalScored={handleGoalScored} onPointScored={handlePointScored}/>
+    </Col>
+  ));
 
   return (
     <div>
       <Container fluid>
         <Card className="match-title">
-          {teamName} vs {match.teams.oppositionTeam}
+          {teamName} vs {currentMatch.teams.oppositionTeam}
         </Card>
         <Row>
           <Col sm={6} md={6} lg={6}>
             <div className="scoreline-for">
               {" "}
-              Score for &nbsp;&nbsp;&nbsp;&nbsp;:
+              {goalsFor}:{pointsFor} &nbsp;&nbsp;&nbsp;&nbsp;-
             </div>
           </Col>
           <Col sm={6} md={6} lg={6}>

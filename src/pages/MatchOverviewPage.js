@@ -22,6 +22,10 @@ function MatchOverview() {
   useEffect(() => {
     const getAllPlayers = async () => {
       try {
+        // need to exit function if the match data isn't available yet
+        if (!match || !match.teams || !match.teams.players) {
+          return;
+        }
         const playerPromises = match.teams.players.map(
           async (player) => {
             const response = await getPlayerById(player.playerId);
