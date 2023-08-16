@@ -149,9 +149,8 @@ function RecordPlayerList({ loadedPlayers }) {
         </Row>
         <div className="stats-section ">
           <Stack gap={3} className="Stats col-md-3 mx-auto">
-            {" "}
             {statsToDisplay.map((item) => {
-              return <Stat stat={item.stat} id={item.id} />;
+              return <Stat key={item.id} stat={item.stat} id={item.id} />;
             })}
           </Stack>
         </div>

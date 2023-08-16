@@ -323,11 +323,11 @@ export const getMatches = () => {
 export const addOpponentPoints = (id, pointsAgainst) => {
   const accessToken = Cookies.get("jwt");
   const matchId = id;
-  console.log("matchid",matchId)
+  console.log("matchid", matchId);
   const data = {
     pointsAgainst,
   };
-  console.log("point data:",data)
+  console.log("point data:", data);
   return api
     .patch(`/matches/${matchId}/addOpponentPoints`, data, {
       headers: {
@@ -345,10 +345,10 @@ export const addOpponentPoints = (id, pointsAgainst) => {
 export const addOpponentGoals = (id, goalsAgainst) => {
   const accessToken = Cookies.get("jwt");
   const matchId = id;
-  const data = { 
-    goalsAgainst 
+  const data = {
+    goalsAgainst,
   };
-  console.log("goaldata:", data)
+  console.log("goaldata:", data);
   return api
     .patch(`/matches/${matchId}/addOpponentGoals`, data, {
       headers: {

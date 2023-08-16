@@ -9,13 +9,13 @@ function MatchOverview() {
   const [isLoading, setLoading] = useState(true);
   const { id } = useParams();
   const [loadedPlayers, setLoadedPlayers] = useState([]);
-  
+
   useEffect(() => {
     const getMatch = async () => {
-        const response = await getMatchById(id);
-        setMatch(response);
-        console.log("response", response)
-        setLoading(false);
+      const response = await getMatchById(id);
+      setMatch(response);
+      console.log("response", response);
+      setLoading(false);
     };
     getMatch();
   }, [id]);
@@ -27,12 +27,10 @@ function MatchOverview() {
         if (!match || !match.teams || !match.teams.players) {
           return;
         }
-        const playerPromises = match.teams.players.map(
-          async (player) => {
-            const response = await getPlayerById(player.playerId);
-            return response;
-          }
-        );
+        const playerPromises = match.teams.players.map(async (player) => {
+          const response = await getPlayerById(player.playerId);
+          return response;
+        });
 
         // promise.all ensures we await all playerPromises to complete before setting the loadedPlayers
         const loadedPlayersData = await Promise.all(playerPromises);
@@ -44,20 +42,16 @@ function MatchOverview() {
     getAllPlayers();
   }, [match]);
 
-if (isLoading) {
+  if (isLoading) {
     console.log("loading");
-    return (
-        <div>
-            Loading...
-        </div>
-    )
-}
-return (
+    return <div>Loading...</div>;
+  }
+  return (
     <div>
       <NavBar></NavBar>
-      <ShowOverview match={match} loadedPlayers={loadedPlayers}/>
+      <ShowOverview match={match} loadedPlayers={loadedPlayers} />
     </div>
-  )
+  );
 }
 
 export default MatchOverview;

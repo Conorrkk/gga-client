@@ -9,8 +9,8 @@ function MatchHistory() {
   useEffect(() => {
     getMatches()
       .then((response) => {
-        setMatches(response.matches)
-        console.log("response:",response)
+        setMatches(response.matches);
+        console.log("response:", response);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
