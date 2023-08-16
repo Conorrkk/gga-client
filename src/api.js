@@ -6,7 +6,6 @@ const api = axios.create({
 });
 
 // Define API request functions
-export const getMatches = () => api.get("/matches");
 export const updateMatch = (id) => api.put(`/matches/${id}`);
 export const deleteMatch = (id) => api.delete(`/matches/${id}`);
 
@@ -273,17 +272,17 @@ export const getTotalGoals = (matchId) => {
   const accessToken = Cookies.get("jwt");
   const id = matchId;
   return api
-  .get(`/matches/${id}/totalGoals`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  .then((response) => {
-    return response.data
-  })
-  .catch((error) => {
-    console.error("Error getting total goals:", error);
-  });
+    .get(`/matches/${id}/totalGoals`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error getting total goals:", error);
+    });
 };
 
 // gets total goals scored by a team in a particular match
@@ -291,15 +290,75 @@ export const getTotalPoints = (matchId) => {
   const accessToken = Cookies.get("jwt");
   const id = matchId;
   return api
-  .get(`/matches/${id}/totalPoints`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-  .then((response) => {
-    return response.data
-  })
-  .catch((error) => {
-    console.error("Error getting total goals:", error);
-  });
+    .get(`/matches/${id}/totalPoints`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error getting total goals:", error);
+    });
+};
+
+// gets all user's matches
+export const getMatches = () => {
+  const accessToken = Cookies.get("jwt");
+  return api
+    .get("/matches", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error getting matches:", error);
+    });
+};
+
+export const addOpponentPoints = (id, pointsAgainst) => {
+  const accessToken = Cookies.get("jwt");
+  const matchId = id;
+  console.log("matchid",matchId)
+  const data = {
+    pointsAgainst,
+  };
+  console.log("point data:",data)
+  return api
+    .patch(`/matches/${matchId}/addOpponentPoints`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding opponent points:", error);
+    });
+};
+
+export const addOpponentGoals = (id, goalsAgainst) => {
+  const accessToken = Cookies.get("jwt");
+  const matchId = id;
+  const data = { 
+    goalsAgainst 
+  };
+  console.log("goaldata:", data)
+  return api
+    .patch(`/matches/${matchId}/addOpponentGoals`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding opponent goals:", error);
+    });
 };

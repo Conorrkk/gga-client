@@ -14,6 +14,7 @@ function MatchOverview() {
     const getMatch = async () => {
         const response = await getMatchById(id);
         setMatch(response);
+        console.log("response", response)
         setLoading(false);
     };
     getMatch();

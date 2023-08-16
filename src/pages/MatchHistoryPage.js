@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { getMatches, deleteMatch } from "../api";
+import MatchList from "../components/MatchList";
 import NavBar from "../components/NavBar";
 
 function MatchHistory() {
@@ -6,9 +8,14 @@ function MatchHistory() {
 
   useEffect(() => {
     getMatches()
-      .then((response) => setMatches(response.data))
+      .then((response) => {
+        setMatches(response.matches)
+        console.log("response:",response)
+      })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+  console.log("matches:", matches);
 
   const handleDeleteMatch = (id) => {
     deleteMatch(id)

@@ -11,16 +11,8 @@ function RecordStats() {
   // state for the loaded players used to populate screen
   const [loadedPlayers, setLoadedPlayers] = useState([]);
 
-  // turning currentMatch context into a prop which can be drilled into RecordPlayerList component
-  // const match = currentMatch;
-
-  // checking what the current match is set as
-  useEffect(() => {
-    console.log(currentMatch);
-  }, [currentMatch]);
-
-  // use playerId in match collection to find the matching player from player collection
-  // set the loaded players based on this, ensuring we now have an array of loaded players
+  // use playerId in match collection to find matching player from player collection
+  // set loaded players based on this, ensuring we now have an array of players
   useEffect(() => {
     const getAllPlayers = async () => {
       try {
@@ -31,7 +23,7 @@ function RecordStats() {
           }
         );
 
-        // Promise.all ensures we await all playerPromises to complete before setting the loadedPlayers
+        // Promise.all ensures we await all playerPromises to complete before setting loadedPlayers
         const loadedPlayersData = await Promise.all(playerPromises);
         setLoadedPlayers(loadedPlayersData);
       } catch (error) {
@@ -46,7 +38,6 @@ function RecordStats() {
       <NavBar />
       <div className="stats-container">
         <div className="player-section">
-          {/* <RecordPlayerList loadedPlayers={loadedPlayers} match={match} /> */}
           <RecordPlayerList loadedPlayers={loadedPlayers} />
         </div>
       </div>

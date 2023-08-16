@@ -5,9 +5,15 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
-import { getTeamById, getTotalGoals, getTotalPoints } from "../api";
-import { Link } from "react-router-dom";
+import {
+  addOpponentGoals,
+  addOpponentPoints,
+  getTeamById,
+  getTotalGoals,
+  getTotalPoints,
+} from "../api";
 import "../styles.css";
+import { useNavigate } from "react-router-dom";
 import ScoreCounter from "./ScoreCounter";
 import Stack from "react-bootstrap/Stack";
 import Stat from "../components/Stat";
@@ -39,9 +45,12 @@ function RecordPlayerList({ loadedPlayers }) {
   const [goalsFor, setGoalsFor] = useState(0);
   // state to store user team's points
   const [pointsFor, setPointsFor] = useState(0);
+  // state to store the opposing teams goals
+  const [goalsAgainst, setGoalsAgainst] = useState(0);
+  // state to store the opposing teams points
+  const [pointsAgainst, setPointsAgainst] = useState(0);
 
-  // to drill the matchId when loading match overview page - currentMatch would be null upon 'finish' so context prov wouldn't work
-  const id = currentMatch._id;
+  const navigate = useNavigate();
 
   // sets the users teamName at the top of the screen by fetching it from the database
   useEffect(() => {
@@ -89,12 +98,35 @@ function RecordPlayerList({ loadedPlayers }) {
     }
   };
 
+  const handleUpdateGoalAgainst = (goalUpdate) => {
+    setGoalsAgainst(goalUpdate);
+  };
+
+  const handleUpdatePointAgainst = (pointUpdate) => {
+    setPointsAgainst(pointUpdate);
+  };
+
   // maps through the loaded player cards, rendering the recordPlayerShow component for each player
   const playerCards = loadedPlayers?.map((player) => (
     <Col key={player._id} sm={4} md={4} lg={4}>
-      <RecordPlayerShow player={player} onGoalScored={handleGoalScored} onPointScored={handlePointScored}/>
+      <RecordPlayerShow
+        player={player}
+        onGoalScored={handleGoalScored}
+        onPointScored={handlePointScored}
+      />
     </Col>
   ));
+
+  const handleFinish = async () => {
+    try {
+      const matchId = currentMatch._id;
+      await addOpponentPoints(matchId, pointsAgainst);
+      await addOpponentGoals(matchId, goalsAgainst);
+      navigate(`/matchOverview/${matchId}`);
+    } catch (error) {
+      console.error("Error sending score to api:", error);
+    }
+  };
 
   return (
     <div>
@@ -105,12 +137,14 @@ function RecordPlayerList({ loadedPlayers }) {
         <Row>
           <Col sm={6} md={6} lg={6}>
             <div className="scoreline-for">
-              {" "}
               {goalsFor}:{pointsFor} &nbsp;&nbsp;&nbsp;&nbsp;-
             </div>
           </Col>
           <Col sm={6} md={6} lg={6}>
-            <ScoreCounter />
+            <ScoreCounter
+              onUpdateGoalAgainst={handleUpdateGoalAgainst}
+              onUpdatePointAgainst={handleUpdatePointAgainst}
+            />
           </Col>
         </Row>
         <div className="stats-section ">
@@ -122,9 +156,11 @@ function RecordPlayerList({ loadedPlayers }) {
           </Stack>
         </div>
         <Row>{playerCards}</Row>
-        <Link to={`/matchOverview/${id}`}>
-          <Button variant="outline-primary">Finish</Button>
-        </Link>
+        {/* <Link to={`/matchOverview/${id}`}> */}
+        <Button variant="outline-primary" onClick={() => handleFinish()}>
+          Finish
+        </Button>
+        {/* </Link> */}
       </Container>
     </div>
   );

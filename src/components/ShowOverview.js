@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
-import { getTeamById } from "../api";
+import { getTeamById, getTotalPoints, getTotalGoals } from "../api";
 import { Col, Container } from "react-bootstrap";
 import PlayerOverview from "./PlayerOverview";
 
@@ -9,9 +9,11 @@ function ShowOverview({ match, loadedPlayers }) {
   const [totalPoints, setTotalPoints] = useState(0);
   const [totalGoals, setTotalGoals] = useState(0);
   const [totalWides, setTotalWides] = useState(0);
+  const [userGoals, setUserGoals] = useState(0);
+  const [userPoints, setUserPoints] = useState(0);
   const oppositionName = match.teams.oppositionTeam;
-  const scoreFor = match.goalFor + ":" + match.pointFor;
-  const scoreAgainst = match.goalAgainst + ":" + match.pointAgainst;
+
+  const matchId = match._id;
 
   const playerStatsCards = loadedPlayers?.map((player) => (
     <Col key={player._id} sm={4} md={4} lg={4}>
@@ -19,7 +21,7 @@ function ShowOverview({ match, loadedPlayers }) {
     </Col>
   ));
 
-  // loads the different stat totals
+  // adds up the different stats stored in db to display their totals
   useEffect(() => {
     const calculateTotals = () => {
       let totalPoints = 0;
@@ -51,6 +53,24 @@ function ShowOverview({ match, loadedPlayers }) {
     getTeamName();
   }, [match]);
 
+  // gets the total goals for the user's team
+  useEffect(() => {
+    const getGoals = async () => {
+      const goalScored = await getTotalGoals(matchId);
+      setUserGoals(goalScored.totalGoals);
+    };
+    getGoals();
+  }, [matchId]);
+
+  // gets the total points for the user's team
+  useEffect(() => {
+    const getPoints = async () => {
+      const pointScored = await getTotalPoints(matchId);
+      setUserPoints(pointScored.totalPoints);
+    };
+    getPoints();
+  }, [matchId]);
+
   return (
     <div>
       <Container fluid>
@@ -61,18 +81,21 @@ function ShowOverview({ match, loadedPlayers }) {
               {teamName} vs {oppositionName}
             </Card.Title>
             <Card.Text>
-              {/* Score: {scoreFor} - {scoreAgainst}<br></br> */}
-              Score: 3:4 - 1:6<br></br>
-              Total Points Scored: {totalPoints}<br></br> 
-              Total Goals Scored: {totalGoals}<br></br>
-              Total Wides: {totalWides}<br></br>
-              {/* Total goals: {totalPoints} */}
+              Final Score:<br></br> {userGoals}-{userPoints} :{" "}
+              {match.goalAgainst}-{match.pointAgainst}
+              <br></br>
+              Total Points Scored: {totalPoints}
+              <br></br>
+              Total Goals Scored: {totalGoals}
+              <br></br>
+              Total Wides: {totalWides}
+              <br></br>
             </Card.Text>
           </Card.Body>
         </Card>
         <Card className="mx-4 mt-4">
-        <Card.Header>Players</Card.Header>
-        {playerStatsCards}
+          <Card.Header>Players</Card.Header>
+          {playerStatsCards}
         </Card>
       </Container>
     </div>

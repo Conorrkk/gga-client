@@ -4,32 +4,38 @@ import Card from "react-bootstrap/Card";
 
 import Row from "react-bootstrap/Row";
 
-function ScoreCounter() {
+function ScoreCounter({ onUpdateGoalAgainst, onUpdatePointAgainst }) {
+  // state to score goals
   const [goals, setGoals] = useState(0);
+  // state to score points
   const [points, setPoints] = useState(0);
 
   // if goals are
   const incrementGoals = () => {
     if (goals < 50) {
       setGoals(goals + 1);
+      onUpdateGoalAgainst(goals + 1);
     }
   };
 
   const decrementGoals = () => {
     if (goals > 0) {
       setGoals(goals - 1);
+      onUpdateGoalAgainst(goals - 1);
     }
   };
 
   const incrementPoints = () => {
     if (points < 50) {
       setPoints(points + 1);
+      onUpdatePointAgainst(points + 1);
     }
   };
 
   const decrementPoints = () => {
     if (points > 0) {
       setPoints(points - 1);
+      onUpdatePointAgainst(points - 1);
     }
   };
 
