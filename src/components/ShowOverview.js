@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
-import { getTeamById, getTotalPoints, getTotalGoals } from "../api";
+import { getTeamNameById, getTotalPoints, getTotalGoals } from "../api";
 import { Col, Container } from "react-bootstrap";
 import PlayerOverview from "./PlayerOverview";
 
@@ -44,7 +44,7 @@ function ShowOverview({ match, loadedPlayers }) {
     const getTeamName = async () => {
       try {
         const teamId = match.teams.teamId;
-        const response = await getTeamById(teamId);
+        const response = await getTeamNameById(teamId);
         setTeamName(response);
       } catch (error) {
         console.error("Error getting team name:", error);

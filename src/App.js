@@ -12,6 +12,8 @@ import RecordStats from "./pages/RecordStatsPage";
 import LandingPage from "./pages/LandingPage";
 import MatchOverview from "./pages/MatchOverviewPage";
 import MatchHistory from "./pages/MatchHistoryPage";
+import ViewPlayers from "./pages/ViewPlayersPage";
+import PlayerAnalytics from "./pages/PlayerAnalyticsPage";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
       <Route path="/recordStats" element={<RecordStats />}></Route>
       <Route path="/matchOverview/:id" element={<MatchOverview />}></Route>
       <Route path="/matchHistory" element={<MatchHistory />}></Route>
+      <Route path="/viewPlayers/:teamId" element={<ViewPlayers />}></Route>
+      <Route path ="/player/analytics/:playerId" element={<PlayerAnalytics />}></Route>
     </Routes>
     </BrowserRouter>
   )

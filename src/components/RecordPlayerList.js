@@ -8,7 +8,7 @@ import { useEffect, useState, useContext } from "react";
 import {
   addOpponentGoals,
   addOpponentPoints,
-  getTeamById,
+  getTeamNameById,
   getTotalGoals,
   getTotalPoints,
 } from "../api";
@@ -57,7 +57,7 @@ function RecordPlayerList({ loadedPlayers }) {
     const getTeamName = async () => {
       try {
         const teamId = currentMatch.teams.teamId;
-        const response = await getTeamById(teamId);
+        const response = await getTeamNameById(teamId);
         setTeamName(response);
       } catch (error) {
         console.error("Error getting team name:", error);

@@ -201,7 +201,7 @@ export const getPlayerById = async (playerId) => {
 };
 
 // gets one team
-export const getTeamById = (teamId) => {
+export const getTeamNameById = (teamId) => {
   const accessToken = Cookies.get("jwt");
   return api
     .get("/teams/getTeamName", {
@@ -299,6 +299,24 @@ export const getTotalGoals = (matchId) => {
     });
 };
 
+// gets total goals scored by a player in all their matches
+// export const getPlayerGoals = (playerId) => {
+//   const accessToken = Cookies.get("jwt");
+//   const id = playerId;
+//   return api
+//     .get(`/matches/${id}/totalPlayerGoals`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     })
+//     .then((response) => {
+//       return response.data;
+//     })
+//     .catch((error) => {
+//       console.error("Error getting total goals:", error);
+//     });
+// };
+
 // gets total points scored by a team in a particular match
 export const getTotalPoints = (matchId) => {
   const accessToken = Cookies.get("jwt");
@@ -334,6 +352,25 @@ export const getMatches = () => {
     });
 };
 
+// gets all players matches
+export const getPlayersMatches = (playerId) => {
+  const accessToken = Cookies.get("jwt");
+  const id = playerId;
+  console.log(id)
+  return api
+    .get(`/matches/player/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error getting matches:", error);
+    });
+}
+
 // records opponents total points in a match
 export const addOpponentPoints = (id, pointsAgainst) => {
   const accessToken = Cookies.get("jwt");
@@ -364,7 +401,6 @@ export const addOpponentGoals = (id, goalsAgainst) => {
   const data = {
     goalsAgainst,
   };
-  console.log("goaldata:", data);
   return api
     .patch(`/matches/${matchId}/addOpponentGoals`, data, {
       headers: {
@@ -384,3 +420,21 @@ export const deleteMatch = (id) => api.delete(`/matches/${id}`);
 
 // deletes a match
 export const deleteTeam = (id) => api.delete(`/teams/${id}`);
+
+// gets one team
+export const getTeamById = (id) => {
+  const accessToken = Cookies.get("jwt");
+  const teamId = id;
+  return api
+  .get(`teams/${teamId}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
+  .then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    console.error("Error getting team by id:", error);
+  });
+};

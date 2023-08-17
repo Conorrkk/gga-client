@@ -10,19 +10,17 @@ function PlayerShow({ player, matchId, onSelect }) {
   };
 
   return (
-    <div>
-      <Form onSubmit={handleSubmit}>
-        <Card style={{ width: "18rem" }} className="player-card mx-4 my-4">
+    <Form onSubmit={handleSubmit}>
+        <Card className="player-card">
           <Card.Body>
             <Card.Title>{player.playerName}</Card.Title>
             <Card.Text>{player.playerPosition}</Card.Text>
-            <Button variant="success" type="submit" >
+            <Button variant="success" type="submit">
               Add player
             </Button>
           </Card.Body>
         </Card>
-      </Form>
-    </div>
+    </Form>
   );
 }
 

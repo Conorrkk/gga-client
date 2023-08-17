@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function TeamShow({ team, onDelete }) {
   const navigate = useNavigate();
 
+  // go to add panel page
   const handleAddPlayers = () => {
     navigate(`/addPanel/${team._id}`);
   };
@@ -14,6 +15,11 @@ function TeamShow({ team, onDelete }) {
     onDelete(team._id);
   };
 
+  // go to view players page
+  const handleViewPlayers = () => {
+    navigate(`/viewPlayers/${team._id}`);
+  };
+
   return (
     <div>
       {/* <Card className="mx-4 my-4 item-hover" onClick={handleClick}> */}
@@ -21,10 +27,25 @@ function TeamShow({ team, onDelete }) {
         <Card.Body>
           <Card.Title>{team.teamName}</Card.Title>
           <Card.Text>{team.teamLevel}</Card.Text>
-          <Button variant="outline-success" onClick={handleAddPlayers}>
+          <Button
+            className="mx-1"
+            variant="outline-success"
+            onClick={handleAddPlayers}
+          >
             Add players
           </Button>
-          <Button variant="outline-danger" onClick={handleDelete}>
+          <Button
+            className="mx-1"
+            variant="outline-success"
+            onClick={handleViewPlayers}
+          >
+            View Players
+          </Button>
+          <Button
+            className="mx-1"
+            variant="outline-danger"
+            onClick={handleDelete}
+          >
             Delete
           </Button>
         </Card.Body>

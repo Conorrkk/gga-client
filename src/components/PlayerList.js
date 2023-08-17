@@ -34,7 +34,7 @@ function PlayerList({ teamId, matchId }) {
     <div>
       <Row>
         {loadedPlayers.map((player) => (
-          <Col key={player._id} sm={4} md={4} lg={4}>
+          <Col className="mx-2 my-2" key={player._id} sm={3} md={3} lg={3}>
             <PlayerShow player={player} matchId={matchId} onSelect={handleSelect}/>
           </Col>
         ))}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import { getTeamById } from "../api";
+import { getTeamNameById } from "../api";
 import { useNavigate } from "react-router-dom";
 import "../styles.css";
 
@@ -32,7 +32,7 @@ function MatchShow({ match, onDelete }) {
     const getTeamName = async () => {
       try {
         const teamId = match.teams.teamId;
-        const response = await getTeamById(teamId);
+        const response = await getTeamNameById(teamId);
         setTeamName(response);
       } catch (error) {
         console.error("Error getting team name:", error);
