@@ -1,6 +1,6 @@
 import TeamList from "../components/TeamList";
 import { useState, useEffect } from "react";
-import { getTeams } from "../api";
+import { getTeams, deleteTeam } from "../api";
 import NavBar from "../components/NavBar";
 
 function Teams() {
@@ -14,10 +14,18 @@ function Teams() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
   
+  const handleDeleteTeam = (id) => {
+    deleteTeam(id)
+    .then(() => {
+      setTeams(teams.filter((team) => team._id !== id))
+    })
+    .catch((error) => console.error("Error deleting team:", error))
+  };
+
   return (
     <div>
       <NavBar />
-      <TeamList teams={teams} />
+      <TeamList teams={teams} onDelete={handleDeleteTeam}/>
     </div>
   );
 }

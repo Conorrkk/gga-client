@@ -24,6 +24,7 @@ function MatchHistory() {
       })
       .catch((error) => console.error("Error deleting data:", error));
   };
+
   return (
     <div>
       <NavBar />

@@ -52,11 +52,15 @@
 .stats-section {
   width: 25%;
   float: left;
-  /* Add more styling here */
 }
 
 .player-section {
   width: 75%;
   float: left;
-  /* Add more styling here */
+}
+
+.item-hover:hover {
+  transform: scale(1.01);
+  border: 2px solid #007bff;
+  transition: transform 0.3s ease;
 }

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { getTeamById } from "../api";
+import { useNavigate } from "react-router-dom";
+import "../styles.css";
 
 function MatchShow({ match, onDelete }) {
   const [teamName, setTeamName] = useState("");
@@ -12,9 +14,17 @@ function MatchShow({ match, onDelete }) {
 
   const configuredDate = date.toLocaleDateString(undefined, options);
 
+  const navigate = useNavigate();
+
   // deletes a match
   const handleDelete = () => {
     onDelete(match._id);
+  };
+
+  // when user clicks on a match card go to match overview
+  const handleClick = () => {
+    const matchId = match._id
+    navigate(`/matchOverview/${matchId}`);
   };
 
   // loads user's team name
@@ -34,14 +44,14 @@ function MatchShow({ match, onDelete }) {
   return (
     <div>
       <div>
-        <Card className="mx-4 my-4">
+        <Card className="mx-4 my-4 item-hover" onClick={handleClick}>
           <Card.Header>{configuredDate}</Card.Header>
           <Card.Body>
             <Card.Title>
               {teamName} vs {oppositionName}
             </Card.Title>
             <Card.Text>Score</Card.Text>
-            <Button variant="outline-success" onClick={handleDelete}>
+            <Button variant="outline-danger" onClick={handleDelete}>
               Delete
             </Button>
           </Card.Body>

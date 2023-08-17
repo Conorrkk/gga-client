@@ -49,7 +49,7 @@ function RecordPlayerList({ loadedPlayers }) {
   const [goalsAgainst, setGoalsAgainst] = useState(0);
   // state to store the opposing teams points
   const [pointsAgainst, setPointsAgainst] = useState(0);
-  
+
   const navigate = useNavigate();
 
   // sets the users teamName at the top of the screen by fetching it from the database
@@ -71,24 +71,24 @@ function RecordPlayerList({ loadedPlayers }) {
     try {
       const matchId = currentMatch._id;
       const res = await getTotalGoals(matchId);
-      setGoalsFor(prevGoals => (res != null ? res.totalGoals : 0));
+      setGoalsFor((prevGoals) => (res != null ? res.totalGoals : 0));
     } catch (error) {
       console.error("Error getting total goals scored:", error);
     }
   };
-  console.log("goalsfor:", goalsFor)
+  console.log("goalsfor:", goalsFor);
   // when a user records a player this method will also trigger and update the teams total goals
   const handlePointScored = async () => {
     try {
       const matchId = currentMatch._id;
       const res = await getTotalPoints(matchId);
-      setPointsFor(prevPoints => (res != null ? res.totalPoints : 0))
+      setPointsFor((prevPoints) => (res != null ? res.totalPoints : 0));
     } catch (error) {
       console.error("Error getting total goals scored:", error);
     }
   };
 
-  console.log("pointsFor:", pointsFor)
+  console.log("pointsFor:", pointsFor);
   // function to inc or dec the other team's goals
   const handleUpdateGoalAgainst = (goalUpdate) => {
     setGoalsAgainst(goalUpdate);

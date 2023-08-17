@@ -1,13 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { getUserClub, postTeam } from "../api";
+import { useNavigate } from "react-router-dom";
 
 function TeamCreate() {
   const errRef = useRef();
-
   const [userClub, setUserClub] = useState(null);
   const [teamLevel, setTeamLevel] = useState("Senior");
   const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserClub()
@@ -37,31 +38,29 @@ function TeamCreate() {
     },
   ];
 
+  // letting user choose which level the team will play at (senior, minor, u20)
   const handleLevelChange = (event) => {
     setTeamLevel(event.target.value);
   };
 
+  // create a new team
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const teamData = {
         club: userClub,
         teamLevel: teamLevel,
       };
-      // send teamData to frontend api
       postTeam(teamData);
       setTeamLevel("Senior");
-      console.log(teamData);
+      navigate("/teams");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No server response");
       } else if (err.response?.status === 400) {
         setErrMsg("Issue with data");
-      } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorised");
       } else {
-        setErrMsg("Login failed");
+        setErrMsg("Unauthorised");
       }
     }
   };
@@ -101,7 +100,7 @@ function TeamCreate() {
             </Form.Select>
           </Form.Group>
           <div className="d-grid">
-            <Button variant="success" type="submit">
+            <Button variant="outline-success" type="submit">
               Create Team
             </Button>
           </div>

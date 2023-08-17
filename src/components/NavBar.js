@@ -6,7 +6,7 @@ function NavBar() {
   return (
     <div>
       <Navbar bg="dark" variant={"dark"} expand="lg">
-        <Navbar.Brand href="#">GGAnalytics</Navbar.Brand>
+        <Navbar.Brand className="ms-2" href="#">GGAnalytics</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -21,7 +21,7 @@ function NavBar() {
               Create Team
             </Nav.Link>
             <Nav.Link as={Link} to="/teams">
-              My teams
+              Teams
             </Nav.Link>
             <Nav.Link as={Link} to="/createMatch">
               Create Match

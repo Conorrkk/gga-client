@@ -6,9 +6,9 @@ const api = axios.create({
 });
 
 // Define API request functions
-export const updateMatch = (id) => api.put(`/matches/${id}`);
-export const deleteMatch = (id) => api.delete(`/matches/${id}`);
+// export const updateMatch = (id) => api.put(`/matches/${id}`);
 
+// register a new user
 export const registerUser = (userData) => {
   return api
     .post("/users", userData)
@@ -19,6 +19,7 @@ export const registerUser = (userData) => {
     });
 };
 
+// checks to see if the email and password provided return true and allow a user to login, creating a cookie to store session in browser
 export const checkLogin = (loginData) => {
   return api
     .post("/login", loginData, {
@@ -36,6 +37,7 @@ export const checkLogin = (loginData) => {
     });
 };
 
+// get user's club
 export const getUserClub = () => {
   // gets jwt from client to be passed to backend and then be decoded
   const accessToken = Cookies.get("jwt");
@@ -54,6 +56,7 @@ export const getUserClub = () => {
     });
 };
 
+// get user's teams
 export const getTeams = () => {
   const accessToken = Cookies.get("jwt");
   return api
@@ -70,6 +73,7 @@ export const getTeams = () => {
     });
 };
 
+// create new team
 export const postTeam = (teamData) => {
   const accessToken = Cookies.get("jwt");
   return api
@@ -87,6 +91,7 @@ export const postTeam = (teamData) => {
     });
 };
 
+// create new player
 export const postPlayer = (playerData) => {
   const accessToken = Cookies.get("jwt");
   return api
@@ -104,6 +109,7 @@ export const postPlayer = (playerData) => {
     });
 };
 
+// gets players for a team
 export const getPlayers = async (team) => {
   const accessToken = Cookies.get("jwt");
   const teamId = team;
@@ -122,6 +128,7 @@ export const getPlayers = async (team) => {
     });
 };
 
+// creates a new match
 export const postMatch = (matchData) => {
   const accessToken = Cookies.get("jwt");
   return api
@@ -139,6 +146,7 @@ export const postMatch = (matchData) => {
     });
 };
 
+// create the panel for a team through a patch request to backend
 export const updatePanel = (matchId, playerId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
@@ -156,6 +164,7 @@ export const updatePanel = (matchId, playerId) => {
     .catch();
 };
 
+// gets one match
 export const getMatchById = async (matchId) => {
   const accessToken = Cookies.get("jwt");
   const id = matchId;
@@ -173,6 +182,7 @@ export const getMatchById = async (matchId) => {
     });
 };
 
+// gets one player
 export const getPlayerById = async (playerId) => {
   const accessToken = Cookies.get("jwt");
   const id = playerId;
@@ -190,6 +200,7 @@ export const getPlayerById = async (playerId) => {
     });
 };
 
+// gets one team
 export const getTeamById = (teamId) => {
   const accessToken = Cookies.get("jwt");
   return api
@@ -207,6 +218,7 @@ export const getTeamById = (teamId) => {
     });
 };
 
+// records a goal scored by a player
 export const addGoal = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
@@ -227,6 +239,7 @@ export const addGoal = (playerId, matchId) => {
     });
 };
 
+// records a point scored by a player
 export const addPoint = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
@@ -247,6 +260,7 @@ export const addPoint = (playerId, matchId) => {
     });
 };
 
+// records a players wide
 export const addWide = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
@@ -267,7 +281,7 @@ export const addWide = (playerId, matchId) => {
     });
 };
 
-// gets total goals scored by a team in a particular match
+// gets total goals scored by a team in a match
 export const getTotalGoals = (matchId) => {
   const accessToken = Cookies.get("jwt");
   const id = matchId;
@@ -285,7 +299,7 @@ export const getTotalGoals = (matchId) => {
     });
 };
 
-// gets total goals scored by a team in a particular match
+// gets total points scored by a team in a particular match
 export const getTotalPoints = (matchId) => {
   const accessToken = Cookies.get("jwt");
   const id = matchId;
@@ -320,6 +334,7 @@ export const getMatches = () => {
     });
 };
 
+// records opponents total points in a match
 export const addOpponentPoints = (id, pointsAgainst) => {
   const accessToken = Cookies.get("jwt");
   const matchId = id;
@@ -342,6 +357,7 @@ export const addOpponentPoints = (id, pointsAgainst) => {
     });
 };
 
+// records opponents total goals in a match
 export const addOpponentGoals = (id, goalsAgainst) => {
   const accessToken = Cookies.get("jwt");
   const matchId = id;
@@ -362,3 +378,9 @@ export const addOpponentGoals = (id, goalsAgainst) => {
       console.error("Error adding opponent goals:", error);
     });
 };
+
+// deletes a match
+export const deleteMatch = (id) => api.delete(`/matches/${id}`);
+
+// deletes a match
+export const deleteTeam = (id) => api.delete(`/teams/${id}`);
