@@ -81,8 +81,8 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
   };
 
   return (
-    <div ref={drop}>
-      <Card style={{ width: "18rem" }} className="player-card mb-4">
+    <div >
+      <Card ref={drop} style={{ width: "18rem" }} className="player-card mb-4">
         <Card.Body>
           <Card.Text>{player.playerPosition}</Card.Text>
           <Card.Title>{player.playerName}</Card.Title>
