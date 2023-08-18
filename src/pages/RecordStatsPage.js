@@ -42,7 +42,7 @@ function RecordStats() {
           <RecordPlayerList loadedPlayers={loadedPlayers} />
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

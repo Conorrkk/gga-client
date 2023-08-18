@@ -130,8 +130,6 @@ function PlayerAnalysis({ id }) {
     }
   }, [isLoaded, matches, player]);
 
-  
-
   useEffect(() => {
     const createAccChartData = () => {
       matches.forEach((match) => {
@@ -147,12 +145,12 @@ function PlayerAnalysis({ id }) {
             (playerCheck.stats.goal_from_play +
               playerCheck.stats.point_from_play +
               playerCheck.stats.wide);
-              console.log("accuracy", accuracy)
+          console.log("accuracy", accuracy);
 
-              // we set the accuracy to 0 if it is not a number with isNan()method
-              if (isNaN(accuracy)) {
-                accuracy = 0;
-              }
+          // we set the accuracy to 0 if it is not a number with isNan()method
+          if (isNaN(accuracy)) {
+            accuracy = 0;
+          }
           setAccChartData((prevArray) => [
             ...prevArray,
             { date: readableDate, accuracy },
@@ -213,8 +211,14 @@ function PlayerAnalysis({ id }) {
             </Card.Body>
           </Card>
         </Col>
-        <Col>
-          <AccuracyChart data={accChartData}></AccuracyChart>
+        <Col className="mx-1 my-1">
+          <Card>
+            <Card.Body>
+              <Card.Title>{player.playerName}: Shot Accuracy</Card.Title>
+              <Card.Text>Average: {statsCalculated && accuracy}%</Card.Text>
+              <AccuracyChart data={accChartData}></AccuracyChart>´
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </div>

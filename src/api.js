@@ -218,8 +218,8 @@ export const getTeamNameById = (teamId) => {
     });
 };
 
-// records a goal scored by a player
-export const addGoal = (playerId, matchId) => {
+// records a goal scored by a player from play
+export const addGoalPlay = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
@@ -239,8 +239,29 @@ export const addGoal = (playerId, matchId) => {
     });
 };
 
-// records a point scored by a player
-export const addPoint = (playerId, matchId) => {
+// records a goal scored by a player from dead ball
+export const addGoalDead = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const data = {
+    playerId,
+  };
+  const id = matchId;
+  return api
+    .patch(`/matches/${id}/addGoalDead`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding goal:", error);
+    });
+};
+
+// records a point scored by a player from play
+export const addPointPlay = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
@@ -248,6 +269,27 @@ export const addPoint = (playerId, matchId) => {
   const id = matchId;
   return api
     .patch(`/matches/${id}/addPoint`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding point:", error);
+    });
+};
+
+// records a point scored by a player from dead ball
+export const addPointDead = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const data = {
+    playerId,
+  };
+  const id = matchId;
+  return api
+    .patch(`/matches/${id}/addPointDead`, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -269,6 +311,69 @@ export const addWide = (playerId, matchId) => {
   const id = matchId;
   return api
     .patch(`/matches/${id}/addWide`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding wide:", error);
+    });
+};
+
+// records a players block
+export const addBlock = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const data = {
+    playerId,
+  };
+  const id = matchId;
+  return api
+    .patch(`/matches/${id}/addBlock`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding wide:", error);
+    });
+};
+
+// records a players catch
+export const addCatch = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const data = {
+    playerId,
+  };
+  const id = matchId;
+  return api
+    .patch(`/matches/${id}/addCatch`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Error adding wide:", error);
+    });
+};
+
+// records a players dropped ball
+export const addDrop = (playerId, matchId) => {
+  const accessToken = Cookies.get("jwt");
+  const data = {
+    playerId,
+  };
+  const id = matchId;
+  return api
+    .patch(`/matches/${id}/addDrop`, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

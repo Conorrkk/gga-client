@@ -23,16 +23,36 @@ import CurrentMatchContext from "../context/CurrentMatchProvider";
 const statsToDisplay = [
   {
     id: 1,
-    stat: "goal",
+    stat: "goal(play)",
   },
   {
     id: 2,
-    stat: "point",
+    stat: "point(play)",
   },
   {
     id: 3,
     stat: "wide",
   },
+  {
+    id: 4,
+    stat: "goal(dead)",
+  },
+  {
+    id: 5,
+    stat: "point(dead)"
+  },
+  {
+    id: 6,
+    stat: "block",
+  },
+  {
+    id: 7,
+    stat: "catch",
+  },
+  {
+    id: 8,
+    stat: "drop",
+  }
 ];
 
 // function RecordPlayerList({ loadedPlayers, match }) {
@@ -148,11 +168,9 @@ function RecordPlayerList({ loadedPlayers }) {
           </Stack>
         </div>
         <Row>{playerCards}</Row>
-        {/* <Link to={`/matchOverview/${id}`}> */}
         <Button variant="outline-primary" onClick={() => handleFinish()}>
           Finish
         </Button>
-        {/* </Link> */}
       </Container>
     </div>
   );

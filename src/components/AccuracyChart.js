@@ -22,7 +22,7 @@ function AccuracyChart({ data }) {
         borderColor: 'black',
         pointBorderColor: 'aqua',
         fill: true,
-        // tension: 0.4
+        tension: 0.4
       },
     ],
   };
@@ -40,10 +40,11 @@ function AccuracyChart({ data }) {
   }
 
   return (
-    <div style={
-        {width: "600px",
-        height: "300px"}
-    }>
+    // <div style={
+    //     {width: "600px",
+    //     height: "300px"}
+    // }>
+    <div>
       <Line data={accuracyData} options={options}></Line>
     </div>
   );
