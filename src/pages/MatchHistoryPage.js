@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getMatches, deleteMatch } from "../api";
 import MatchList from "../components/MatchList";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 function MatchHistory() {
   const [matches, setMatches] = useState([]);
@@ -29,6 +30,7 @@ function MatchHistory() {
     <div>
       <NavBar />
       <MatchList matches={matches} onDelete={handleDeleteMatch} />
+      <Footer />
     </div>
   );
 }

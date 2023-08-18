@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import PlayerAnalysis from "../components/PlayerAnalysis";
 import { useParams } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function PlayerAnalytics() {
     const { playerId } = useParams();
@@ -9,6 +10,7 @@ function PlayerAnalytics() {
     <div>
       <NavBar></NavBar>
       <PlayerAnalysis id={id}></PlayerAnalysis>
+      <Footer />
     </div>
   );
 }

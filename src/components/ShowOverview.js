@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
 import { getTeamNameById, getTotalPoints, getTotalGoals } from "../api";
-import { Col, Container } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import PlayerOverview from "./PlayerOverview";
 
 function ShowOverview({ match, loadedPlayers }) {
@@ -91,11 +91,14 @@ function ShowOverview({ match, loadedPlayers }) {
               Total Wides: {totalWides}
               <br></br>
             </Card.Text>
+            <Button>
+              Analytics
+            </Button>
           </Card.Body>
         </Card>
-        <Card className="mx-4 mt-4">
+        <Card className="mx-4 my-4">
           <Card.Header>Players</Card.Header>
-          {playerStatsCards}
+          <Row>{playerStatsCards}</Row>
         </Card>
       </Container>
     </div>

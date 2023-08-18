@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 import PlayerCard from "../components/PlayerCard";
+import Footer from "../components/Footer";
 
 function ViewPlayers() {
   // state to store an array of players
@@ -23,16 +24,26 @@ function ViewPlayers() {
     getPanel();
   }, [teamId]);
 
-  return <div>
-    <NavBar></NavBar>
-    <Row>
+  return (
+    <div>
+      <NavBar></NavBar>
+      <Row>
         {players.map((player) => (
-          <Col className="mx-2 my-2" key={player._id} sm={3} md={3} lg={3} xl={3}>
-            <PlayerCard player={player}/>
+          <Col
+            className="mx-2 my-2"
+            key={player._id}
+            sm={3}
+            md={3}
+            lg={3}
+            xl={3}
+          >
+            <PlayerCard player={player} />
           </Col>
         ))}
       </Row>
-  </div>;
+      <Footer />
+    </div>
+  );
 }
 
 export default ViewPlayers;

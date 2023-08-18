@@ -1,6 +1,7 @@
 import React from "react";
 import SelectTeam from "../components/SelectTeam";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 
 function CreateMatchPage() {
@@ -9,6 +10,7 @@ function CreateMatchPage() {
     <div>
       <NavBar/>
       <SelectTeam />
+      <Footer />
     </div>
   );
 }

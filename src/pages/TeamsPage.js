@@ -2,6 +2,7 @@ import TeamList from "../components/TeamList";
 import { useState, useEffect } from "react";
 import { getTeams, deleteTeam } from "../api";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 function Teams() {
   const [teams, setTeams] = useState([])
@@ -25,6 +26,7 @@ function Teams() {
     <div>
       <NavBar />
       <TeamList teams={teams} onDelete={handleDeleteTeam}/>
+      <Footer />
     </div>
   );
 }

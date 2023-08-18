@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import NavBar from "../components/NavBar";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function Dashboard() {
   return (
@@ -35,6 +36,7 @@ function Dashboard() {
           </Row>
         </Container>
       </section>
+      <Footer />
     </div>
   );
 }
