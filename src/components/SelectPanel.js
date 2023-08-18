@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PlayerList from "./PlayerList";
 import { Link } from "react-router-dom";
-import { Button, Row } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { getMatchById } from "../api";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 

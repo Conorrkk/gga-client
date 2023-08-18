@@ -3,6 +3,7 @@ import { getPlayerById, getTeamById, getPlayersMatches } from "../api";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import AccuracyChart from "./AccuracyChart";
 
 function PlayerAnalysis({ id }) {
   // object to store the player
@@ -15,14 +16,12 @@ function PlayerAnalysis({ id }) {
   const [isLoaded, setIsLoaded] = useState(false);
   // boolean to check whether if stats have been calculated
   const [statsCalculated, setStatsCalculated] = useState(false);
+  // array for accuracy chart
+  const [accChartData, setAccChartData] = useState([]);
   //the following stat related stats are to bypass the issue of .current properties not rendering at the right time
-  // accuracy
   const [accuracy, setAccuracy] = useState(null);
-  // average points
   const [averagePoints, setAveragePoints] = useState(null);
-  // average goals
   const [averageGoals, setAverageGoals] = useState(null);
-  // average wides
   const [averageWides, setAverageWides] = useState(null);
 
   // declare vars to hold calculated stats
@@ -131,6 +130,39 @@ function PlayerAnalysis({ id }) {
     }
   }, [isLoaded, matches, player]);
 
+  
+
+  useEffect(() => {
+    const createAccChartData = () => {
+      matches.forEach((match) => {
+        const playerCheck = match.teams.players.find(
+          (p) => p.playerId === player._id
+        );
+        if (playerCheck) {
+          let date = new Date(match.matchDate);
+          let readableDate = date.toLocaleDateString();
+          let accuracy =
+            (playerCheck.stats.goal_from_play +
+              playerCheck.stats.point_from_play) /
+            (playerCheck.stats.goal_from_play +
+              playerCheck.stats.point_from_play +
+              playerCheck.stats.wide);
+              console.log("accuracy", accuracy)
+
+              // we set the accuracy to 0 if it is not a number with isNan()method
+              if (isNaN(accuracy)) {
+                accuracy = 0;
+              }
+          setAccChartData((prevArray) => [
+            ...prevArray,
+            { date: readableDate, accuracy },
+          ]);
+        }
+      });
+    };
+    createAccChartData();
+  }, [matches, player]);
+
   // placeholder to allow player and to be fetched from api and set as state
   if (!player || !team || !statsCalculated) {
     return <div>Loading...</div>;
@@ -180,6 +212,9 @@ function PlayerAnalysis({ id }) {
               </Card.Text>
             </Card.Body>
           </Card>
+        </Col>
+        <Col>
+          <AccuracyChart data={accChartData}></AccuracyChart>
         </Col>
       </Row>
     </div>

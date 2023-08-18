@@ -1,5 +1,4 @@
 import { Card } from "react-bootstrap";
-import { useEffect, useState } from "react";
 
 function PlayerOverview({ player, match }) {
   // returns player where playerId from match in match collection and _id in player collection are equal
