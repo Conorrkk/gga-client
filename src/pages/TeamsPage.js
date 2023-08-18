@@ -9,7 +9,6 @@ function Teams() {
   useEffect(() => {
     getTeams()
       .then((response) => {
-        console.log(response)
         setTeams(response.teams)})
       .catch((error) => console.error("Error fetching data:", error));
   }, []);

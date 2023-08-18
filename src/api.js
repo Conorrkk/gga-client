@@ -299,24 +299,6 @@ export const getTotalGoals = (matchId) => {
     });
 };
 
-// gets total goals scored by a player in all their matches
-// export const getPlayerGoals = (playerId) => {
-//   const accessToken = Cookies.get("jwt");
-//   const id = playerId;
-//   return api
-//     .get(`/matches/${id}/totalPlayerGoals`, {
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     })
-//     .then((response) => {
-//       return response.data;
-//     })
-//     .catch((error) => {
-//       console.error("Error getting total goals:", error);
-//     });
-// };
-
 // gets total points scored by a team in a particular match
 export const getTotalPoints = (matchId) => {
   const accessToken = Cookies.get("jwt");
@@ -356,7 +338,6 @@ export const getMatches = () => {
 export const getPlayersMatches = (playerId) => {
   const accessToken = Cookies.get("jwt");
   const id = playerId;
-  console.log(id)
   return api
     .get(`/matches/player/${id}`, {
       headers: {

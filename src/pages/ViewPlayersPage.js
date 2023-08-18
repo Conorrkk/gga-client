@@ -16,7 +16,6 @@ function ViewPlayers() {
       try {
         const response = await getPlayers(teamId);
         setPlayers(response);
-        console.log(response);
       } catch (error) {
         console.error("Error getting players:", error);
       }

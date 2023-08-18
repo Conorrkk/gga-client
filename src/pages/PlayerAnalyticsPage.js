@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 function PlayerAnalytics() {
     const { playerId } = useParams();
     const id = playerId
-    console.log("id", id)
   return (
     <div>
       <NavBar></NavBar>
