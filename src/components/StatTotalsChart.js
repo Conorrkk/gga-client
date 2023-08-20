@@ -6,38 +6,48 @@ import {
   CategoryScale, // x axis
   LinearScale, // y axis
   PointElement,
-  Legend
+  Legend,
+  Filler
 } from "chart.js";
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend, Filler);
 
 function StatTotalsChart({ data }) {
+  if (!data) {
+    return <div>Loading data...</div>;
+  }
+
+  if (data.length === 0) {
+    return <div>Data unavailable.</div>;
+  }
+
+  let statName = data[0].name;
   const totalsData = {
-    labels: data.map(item => item.date),
+    labels: data.map((item) => item.date),
     datasets: [
       {
-        label: "Stat total(Make dynamic)",
-        data: data.map(item => item.stat),
-        backgroundColor: 'aqua',
-        borderColor: 'black',
-        pointBorderColor: 'aqua',
-        fill: true,
-        tension: 0.4
+        label: `${statName}`,
+        data: data.map((item) => item.stat),
+        backgroundColor: "red",
+        borderColor: "black",
+        pointBorderColor: "red",
+        fill: false,
+        tension: 0.4,
       },
     ],
   };
 
   const options = {
     plugins: {
-        legend: true
+      legend: true,
     },
     scales: {
-        y: {
-            min: 0.00,
-            max: 1.00
-        }
-    }
-  }
+      y: {
+        min: 0,
+        max: 10,
+      },
+    },
+  };
 
   return (
     <div>

@@ -3,6 +3,7 @@ import { getPlayerById, getTeamById, getPlayersMatches } from "../api";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import AccuracyChart from "./AccuracyChart";
 import StatTotalsChart from "./StatTotalsChart";
 
@@ -17,8 +18,12 @@ function PlayerAnalysis({ id }) {
   const [isLoaded, setIsLoaded] = useState(false);
   // boolean to check whether if stats have been calculated
   const [statsCalculated, setStatsCalculated] = useState(false);
+  // string of which total user wants displayed
+  const [userSelect, setUserSelect] = useState("");
   // array for accuracy chart
   const [accChartData, setAccChartData] = useState([]);
+  // array for total chart
+  const [totalsChartData, setTotalsChartData] = useState([]);
   // following stat related stats bypass issue of useRef.current properties not rendering at the right time
   const [accuracy, setAccuracy] = useState(null);
   const [averagePointsPlay, setAveragePointsPlay] = useState(null);
@@ -202,11 +207,139 @@ function PlayerAnalysis({ id }) {
     createAccChartData();
   }, [matches, player]);
 
+  // options for totals chart
+  const options = [
+    {
+      id: 1,
+      stat: "goal(play)",
+    },
+    {
+      id: 2,
+      stat: "point(play)",
+    },
+    {
+      id: 3,
+      stat: "goal(dead)",
+    },
+    {
+      id: 4,
+      stat: "point(dead)",
+    },
+    {
+      id: 5,
+      stat: "wide",
+    },
+    {
+      id: 6,
+      stat: "block",
+    },
+    {
+      id: 7,
+      stat: "catch",
+    },
+    {
+      id: 8,
+      stat: "drop",
+    },
+  ];
+
+  const onUserSelect = (event) => {
+    const selection = event.target.value;
+    setUserSelect(selection);
+  };
+
+  // creates a chart based on the users selected total
+  useEffect(() => {
+    const createTotalsChartData = () => {
+      if (matches.length > 0) {
+        const chartData = matches.map((match) => {
+          const playerCheck = match.teams.players.find(
+            (p) => p.playerId === player._id
+          );
+          let date;
+          let readableDate;
+          let statTotal;
+          let statName;
+          if (playerCheck) {
+            switch (userSelect) {
+              case "1":
+                statTotal = playerCheck.stats.goal_from_play;
+                statName = "Goals from play";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "2":
+                statTotal = playerCheck.stats.point_from_play;
+                statName = "Points from play";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "3":
+                statTotal = playerCheck.stats.goal_from_dead;
+                statName = "Goals from dead ball";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "4":
+                statTotal = playerCheck.stats.point_from_dead;
+                statName = "Points from dead ball";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "5":
+                statTotal = playerCheck.stats.wides;
+                statName = "Wides";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "6":
+                statTotal = playerCheck.stats.block_hook;
+                statName = "Blocks";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "7":
+                statTotal = playerCheck.stats.catch_made;
+                statName = "Catches";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              case "8":
+                statTotal = playerCheck.stats.catch_missed;
+                statName = "Drops";
+                if (isNaN(statTotal)) {
+                  statTotal = 0;
+                }
+                break;
+              default:
+                statTotal = null;
+                break;
+            }
+          }
+          // get the matchdate
+          date = new Date(match.matchDate);
+          readableDate = date.toLocaleDateString();
+
+          // returns the matchdate and string to be used in the chart
+          return { date: readableDate, stat: statTotal, name: statName };
+        });
+        setTotalsChartData(chartData);
+      }
+    };
+    createTotalsChartData();
+  }, [matches, player, userSelect]);
+
   // placeholder to allow player and to be fetched from api and set as state
   if (!player || !team || !statsCalculated) {
     return <div>Loading...</div>;
   }
-
   return (
     <div>
       <Row>
@@ -226,75 +359,75 @@ function PlayerAnalysis({ id }) {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
-      <Row>
-        <Col className="mx-1 my-1">
+        {/* <Col className="mx-1 my-1">
           <Card className="player-analytics-card">
             <Card.Body>
               <Card.Title>Overall stats</Card.Title>
               <Card.Text>
-                {/* statsCalculated boolean ensure we wait until stats have been calculated is true to show these values */}
+                statsCalculated boolean ensure we wait until stats have been calculated is true to show these values
                 Total goals(play):{" "}
                 {statsCalculated && totalGoalsPlayRef.current}
-                <br></br>
                 Total points(play):{" "}
                 {statsCalculated && totalPointsPlayRef.current}
-                <br></br>
                 Total wides: {statsCalculated && totalWidesRef.current}
-                <br></br>
                 Average goals play: {statsCalculated && averageGoalsPlay}
-                <br></br>
                 Average points play: {statsCalculated && averagePointsPlay}
-                <br></br>
                 Average goals dead: {statsCalculated && averageGoalsDead}
-                <br></br>
                 Average points dead: {statsCalculated && averagePointsDead}
-                <br></br>
                 Average wides: {statsCalculated && averageWides}
-                <br></br>
                 Average blocks: {statsCalculated && averageBlocks}
-                <br></br>
                 Average catches: {statsCalculated && averageCatches}
-                <br></br>
                 Average drops: {statsCalculated && averageDrops}
-                <br></br>
-                Accuracy: {statsCalculated && accuracy}%<br></br>
+                Accuracy: {statsCalculated && accuracy}%
                 Total blocks: {statsCalculated && totalBlocksRef.current}
-                <br></br>
                 Total catches: {statsCalculated && totalCatchesRef.current}
-                <br></br>
                 Total catches dropped: {statsCalculated && totalDropRef.current}
-                <br></br>
                 Total goals (dead):{" "}
                 {statsCalculated && totalGoalsDeadRef.current}
-                <br></br>
                 Total points (dead):{" "}
                 {statsCalculated && totalPointsDeadRef.current}
               </Card.Text>
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
+      </Row>
+      <Row>
         <Col className="mx-1 my-1">
           <Card>
             <Card.Body>
-              <Card.Title>{player.playerName}: Shot Accuracy</Card.Title>
+              <Card.Title>Shot Accuracy</Card.Title>
               <Card.Text>Average: {statsCalculated && accuracy}%</Card.Text>
               <AccuracyChart data={accChartData}></AccuracyChart>
             </Card.Body>
           </Card>
         </Col>
-      </Row>
-      {/* <Row>
         <Col className="mx-1 my-1">
           <Card>
             <Card.Body>
-              <Card.Title>{player.playerName}: Stat Totals</Card.Title>
+              <Row>
+                <Col sm={1} md={1} lg={1} className="d-flex align-items-center justify-content-end">
+                  <Card.Title>Total</Card.Title>
+                </Col>
+                <Col sm={4} md={4} lg={4} className="d-flex justify-content-start">
+                  <Form>
+                    <Form.Select onChange={onUserSelect} value={userSelect}>
+                    <option value="">Select stat</option>
+                      {options.map((option) => (
+                        <option key={option.id} value={option.id}>
+                          {option.stat}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form>
+                </Col>
+              </Row>
               <Card.Text></Card.Text>
-              <StatTotalsChart data={statTotalsData}></StatTotalsChart>
+              <StatTotalsChart data={totalsChartData}></StatTotalsChart>
             </Card.Body>
           </Card>
         </Col>
-      </Row> */}
+      </Row>
+      <Row></Row>
     </div>
   );
 }

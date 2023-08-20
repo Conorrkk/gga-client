@@ -18,10 +18,11 @@ function AccuracyChart({ data }) {
       {
         label: "Shot accuracy",
         data: data.map(item => item.accuracy),
-        backgroundColor: 'aqua',
-        borderColor: 'black',
-        pointBorderColor: 'aqua',
-        fill: true,
+        backgroundColor: "red",
+        borderColor: "black",
+        pointBorderColor: "red",
+        pointBackgroundColor: 'red',
+        fill: false,
         tension: 0.4
       },
     ],
