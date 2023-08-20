@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 import PlayerCard from "../components/PlayerCard";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 function ViewPlayers() {
   // state to store an array of players
@@ -41,7 +41,7 @@ function ViewPlayers() {
           </Col>
         ))}
       </Row>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

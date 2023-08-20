@@ -16,7 +16,7 @@ function ShowOverview({ match, loadedPlayers }) {
   const matchId = match._id;
 
   const playerStatsCards = loadedPlayers?.map((player) => (
-    <Col key={player._id} sm={4} md={4} lg={4}>
+    <Col key={player._id} sm={3} md={3} lg={3}>
       <PlayerOverview player={player} match={match} />
     </Col>
   ));
@@ -97,7 +97,7 @@ function ShowOverview({ match, loadedPlayers }) {
           </Card.Body>
         </Card>
         <Card className="mx-4 my-4">
-          <Card.Header>Players</Card.Header>
+          <Card.Header>Player Overview</Card.Header>
           <Row>{playerStatsCards}</Row>
         </Card>
       </Container>

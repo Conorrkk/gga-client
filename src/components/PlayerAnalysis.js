@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AccuracyChart from "./AccuracyChart";
+import StatTotalsChart from "./StatTotalsChart";
 
 function PlayerAnalysis({ id }) {
   // object to store the player
@@ -18,16 +19,26 @@ function PlayerAnalysis({ id }) {
   const [statsCalculated, setStatsCalculated] = useState(false);
   // array for accuracy chart
   const [accChartData, setAccChartData] = useState([]);
-  //the following stat related stats are to bypass the issue of .current properties not rendering at the right time
+  // following stat related stats bypass issue of useRef.current properties not rendering at the right time
   const [accuracy, setAccuracy] = useState(null);
-  const [averagePoints, setAveragePoints] = useState(null);
-  const [averageGoals, setAverageGoals] = useState(null);
+  const [averagePointsPlay, setAveragePointsPlay] = useState(null);
+  const [averageGoalsPlay, setAverageGoalsPlay] = useState(null);
+  const [averageGoalsDead, setAverageGoalsDead] = useState(null);
+  const [averagePointsDead, setAveragePointsDead] = useState(null);
   const [averageWides, setAverageWides] = useState(null);
+  const [averageBlocks, setAverageBlocks] = useState(null);
+  const [averageCatches, setAverageCatches] = useState(null);
+  const [averageDrops, setAverageDrops] = useState(null);
 
   // declare vars to hold calculated stats
-  const totalGoalsFromPlayRef = useRef(0);
-  const totalPointsFromPlayRef = useRef(0);
+  const totalGoalsPlayRef = useRef(0);
+  const totalPointsPlayRef = useRef(0);
   const totalWidesRef = useRef(0);
+  const totalGoalsDeadRef = useRef(0);
+  const totalPointsDeadRef = useRef(0);
+  const totalBlocksRef = useRef(0);
+  const totalCatchesRef = useRef(0);
+  const totalDropRef = useRef(0);
 
   // loads the player information and sets in in the player state
   useEffect(() => {
@@ -81,9 +92,14 @@ function PlayerAnalysis({ id }) {
   // calculates player's stats based on the matches they've played
   useEffect(() => {
     // store the mutable stat value in the .current property
-    totalGoalsFromPlayRef.current = 0;
-    totalPointsFromPlayRef.current = 0;
+    totalGoalsPlayRef.current = 0;
+    totalPointsPlayRef.current = 0;
     totalWidesRef.current = 0;
+    totalGoalsDeadRef.current = 0;
+    totalPointsDeadRef.current = 0;
+    totalBlocksRef.current = 0;
+    totalCatchesRef.current = 0;
+    totalDropRef.current = 0;
     if (isLoaded) {
       const calculateStats = () => {
         let matchesPlayed = 0;
@@ -93,36 +109,61 @@ function PlayerAnalysis({ id }) {
           );
           // if player check returns through then add on the stats to the total
           if (playerCheck) {
-            totalGoalsFromPlayRef.current += playerCheck.stats.goal_from_play;
-            totalPointsFromPlayRef.current += playerCheck.stats.point_from_play;
+            totalGoalsPlayRef.current += playerCheck.stats.goal_from_play;
+            totalPointsPlayRef.current += playerCheck.stats.point_from_play;
             totalWidesRef.current += playerCheck.stats.wide;
-            // of player played in the match then inc matchesPlayed
+            totalGoalsDeadRef.current += playerCheck.stats.goal_from_dead;
+            totalPointsDeadRef.current += playerCheck.stats.point_from_dead;
+            totalBlocksRef.current += playerCheck.stats.block_hook;
+            totalCatchesRef.current += playerCheck.stats.catch_made;
+            totalDropRef.current += playerCheck.stats.catch_missed;
+            // ff player in the match inc matchesPlayed
             matchesPlayed++;
           }
         });
 
         if (matchesPlayed > 0) {
           const calculatedAccuracy = (
-            ((totalGoalsFromPlayRef.current + totalPointsFromPlayRef.current) /
-              (totalGoalsFromPlayRef.current +
-                totalPointsFromPlayRef.current +
+            ((totalGoalsPlayRef.current + totalPointsPlayRef.current) /
+              (totalGoalsPlayRef.current +
+                totalPointsPlayRef.current +
                 totalWidesRef.current)) *
             100
           ).toFixed(2);
-          const calculatedAveragePoints = (
-            totalPointsFromPlayRef.current / matchesPlayed
+          const calcAvrgPointsPlay = (
+            totalPointsPlayRef.current / matchesPlayed
           ).toFixed(2);
-          const calculatedAverageGoals = (
-            totalGoalsFromPlayRef.current / matchesPlayed
+          const calcAvrgGoalsPlay = (
+            totalGoalsPlayRef.current / matchesPlayed
           ).toFixed(2);
-          const calculatedAverageWides = (
-            totalWidesRef.current / matchesPlayed
+          const calcAvrgPointsDead = (
+            totalPointsDeadRef.current / matchesPlayed
           ).toFixed(2);
+          const calcAvrgGoalsDead = (
+            totalGoalsDeadRef.current / matchesPlayed
+          ).toFixed(2);
+          const calcAvrgWides = (totalWidesRef.current / matchesPlayed).toFixed(
+            2
+          );
+          const calcAvrgBlocks = (
+            totalBlocksRef.current / matchesPlayed
+          ).toFixed(2);
+          const calcAvrgCatches = (
+            totalCatchesRef.current / matchesPlayed
+          ).toFixed(2);
+          const calcAvrgDrops = (totalDropRef.current / matchesPlayed).toFixed(
+            2
+          );
 
           setAccuracy(calculatedAccuracy);
-          setAveragePoints(calculatedAveragePoints);
-          setAverageGoals(calculatedAverageGoals);
-          setAverageWides(calculatedAverageWides);
+          setAveragePointsPlay(calcAvrgPointsPlay);
+          setAverageGoalsPlay(calcAvrgGoalsPlay);
+          setAveragePointsDead(calcAvrgPointsDead);
+          setAverageGoalsDead(calcAvrgGoalsDead);
+          setAverageWides(calcAvrgWides);
+          setAverageBlocks(calcAvrgBlocks);
+          setAverageCatches(calcAvrgCatches);
+          setAverageDrops(calcAvrgDrops);
         }
         setStatsCalculated(true);
       };
@@ -130,6 +171,7 @@ function PlayerAnalysis({ id }) {
     }
   }, [isLoaded, matches, player]);
 
+  // gets the data to be sent to the accuracy chart and sets it as in array object
   useEffect(() => {
     const createAccChartData = () => {
       matches.forEach((match) => {
@@ -145,7 +187,6 @@ function PlayerAnalysis({ id }) {
             (playerCheck.stats.goal_from_play +
               playerCheck.stats.point_from_play +
               playerCheck.stats.wide);
-          console.log("accuracy", accuracy);
 
           // we set the accuracy to 0 if it is not a number with isNan()method
           if (isNaN(accuracy)) {
@@ -193,20 +234,42 @@ function PlayerAnalysis({ id }) {
               <Card.Title>Overall stats</Card.Title>
               <Card.Text>
                 {/* statsCalculated boolean ensure we wait until stats have been calculated is true to show these values */}
-                Total goals: {statsCalculated && totalGoalsFromPlayRef.current}
+                Total goals(play):{" "}
+                {statsCalculated && totalGoalsPlayRef.current}
                 <br></br>
-                Total points:{" "}
-                {statsCalculated && totalPointsFromPlayRef.current}
+                Total points(play):{" "}
+                {statsCalculated && totalPointsPlayRef.current}
                 <br></br>
                 Total wides: {statsCalculated && totalWidesRef.current}
                 <br></br>
-                Average points: {statsCalculated && averagePoints}
+                Average goals play: {statsCalculated && averageGoalsPlay}
                 <br></br>
-                Average goals: {statsCalculated && averageGoals}
+                Average points play: {statsCalculated && averagePointsPlay}
+                <br></br>
+                Average goals dead: {statsCalculated && averageGoalsDead}
+                <br></br>
+                Average points dead: {statsCalculated && averagePointsDead}
                 <br></br>
                 Average wides: {statsCalculated && averageWides}
                 <br></br>
+                Average blocks: {statsCalculated && averageBlocks}
+                <br></br>
+                Average catches: {statsCalculated && averageCatches}
+                <br></br>
+                Average drops: {statsCalculated && averageDrops}
+                <br></br>
                 Accuracy: {statsCalculated && accuracy}%<br></br>
+                Total blocks: {statsCalculated && totalBlocksRef.current}
+                <br></br>
+                Total catches: {statsCalculated && totalCatchesRef.current}
+                <br></br>
+                Total catches dropped: {statsCalculated && totalDropRef.current}
+                <br></br>
+                Total goals (dead):{" "}
+                {statsCalculated && totalGoalsDeadRef.current}
+                <br></br>
+                Total points (dead):{" "}
+                {statsCalculated && totalPointsDeadRef.current}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -216,11 +279,22 @@ function PlayerAnalysis({ id }) {
             <Card.Body>
               <Card.Title>{player.playerName}: Shot Accuracy</Card.Title>
               <Card.Text>Average: {statsCalculated && accuracy}%</Card.Text>
-              <AccuracyChart data={accChartData}></AccuracyChart>´
+              <AccuracyChart data={accChartData}></AccuracyChart>
             </Card.Body>
           </Card>
         </Col>
       </Row>
+      {/* <Row>
+        <Col className="mx-1 my-1">
+          <Card>
+            <Card.Body>
+              <Card.Title>{player.playerName}: Stat Totals</Card.Title>
+              <Card.Text></Card.Text>
+              <StatTotalsChart data={statTotalsData}></StatTotalsChart>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row> */}
     </div>
   );
 }

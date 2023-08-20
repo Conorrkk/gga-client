@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 import { useParams } from "react-router-dom";
 import { getMatchById, getPlayerById } from "../api";
 import ShowOverview from "../components/ShowOverview";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 function MatchOverview() {
   const [match, setMatch] = useState({});
@@ -51,7 +51,7 @@ function MatchOverview() {
     <div>
       <NavBar />
       <ShowOverview match={match} loadedPlayers={loadedPlayers} />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

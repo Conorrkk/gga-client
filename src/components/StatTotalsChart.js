@@ -11,13 +11,13 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
 
-function AccuracyChart({ data }) {
-  const accuracyData = {
+function StatTotalsChart({ data }) {
+  const totalsData = {
     labels: data.map(item => item.date),
     datasets: [
       {
-        label: "Shot accuracy",
-        data: data.map(item => item.accuracy),
+        label: "Stat total(Make dynamic)",
+        data: data.map(item => item.stat),
         backgroundColor: 'aqua',
         borderColor: 'black',
         pointBorderColor: 'aqua',
@@ -41,9 +41,9 @@ function AccuracyChart({ data }) {
 
   return (
     <div>
-      <Line data={accuracyData} options={options}></Line>
+      <Line data={totalsData} options={options}></Line>
     </div>
   );
 }
 
-export default AccuracyChart;
+export default StatTotalsChart;
