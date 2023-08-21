@@ -22,6 +22,7 @@ function StatTotalsChart({ data }) {
   }
 
   let statName = data[0].name;
+  
   const totalsData = {
     labels: data.map((item) => item.date),
     datasets: [

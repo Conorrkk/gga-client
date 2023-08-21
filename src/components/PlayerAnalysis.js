@@ -35,7 +35,7 @@ function PlayerAnalysis({ id }) {
   const [averageCatches, setAverageCatches] = useState(null);
   const [averageDrops, setAverageDrops] = useState(null);
 
-  // declare vars to hold calculated stats
+  // vars to hold calculated stats
   const totalGoalsPlayRef = useRef(0);
   const totalPointsPlayRef = useRef(0);
   const totalWidesRef = useRef(0);
@@ -336,10 +336,11 @@ function PlayerAnalysis({ id }) {
     createTotalsChartData();
   }, [matches, player, userSelect]);
 
-  // placeholder to allow player and to be fetched from api and set as state
+  // allow time for async functions to set state
   if (!player || !team || !statsCalculated) {
     return <div>Loading...</div>;
   }
+
   return (
     <div>
       <Row>
@@ -421,7 +422,6 @@ function PlayerAnalysis({ id }) {
                   </Form>
                 </Col>
               </Row>
-              <Card.Text></Card.Text>
               <StatTotalsChart data={totalsChartData}></StatTotalsChart>
             </Card.Body>
           </Card>

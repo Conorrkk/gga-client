@@ -40,7 +40,7 @@ function MatchTotals({ data }) {
   return (
     <div>
       <Bar
-        style={{ padding: "20px", width: "80%" }}
+        style={{ width: "100%" }}
         data={statData}
         options={options}
       ></Bar>

@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import {
   getMatchById,
+  getPlayerById,
   getTeamById,
   getTotalGoals,
   getTotalPoints,
 } from "../api";
-import { Card, Col } from "react-bootstrap";
+import { Card, Col, Form, Row } from "react-bootstrap";
 import MatchTotals from "../components/MatchTotalsChart";
+import PerformanceChart from "../components/PerformanceChart";
 
 function MatchAnalytics() {
   // the current match
@@ -20,8 +22,12 @@ function MatchAnalytics() {
   const [userPoints, setUserPoints] = useState(0);
   // array for stat totals chart data
   const [totalsChart, setTotalsChart] = useState([]);
+  // array for performance chart
+  const [performanceData, setPerformanceData] = useState([]);
   // boolean to check whether all state is loaded
   const [isLoaded, setIsLoaded] = useState(false);
+  // string of which total user wants displayed
+  const [userSelect, setUserSelect] = useState("");
   const { matchId } = useParams();
 
   // vars to hold calculated stats
@@ -122,6 +128,136 @@ function MatchAnalytics() {
     }
   }, [isLoaded, match]);
 
+  // options for performance chart
+  const options = [
+    {
+      id: 1,
+      stat: "goals(play)",
+    },
+    {
+      id: 2,
+      stat: "points(play)",
+    },
+    {
+      id: 3,
+      stat: "goals(dead)",
+    },
+    {
+      id: 4,
+      stat: "points(dead)",
+    },
+    {
+      id: 5,
+      stat: "wides",
+    },
+    {
+      id: 6,
+      stat: "blocks",
+    },
+    {
+      id: 7,
+      stat: "catches",
+    },
+    {
+      id: 8,
+      stat: "drops",
+    },
+  ];
+
+  const onUserSelect = (event) => {
+    const selection = event.target.value;
+    setUserSelect(selection);
+  };
+
+  // creates a chart based on the users selected total
+  useEffect(() => {
+    const createPerformanceChartData = async () => {
+      const performanceChartData = await Promise.all(
+        match.teams.players.map(async (player) => {
+          let statTotal;
+          let statName;
+          switch (userSelect) {
+            case "1":
+              statTotal = player.stats.goal_from_play;
+              statName = "Goals from play";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "2":
+              statTotal = player.stats.point_from_play;
+              statName = "Points from play";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "3":
+              statTotal = player.stats.goal_from_dead;
+              statName = "Goals from dead ball";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "4":
+              statTotal = player.stats.point_from_dead;
+              statName = "Points from dead ball";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "5":
+              statTotal = player.stats.wides;
+              statName = "Wides";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "6":
+              statTotal = player.stats.block_hook;
+              statName = "Blocks";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "7":
+              statTotal = player.stats.catch_made;
+              statName = "Catches";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            case "8":
+              statTotal = player.stats.catch_missed;
+              statName = "Drops";
+              if (isNaN(statTotal)) {
+                statTotal = 0;
+              }
+              break;
+            default:
+              statTotal = null;
+              statName = "";
+              break;
+          }
+
+          let playerName = "";
+          try {
+            const response = await getPlayerById(player.playerId);
+            playerName = response.playerName;
+          } catch (error) {
+            console.error("Error getting player name:", error);
+          }
+
+          // returns data used in performance chart
+          return { name: playerName, amount: statTotal, statName };
+        })
+      );
+      setPerformanceData(performanceChartData);
+    };
+    if (match && userSelect) {
+      createPerformanceChartData();
+    }
+  }, [match, userSelect]);
+
   // give time for the data to load
   if (!match || !team) {
     return <div>Loading...</div>;
@@ -136,19 +272,59 @@ function MatchAnalytics() {
         lg={{ span: 8, offset: 2 }}
       >
         <Card className="mx-4 my-4">
-          {/* <Card.Header>{configuredDate}</Card.Header> */}
-          <Card.Body>
-            <Card.Title>
+          <Card.Body >
+            <Card.Title className="d-flex justify-content-center">
               {team.teamName} {team.teamLevel} vs {match.teams.oppositionTeam}
             </Card.Title>
-            <Card.Text>
+            <Card.Text className="d-flex justify-content-center">
               {userGoals}-{userPoints} : {match.goalAgainst}-
               {match.pointAgainst}
             </Card.Text>
           </Card.Body>
         </Card>
       </Col>
-      <MatchTotals data={totalsChart} />
+
+      <Col className="my-2"
+        sm={{ span: 6 }}
+        md={{ span: 8, offset: 2 }}
+        lg={{ span: 8, offset: 2 }}
+      >
+        <Card>
+          <Card.Body>
+            <Card.Title className="d-flex justify-content-center">Overall Team Stats</Card.Title>
+            <MatchTotals data={totalsChart} />
+          </Card.Body>
+        </Card>
+      </Col>
+
+      <Col className="my-4"
+        sm={{ span: 6 }}
+        md={{ span: 8, offset: 2 }}
+        lg={{ span: 8, offset: 2 }}
+      >
+        <Card>
+          <Card.Body>
+            <Row>
+              <Card.Title className="d-flex justify-content-center">Player Performance</Card.Title>
+              <Col
+                className="d-flex justify-content-center"
+              >
+                <Form>
+                  <Form.Select onChange={onUserSelect} value={userSelect}>
+                    <option value="">Select stat</option>
+                    {options.map((option) => (
+                      <option key={option.id} value={option.id}>
+                        {option.stat}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form>
+              </Col>
+            </Row>
+            <PerformanceChart data={performanceData} />
+          </Card.Body>
+        </Card>
+      </Col>
     </div>
   );
 }
