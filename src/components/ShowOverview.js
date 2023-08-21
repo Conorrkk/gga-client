@@ -55,22 +55,15 @@ function ShowOverview({ match, loadedPlayers }) {
     getTeam();
   }, [match]);
 
-  // gets the total goals for the user's team
+  // gets the total scores for the user's team
   useEffect(() => {
-    const getGoals = async () => {
+    const fetchUserScores = async () => {
       const goalScored = await getTotalGoals(matchId);
-      setUserGoals(goalScored.totalGoals);
-    };
-    getGoals();
-  }, [matchId]);
-
-  // gets the total points for the user's team
-  useEffect(() => {
-    const getPoints = async () => {
       const pointScored = await getTotalPoints(matchId);
+      setUserGoals(goalScored.totalGoals);
       setUserPoints(pointScored.totalPoints);
     };
-    getPoints();
+    fetchUserScores();
   }, [matchId]);
 
   const handleClick = () => {

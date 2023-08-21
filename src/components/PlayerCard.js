@@ -15,7 +15,7 @@ function PlayerCard({ player }) {
       <Card.Body>
         <Card.Title>{player.playerName}</Card.Title>
         <Card.Text>{player.playerPosition}</Card.Text>
-        <Button variant="success" onClick={handleAnalytics}>
+        <Button variant="outline-success" onClick={handleAnalytics}>
           Analytics
         </Button>
       </Card.Body>

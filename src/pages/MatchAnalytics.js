@@ -49,7 +49,7 @@ function MatchAnalytics() {
     getMatch();
   }, [matchId]);
 
-  // gets the total goals for the user's team
+  // gets the total scores for the user's team
   useEffect(() => {
     const fetchUserScores = async () => {
       const goalScored = await getTotalGoals(matchId);
