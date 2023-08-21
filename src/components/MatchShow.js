@@ -53,14 +53,13 @@ function MatchShow({ match, onDelete }) {
         const teamId = match.teams.teamId;
         const response = await getTeamById(teamId);
         setTeam(response);
-        console.log(response);
       } catch (error) {
         console.error("Error getting team name:", error);
       }
     };
     getTeam();
   }, [match]);
-  console.log(match);
+  
   return (
     <Col
       sm={{ span: 6 }}

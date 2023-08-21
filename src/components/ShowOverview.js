@@ -1,8 +1,8 @@
-import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
 import { getTeamById, getTotalPoints, getTotalGoals } from "../api";
-import { Col, Container, Row, Button } from "react-bootstrap";
+import { Col, Container, Row, Button, Card } from "react-bootstrap";
 import PlayerOverview from "./PlayerOverview";
+import { useNavigate } from "react-router-dom";
 
 function ShowOverview({ match, loadedPlayers }) {
   const [team, setTeam] = useState("");
@@ -14,6 +14,8 @@ function ShowOverview({ match, loadedPlayers }) {
   const oppositionName = match.teams.oppositionTeam;
 
   const matchId = match._id;
+
+  const navigate = useNavigate();
 
   const playerStatsCards = loadedPlayers?.map((player) => (
     <Col key={player._id} sm={3} md={3} lg={3}>
@@ -71,6 +73,10 @@ function ShowOverview({ match, loadedPlayers }) {
     getPoints();
   }, [matchId]);
 
+  const handleClick = () => {
+    navigate(`/match/analytics/${matchId}`)
+  }
+
   return (
     <div>
       <Container fluid>
@@ -91,7 +97,7 @@ function ShowOverview({ match, loadedPlayers }) {
               Total Wides: {totalWides}
               <br></br>
             </Card.Text>
-            <Button>
+            <Button onClick={handleClick}>
               Analytics
             </Button>
           </Card.Body>

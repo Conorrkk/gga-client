@@ -6,39 +6,39 @@ import {
   CategoryScale, // x axis
   LinearScale, // y axis
   PointElement,
-  Legend
+  Legend,
 } from "chart.js";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
 
 function AccuracyChart({ data }) {
   const accuracyData = {
-    labels: data.map(item => item.date),
+    labels: data.map((item) => item.date),
     datasets: [
       {
         label: "Shot accuracy",
-        data: data.map(item => item.accuracy),
+        data: data.map((item) => item.accuracy),
         backgroundColor: "red",
         borderColor: "black",
         pointBorderColor: "red",
-        pointBackgroundColor: 'red',
+        pointBackgroundColor: "red",
         fill: false,
-        tension: 0.4
+        tension: 0.4,
       },
     ],
   };
 
   const options = {
     plugins: {
-        legend: true
+      legend: true,
     },
     scales: {
-        y: {
-            min: 0.00,
-            max: 1.00
-        }
-    }
-  }
+      y: {
+        min: 0.0,
+        max: 1.0,
+      },
+    },
+  };
 
   return (
     <div>

@@ -1,4 +1,5 @@
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function PlayerOverview({ player, match }) {
   // returns player where playerId from match in match collection and _id in player collection are equal
@@ -6,8 +7,16 @@ function PlayerOverview({ player, match }) {
     return p.playerId === player._id;
   });
 
+  const navigate = useNavigate();
+
   // accesses the stats for this player
   const playerStats = matchPlayer[0].stats;
+
+  const playerId = player._id;
+
+  const handleClick = () => {
+    navigate(`/player/analytics/${playerId}`);
+  };
 
   return (
     <div>
@@ -23,6 +32,7 @@ function PlayerOverview({ player, match }) {
             <br></br>
             Wides: {playerStats.wide}
             <br></br>
+            <Button onClick={handleClick}>Player Analytics</Button>
           </Card.Text>
         </Card.Body>
       </Card>
