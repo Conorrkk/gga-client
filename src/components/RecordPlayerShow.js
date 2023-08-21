@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Accordion } from "react-bootstrap";
 import {
   addGoalPlay,
   addPointPlay,
@@ -158,19 +158,41 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
 
   return (
     <div>
-      <Card ref={drop} style={{ width: "18rem" }} className="player-card mb-4">
+      <Accordion ref={drop} className="player-accordion mb-4">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>
+            {player.playerName}
+            <br></br>
+            {player.playerPosition}
+          </Accordion.Header>
+          <Accordion.Body>
+            Play: {goalsPlay} : {pointsPlay} 
+            <br></br>
+            Dead: {goalsDead} : {pointsDead}
+            <br></br>
+            Wides: {wides}
+            <br></br>
+            catch/drop: {catches}-{ballDrops}
+            <br></br>
+            blocks: {blocks}
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+
+      {/* <Card ref={drop} style={{ width: "18rem" }} className="player-card mb-4">
         <Card.Body>
           <Card.Text>{player.playerPosition}</Card.Text>
           <Card.Title>{player.playerName}</Card.Title>
           Play: {goalsPlay} : {pointsPlay} <br></br>
           Dead: {goalsDead} : {pointsDead}
           <br></br>
-          Wides: {wides}<br></br>
+          Wides: {wides}
+          <br></br>
           catch/drop: {catches}-{ballDrops}
           <br></br>
           blocks: {blocks}
         </Card.Body>
-      </Card>
+      </Card> */}
     </div>
   );
 }

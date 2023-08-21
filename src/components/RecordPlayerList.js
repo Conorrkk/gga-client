@@ -96,7 +96,7 @@ function RecordPlayerList({ loadedPlayers }) {
       console.error("Error getting total goals scored:", error);
     }
   };
-  console.log("goalsfor:", goalsFor);
+ 
   // when a user records a player this method will also trigger and update the teams total goals
   const handlePointScored = async () => {
     try {
@@ -108,7 +108,6 @@ function RecordPlayerList({ loadedPlayers }) {
     }
   };
 
-  console.log("pointsFor:", pointsFor);
   // function to inc or dec the other team's goals
   const handleUpdateGoalAgainst = (goalUpdate) => {
     setGoalsAgainst(goalUpdate);
