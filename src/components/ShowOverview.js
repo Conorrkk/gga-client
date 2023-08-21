@@ -1,11 +1,11 @@
 import Card from "react-bootstrap/Card";
 import { useState, useEffect } from "react";
-import { getTeamNameById, getTotalPoints, getTotalGoals } from "../api";
+import { getTeamById, getTotalPoints, getTotalGoals } from "../api";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import PlayerOverview from "./PlayerOverview";
 
 function ShowOverview({ match, loadedPlayers }) {
-  const [teamName, setTeamName] = useState("");
+  const [team, setTeam] = useState("");
   const [totalPoints, setTotalPoints] = useState(0);
   const [totalGoals, setTotalGoals] = useState(0);
   const [totalWides, setTotalWides] = useState(0);
@@ -39,18 +39,18 @@ function ShowOverview({ match, loadedPlayers }) {
     calculateTotals();
   }, [match]);
 
-  // loads the user's team name
+  // loads the user's team 
   useEffect(() => {
-    const getTeamName = async () => {
+    const getTeam = async () => {
       try {
         const teamId = match.teams.teamId;
-        const response = await getTeamNameById(teamId);
-        setTeamName(response);
+        const response = await getTeamById(teamId);
+        setTeam(response);
       } catch (error) {
         console.error("Error getting team name:", error);
       }
     };
-    getTeamName();
+    getTeam();
   }, [match]);
 
   // gets the total goals for the user's team
@@ -78,7 +78,7 @@ function ShowOverview({ match, loadedPlayers }) {
           <Card.Header>Match Overview</Card.Header>
           <Card.Body>
             <Card.Title>
-              {teamName} vs {oppositionName}
+              {team.teamName} {team.teamLevel} vs {oppositionName}
             </Card.Title>
             <Card.Text>
               Final Score:<br></br> {userGoals}-{userPoints} :{" "}

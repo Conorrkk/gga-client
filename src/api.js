@@ -200,24 +200,6 @@ export const getPlayerById = async (playerId) => {
     });
 };
 
-// gets one team
-export const getTeamNameById = (teamId) => {
-  const accessToken = Cookies.get("jwt");
-  return api
-    .get("/teams/getTeamName", {
-      params: { teamId },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.error("Error getting team by id:", error);
-    });
-};
-
 // records a goal scored by a player from play
 export const addGoalPlay = (playerId, matchId) => {
   const accessToken = Cookies.get("jwt");
@@ -504,7 +486,7 @@ export const addOpponentGoals = (id, goalsAgainst) => {
 // deletes a match
 export const deleteMatch = (id) => api.delete(`/matches/${id}`);
 
-// deletes a match
+// deletes a team
 export const deleteTeam = (id) => api.delete(`/teams/${id}`);
 
 // gets one team

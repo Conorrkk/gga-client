@@ -8,7 +8,7 @@ import { useEffect, useState, useContext } from "react";
 import {
   addOpponentGoals,
   addOpponentPoints,
-  getTeamNameById,
+  getTeamById,
   getTotalGoals,
   getTotalPoints,
 } from "../api";
@@ -60,7 +60,7 @@ function RecordPlayerList({ loadedPlayers }) {
   // get the global match context and use it as currentMatch
   const [currentMatch] = useContext(CurrentMatchContext);
   // state to store the user's team name
-  const [teamName, setTeamName] = useState("");
+  const [team, setTeam] = useState("");
   // state to store user team's goals
   const [goalsFor, setGoalsFor] = useState(0);
   // state to store user team's points
@@ -74,16 +74,16 @@ function RecordPlayerList({ loadedPlayers }) {
 
   // sets the users teamName at the top of the screen by fetching it from the database
   useEffect(() => {
-    const getTeamName = async () => {
+    const getTeam = async () => {
       try {
         const teamId = currentMatch.teams.teamId;
-        const response = await getTeamNameById(teamId);
-        setTeamName(response);
+        const response = await getTeamById(teamId);
+        setTeam(response);
       } catch (error) {
         console.error("Error getting team name:", error);
       }
     };
-    getTeamName();
+    getTeam();
   }, [currentMatch]);
 
   // when a user records a player this method will also trigger and update the teams total goals
@@ -144,7 +144,7 @@ function RecordPlayerList({ loadedPlayers }) {
     <div>
       <Container fluid>
         <Card className="match-title">
-          {teamName} vs {currentMatch.teams.oppositionTeam}
+          {team.teamName} {team.teamLevel} vs {currentMatch.teams.oppositionTeam}
         </Card>
         <Row>
           <Col sm={6} md={6} lg={6}>

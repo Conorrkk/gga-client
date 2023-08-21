@@ -1,6 +1,6 @@
 import UserLogin from "../components/UserLogin";
 import { useState } from "react";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 function Login() {
   const [loginDetails, setLoginDetails] = useState([]);
@@ -14,7 +14,7 @@ function Login() {
   return (
     <div>
       <UserLogin onLogin={handleLogin} />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
