@@ -86,6 +86,7 @@ function PlayerAnalytics() {
     }
   }, [player]);
 
+  // checks if player, team and matches state has been loaded and if true sets is loaded as true
   useEffect(() => {
     const checkIsLoaded = () => {
       if (player && team && matches) {
@@ -162,7 +163,7 @@ function PlayerAnalytics() {
           const calcAvrgDrops = (totalDropRef.current / matchesPlayed).toFixed(
             2
           );
-
+          // setting the calculated stats as state
           setAccuracy(calculatedAccuracy);
           setAveragePointsPlay(calcAvrgPointsPlay);
           setAverageGoalsPlay(calcAvrgGoalsPlay);
@@ -195,7 +196,6 @@ function PlayerAnalytics() {
             (playerCheck.stats.goal_from_play +
               playerCheck.stats.point_from_play +
               playerCheck.stats.wide);
-
           // we set the accuracy to 0 if it is not a number with isNan()method
           if (isNaN(accuracy)) {
             accuracy = 0;
@@ -246,6 +246,7 @@ function PlayerAnalytics() {
     },
   ];
 
+  // when user selects the stat set it as state so this data can be sent to line graph
   const onUserSelect = (event) => {
     const selection = event.target.value;
     setUserSelect(selection);
@@ -256,6 +257,7 @@ function PlayerAnalytics() {
     const createTotalsChartData = () => {
       if (matches.length > 0) {
         const chartData = matches.map((match) => {
+          // determine if this player was in this match
           const playerCheck = match.teams.players.find(
             (p) => p.playerId === player._id
           );
@@ -263,7 +265,7 @@ function PlayerAnalytics() {
           let readableDate;
           let statTotal;
           let statName;
-
+          // if the playerCheck is true then options are displayed to user
           if (playerCheck) {
             switch (userSelect) {
               case "1":

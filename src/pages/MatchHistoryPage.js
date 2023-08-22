@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
+import { Container, Row, Col, FormControl } from "react-bootstrap";
 import { getMatches, deleteMatch } from "../api";
 import MatchList from "../components/MatchList";
 import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import { Container, Row, Col, FormControl } from "react-bootstrap";
+// import Footer from "../components/Footer";
 
 function MatchHistory() {
+  // store all of the users matches
   const [matches, setMatches] = useState([]);
+  // filtered matches state based on the users search query
   const [filteredMatches, setFilteredMatches] = useState([]);
+  // state for user's search query
   const [query, setQuery] = useState("");
 
   // get all matches to be displayed
@@ -20,6 +23,7 @@ function MatchHistory() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  // if there's a query set filtered matches to ones which include the query - if no query set fm as matches
   useEffect(() => {
     if (query) {
       const filteredMatchArray = matches.filter((match) =>
@@ -47,8 +51,12 @@ function MatchHistory() {
       <NavBar />
       <Container fluid className="mt-4">
         <Row>
-          <Col sm={{ span: 6,}} md={{ span: 6, offset: 3 }} lg={{ span: 6, offset: 3}}>
-          <FormControl
+          <Col
+            sm={{ span: 6 }}
+            md={{ span: 6, offset: 3 }}
+            lg={{ span: 6, offset: 3 }}
+          >
+            <FormControl
               type="text"
               placeholder="Search opponent"
               value={query}

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Col } from "react-bootstrap";
-import "../styles.css";
 import { checkLogin } from "../api";
+import "../styles.css";
 // import Footer from "../components/Footer";
 
 function Login() {
@@ -24,17 +24,19 @@ function Login() {
     setErrMsg("");
   }, [email, password]);
 
+  // when user enters email set email state to this value
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+
+  // when user enters password set paddword state to this value
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  // checks if email and password match those in the db
+  // checks if email and password match those in the db when user clicks login
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     try {
       await checkLogin({
         email,

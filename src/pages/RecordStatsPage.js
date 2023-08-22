@@ -4,7 +4,7 @@ import CurrentMatchContext from "../context/CurrentMatchProvider";
 import RecordPlayerList from "../components/RecordPlayerList";
 import NavBar from "../components/NavBar";
 import "../styles.css";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 
 function RecordStats() {
   // get the global match context and use it as currentMatch

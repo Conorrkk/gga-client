@@ -5,25 +5,32 @@ import PlayerOverview from "./PlayerOverview";
 import { useNavigate } from "react-router-dom";
 
 function ShowOverview({ match, loadedPlayers }) {
+  // state to hold match team
   const [team, setTeam] = useState("");
+  // state for totals and users scoreline
   const [totalPoints, setTotalPoints] = useState(0);
   const [totalGoals, setTotalGoals] = useState(0);
   const [totalWides, setTotalWides] = useState(0);
   const [userGoals, setUserGoals] = useState(0);
   const [userPoints, setUserPoints] = useState(0);
+
+  // opposing team name
   const oppositionName = match.teams.oppositionTeam;
 
+  // matchId for nav
   const matchId = match._id;
 
+  // for nav
   const navigate = useNavigate();
 
+  // mapping through all players in the array and generating a playerOverview card for each one
   const playerStatsCards = loadedPlayers?.map((player) => (
     <Col key={player._id} sm={3} md={3} lg={3}>
       <PlayerOverview player={player} match={match} />
     </Col>
   ));
 
-  // adds up the different stats stored in db to display their totals
+  // adds up the different stats stored in db to generate totals
   useEffect(() => {
     const calculateTotals = () => {
       let totalPoints = 0;
@@ -34,6 +41,7 @@ function ShowOverview({ match, loadedPlayers }) {
         totalGoals += player.stats.goal_from_play;
         totalWides += player.stats.wide;
       });
+      // setting the totals as state
       setTotalPoints(totalPoints);
       setTotalGoals(totalGoals);
       setTotalWides(totalWides);
@@ -41,12 +49,13 @@ function ShowOverview({ match, loadedPlayers }) {
     calculateTotals();
   }, [match]);
 
-  // loads the user's team 
+  // loads the user's team
   useEffect(() => {
     const getTeam = async () => {
       try {
         const teamId = match.teams.teamId;
         const response = await getTeamById(teamId);
+        // sets the user's team as state
         setTeam(response);
       } catch (error) {
         console.error("Error getting team name:", error);
@@ -60,15 +69,17 @@ function ShowOverview({ match, loadedPlayers }) {
     const fetchUserScores = async () => {
       const goalScored = await getTotalGoals(matchId);
       const pointScored = await getTotalPoints(matchId);
+      // sets the user's score
       setUserGoals(goalScored.totalGoals);
       setUserPoints(pointScored.totalPoints);
     };
     fetchUserScores();
   }, [matchId]);
 
+  // when user clicks on analytics bring them to matchAnalytics page for the current matchId
   const handleClick = () => {
-    navigate(`/match/analytics/${matchId}`)
-  }
+    navigate(`/match/analytics/${matchId}`);
+  };
 
   return (
     <div>
@@ -90,9 +101,7 @@ function ShowOverview({ match, loadedPlayers }) {
               Total Wides: {totalWides}
               <br></br>
             </Card.Text>
-            <Button onClick={handleClick}>
-              Analytics
-            </Button>
+            <Button onClick={handleClick}>Analytics</Button>
           </Card.Body>
         </Card>
         <Card className="mx-4 my-4">

@@ -1,11 +1,14 @@
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import {Card, Button} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function PlayerCard({ player }) {
+  // for nav
   const navigate = useNavigate();
-    const playerId = player._id
-  // go to player analytics page
+
+  // gets playerId for later use in navigation
+  const playerId = player._id;
+
+  // nav to player analytics page
   const handleAnalytics = () => {
     navigate(`/player/analytics/${playerId}`);
   };

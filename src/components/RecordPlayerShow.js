@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Card, Accordion } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import {
   addGoalPlay,
   addPointPlay,
@@ -10,14 +10,14 @@ import {
   addCatch,
   addDrop,
 } from "../api";
-import CurrentMatchContext from "../context/CurrentMatchProvider";
-import "../styles.css";
 import { useDrop } from "react-dnd";
+import "../styles.css";
+import CurrentMatchContext from "../context/CurrentMatchProvider";
 
 function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
   // get the global match context and use it as currentMatch
   const [currentMatch] = useContext(CurrentMatchContext);
-
+  // state for displaying all player stats
   const [goalsPlay, setGoalsPlay] = useState(0);
   const [goalsDead, setGoalsDead] = useState(0);
   const [pointsPlay, setPointsPlay] = useState(0);
@@ -27,6 +27,7 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
   const [catches, setCatches] = useState(0);
   const [ballDrops, setBallDrops] = useState(0);
 
+  // initialising current stat vars
   var currentGoalsPlay = 0;
   var currentPointsPlay = 0;
   var currentWides = 0;
@@ -42,9 +43,11 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
   //getting match id from context
   const matchId = currentMatch._id;
 
+  // adds a goal from play to db
   const handleGoalPlay = () => {
     addGoalPlay(playerId, matchId)
       .then(() => {
+        // update scoreline
         onGoalScored();
       })
       .catch((error) => {
@@ -52,9 +55,11 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
       });
   };
 
+  // adds a point from play to db
   const handlePointPlay = () => {
     addPointPlay(playerId, matchId)
       .then(() => {
+        // update scoreline
         onPointScored();
       })
       .catch((error) => {
@@ -62,9 +67,11 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
       });
   };
 
+  // adds a goal from dead to db
   const handleGoalDead = () => {
     addGoalDead(playerId, matchId)
       .then(() => {
+        // update scoreline
         onGoalScored();
       })
       .catch((error) => {
@@ -72,9 +79,11 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
       });
   };
 
+  // adds a point from dead to db
   const handlePointDead = () => {
     addPointDead(playerId, matchId)
       .then(() => {
+        // update scoreline
         onPointScored();
       })
       .catch((error) => {
@@ -82,18 +91,22 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
       });
   };
 
+  // add wide to db
   const handleWide = () => {
     addWide(playerId, matchId);
   };
 
+  // add block to db
   const handleBlock = () => {
     addBlock(playerId, matchId);
   };
 
+  // add catch to db
   const handleCatches = () => {
     addCatch(playerId, matchId);
   };
 
+  // add catch drop to db
   const handleBallDrops = () => {
     addDrop(playerId, matchId);
   };
@@ -107,9 +120,9 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
     }),
   }));
 
-  // switch to check which stat(item) is going to be recorded
+  // we can use a swtich tocheck which stat(item) is going to be recorded
   const addStatToPlayer = (item) => {
-    // post to backend and add stat
+    // call function to post stat to backend and add stat to current value
     switch (item.id) {
       case 1:
         currentGoalsPlay = currentGoalsPlay + 1;
@@ -166,7 +179,7 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
             {player.playerPosition}
           </Accordion.Header>
           <Accordion.Body>
-            Play: {goalsPlay} : {pointsPlay} 
+            Play: {goalsPlay} : {pointsPlay}
             <br></br>
             Dead: {goalsDead} : {pointsDead}
             <br></br>
@@ -178,21 +191,6 @@ function RecordPlayerShow({ player, onGoalScored, onPointScored }) {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-
-      {/* <Card ref={drop} style={{ width: "18rem" }} className="player-card mb-4">
-        <Card.Body>
-          <Card.Text>{player.playerPosition}</Card.Text>
-          <Card.Title>{player.playerName}</Card.Title>
-          Play: {goalsPlay} : {pointsPlay} <br></br>
-          Dead: {goalsDead} : {pointsDead}
-          <br></br>
-          Wides: {wides}
-          <br></br>
-          catch/drop: {catches}-{ballDrops}
-          <br></br>
-          blocks: {blocks}
-        </Card.Body>
-      </Card> */}
     </div>
   );
 }

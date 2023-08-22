@@ -1,8 +1,8 @@
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function TeamShow({ team, onDelete }) {
+  // for nav
   const navigate = useNavigate();
 
   // go to add panel page

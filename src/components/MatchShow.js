@@ -5,16 +5,20 @@ import { useNavigate } from "react-router-dom";
 import "../styles.css";
 
 function MatchShow({ match, onDelete }) {
+  // the team in this match
   const [team, setTeam] = useState("");
+  // users team scores in this match
   const [userGoals, setUserGoals] = useState(0);
   const [userPoints, setUserPoints] = useState(0);
+  // opposing team's name
   const oppositionName = match.teams.oppositionTeam;
+
+  // creating a new date using the date from db and reformatting it from iso
   const date = new Date(match.matchDate);
-
   const options = { day: "numeric", month: "numeric", year: "numeric" };
-
   const configuredDate = date.toLocaleDateString(undefined, options);
 
+  // for page nav
   const navigate = useNavigate();
 
   // gets the total goals for the user's team
@@ -59,7 +63,7 @@ function MatchShow({ match, onDelete }) {
     };
     getTeam();
   }, [match]);
-  
+
   return (
     <Col
       sm={{ span: 6 }}

@@ -12,6 +12,7 @@ function ViewPlayers() {
   // get the team id from url params
   const { teamId } = useParams();
 
+  // gets the players on this team and sets them as state
   useEffect(() => {
     const getPanel = async () => {
       try {

@@ -6,47 +6,57 @@ import { registerUser } from "../api";
 import "../styles.css";
 
 function Registration() {
+  // states to store registration information and array for the details
   const [userDetails, setUserDetails] = useState([]);
   const [username, setUsername] = useState("");
   const [club, setClub] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // boolean which will return true if registration is successful
   const [success, setSuccess] = useState(false);
 
+  // for nav
   const navigate = useNavigate();
 
+  // update userDetails state based on the data the user enters
   const handleRegistration = (userData) => {
     const newUserDetails = [...userDetails, { userData }];
-
     setUserDetails(newUserDetails);
   };
+
+  // when user enters a name set as state
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
+
+  // when user enters club set as state
   const handleClubChange = (event) => {
     setClub(event.target.value);
   };
+
+  // when user enters email set as state
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+
+  // when user enters password set as state
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
+  // when user clicks register send data to backend
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const userData = {
       username: username,
       club: club,
       email: email,
       password: password,
     };
-
     handleRegistration(userData);
-
     registerUser(userData)
       .then((response) => {
+        // reset state
         setUsername("");
         setClub("");
         setEmail("");
@@ -56,6 +66,7 @@ function Registration() {
       .catch((error) => console.error("Error posting data:", error));
   };
 
+  // navigate to login page when clicked
   const handleClick = () => {
     navigate("/login");
   };

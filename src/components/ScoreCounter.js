@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-
-import Row from "react-bootstrap/Row";
+import {Button, Card, Row} from "react-bootstrap";
 
 function ScoreCounter({ onUpdateGoalAgainst, onUpdatePointAgainst }) {
   // state to score goals
@@ -10,30 +7,38 @@ function ScoreCounter({ onUpdateGoalAgainst, onUpdatePointAgainst }) {
   // state to score points
   const [points, setPoints] = useState(0);
 
-  // if goals are
+  const maxGoals = 20;
+  const maxPoints = 50;
+  const minGoals = 0;
+  const minPoints = 0;
+
+  // inc goals value while under max
   const incrementGoals = () => {
-    if (goals < 50) {
+    if (goals < maxGoals) {
       setGoals(goals + 1);
       onUpdateGoalAgainst(goals + 1);
     }
   };
 
+  // dec goals value while above min
   const decrementGoals = () => {
-    if (goals > 0) {
+    if (goals > minGoals) {
       setGoals(goals - 1);
       onUpdateGoalAgainst(goals - 1);
     }
   };
 
+  // inc points value while under max
   const incrementPoints = () => {
-    if (points < 50) {
+    if (points < maxPoints) {
       setPoints(points + 1);
       onUpdatePointAgainst(points + 1);
     }
   };
 
+  // dec points value while above min
   const decrementPoints = () => {
-    if (points > 0) {
+    if (points > minPoints) {
       setPoints(points - 1);
       onUpdatePointAgainst(points - 1);
     }
@@ -45,11 +50,18 @@ function ScoreCounter({ onUpdateGoalAgainst, onUpdatePointAgainst }) {
         <Row className="mb-2">
           <div className="score-section">
             <div className="score-actions">
-              <Button className="scoreline-button" variant="outline-dark me-1" onClick={incrementGoals}>
+              <Button
+                className="scoreline-button"
+                variant="outline-dark me-1"
+                onClick={incrementGoals}
+              >
                 {goals}
               </Button>
-
-              <Button className="scoreline-button" variant="outline-dark" onClick={incrementPoints}>
+              <Button
+                className="scoreline-button"
+                variant="outline-dark"
+                onClick={incrementPoints}
+              >
                 {points}
               </Button>
             </div>
@@ -58,10 +70,18 @@ function ScoreCounter({ onUpdateGoalAgainst, onUpdatePointAgainst }) {
         <Row>
           <div className="score-section">
             <div className="score-actions">
-              <Button className="scoreline-button" variant="outline-warning me-2" onClick={decrementGoals}>
+              <Button
+                className="scoreline-button"
+                variant="outline-warning me-2"
+                onClick={decrementGoals}
+              >
                 -
               </Button>
-              <Button className="scoreline-button" variant="outline-warning" onClick={decrementPoints}>
+              <Button
+                className="scoreline-button"
+                variant="outline-warning"
+                onClick={decrementPoints}
+              >
                 -
               </Button>
             </div>

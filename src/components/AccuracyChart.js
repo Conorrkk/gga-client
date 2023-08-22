@@ -9,9 +9,11 @@ import {
   Legend,
 } from "chart.js";
 
+// need to register everything we want to use in our chart
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
 
 function AccuracyChart({ data }) {
+  // data that populates the line chart
   const accuracyData = {
     labels: data.map((item) => item.date),
     datasets: [
@@ -28,6 +30,7 @@ function AccuracyChart({ data }) {
     ],
   };
 
+  // options for the y axis on line chart
   const options = {
     plugins: {
       legend: true,

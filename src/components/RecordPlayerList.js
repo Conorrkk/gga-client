@@ -1,9 +1,5 @@
 import RecordPlayerShow from "./RecordPlayerShow";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import { Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Stack } from "react-bootstrap";
 import { useEffect, useState, useContext } from "react";
 import {
   addOpponentGoals,
@@ -15,7 +11,6 @@ import {
 import "../styles.css";
 import { useNavigate } from "react-router-dom";
 import ScoreCounter from "./ScoreCounter";
-import Stack from "react-bootstrap/Stack";
 import Stat from "../components/Stat";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 
@@ -39,7 +34,7 @@ const statsToDisplay = [
   },
   {
     id: 5,
-    stat: "point(dead)"
+    stat: "point(dead)",
   },
   {
     id: 6,
@@ -52,7 +47,7 @@ const statsToDisplay = [
   {
     id: 8,
     stat: "drop",
-  }
+  },
 ];
 
 // function RecordPlayerList({ loadedPlayers, match }) {
@@ -70,6 +65,7 @@ function RecordPlayerList({ loadedPlayers }) {
   // state to store the opposing teams points
   const [pointsAgainst, setPointsAgainst] = useState(0);
 
+  // for nav
   const navigate = useNavigate();
 
   // sets the users teamName at the top of the screen by fetching it from the database
@@ -96,7 +92,7 @@ function RecordPlayerList({ loadedPlayers }) {
       console.error("Error getting total goals scored:", error);
     }
   };
- 
+
   // when a user records a player this method will also trigger and update the teams total goals
   const handlePointScored = async () => {
     try {
@@ -129,6 +125,7 @@ function RecordPlayerList({ loadedPlayers }) {
     </Col>
   ));
 
+  // when finish clicked add opponents score to  db & navigate to matchOverview with id
   const handleFinish = async () => {
     try {
       const matchId = currentMatch._id;
@@ -144,7 +141,8 @@ function RecordPlayerList({ loadedPlayers }) {
     <div>
       <Container fluid>
         <Card className="match-title">
-          {team.teamName} {team.teamLevel} vs {currentMatch.teams.oppositionTeam}
+          {team.teamName} {team.teamLevel} vs{" "}
+          {currentMatch.teams.oppositionTeam}
         </Card>
         <Row>
           <Col sm={6} md={6} lg={6}>

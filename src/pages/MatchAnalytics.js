@@ -1,6 +1,6 @@
-import NavBar from "../components/NavBar";
-import { useParams } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { Card, Col, Form, Row } from "react-bootstrap";
 import {
   getMatchById,
   getPlayerById,
@@ -8,7 +8,7 @@ import {
   getTotalGoals,
   getTotalPoints,
 } from "../api";
-import { Card, Col, Form, Row } from "react-bootstrap";
+import NavBar from "../components/NavBar";
 import MatchTotals from "../components/MatchTotalsChart";
 import PerformanceChart from "../components/PerformanceChart";
 
@@ -272,7 +272,7 @@ function MatchAnalytics() {
         lg={{ span: 8, offset: 2 }}
       >
         <Card className="mx-4 my-4">
-          <Card.Body >
+          <Card.Body>
             <Card.Title className="d-flex justify-content-center">
               {team.teamName} {team.teamLevel} vs {match.teams.oppositionTeam}
             </Card.Title>
@@ -284,20 +284,24 @@ function MatchAnalytics() {
         </Card>
       </Col>
 
-      <Col className="my-2"
+      <Col
+        className="my-2"
         sm={{ span: 6 }}
         md={{ span: 8, offset: 2 }}
         lg={{ span: 8, offset: 2 }}
       >
         <Card>
           <Card.Body>
-            <Card.Title className="d-flex justify-content-center">Overall Team Stats</Card.Title>
+            <Card.Title className="d-flex justify-content-center">
+              Overall Team Stats
+            </Card.Title>
             <MatchTotals data={totalsChart} />
           </Card.Body>
         </Card>
       </Col>
 
-      <Col className="my-4"
+      <Col
+        className="my-4"
         sm={{ span: 6 }}
         md={{ span: 8, offset: 2 }}
         lg={{ span: 8, offset: 2 }}
@@ -305,10 +309,10 @@ function MatchAnalytics() {
         <Card>
           <Card.Body>
             <Row>
-              <Card.Title className="d-flex justify-content-center">Player Performance</Card.Title>
-              <Col
-                className="d-flex justify-content-center"
-              >
+              <Card.Title className="d-flex justify-content-center">
+                Player Performance
+              </Card.Title>
+              <Col className="d-flex justify-content-center">
                 <Form>
                   <Form.Select onChange={onUserSelect} value={userSelect}>
                     <option value="">Select stat</option>

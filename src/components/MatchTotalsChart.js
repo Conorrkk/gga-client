@@ -9,9 +9,11 @@ import {
 
 import { Bar } from "react-chartjs-2";
 
+// we must register each feature we need for our bar chart
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function MatchTotals({ data }) {
+  // the data we are going to pass into our bar component - dynamic
   const statData = {
     labels: data.map((item) => item.name),
     datasets: [
@@ -25,6 +27,7 @@ function MatchTotals({ data }) {
     ],
   };
 
+  // options for the y axis
   const options = {
     plugins: {
       legend: true,
@@ -39,11 +42,7 @@ function MatchTotals({ data }) {
 
   return (
     <div>
-      <Bar
-        style={{ width: "100%" }}
-        data={statData}
-        options={options}
-      ></Bar>
+      <Bar style={{ width: "100%" }} data={statData} options={options}></Bar>
     </div>
   );
 }

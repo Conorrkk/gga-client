@@ -7,13 +7,16 @@ function PlayerOverview({ player, match }) {
     return p.playerId === player._id;
   });
 
+  // for nav
   const navigate = useNavigate();
 
   // accesses the stats for this player
   const playerStats = matchPlayer[0].stats;
 
+  // const for playerId to use for navigation
   const playerId = player._id;
 
+  // when users clicks on player analytics button bring them to this page
   const handleClick = () => {
     navigate(`/player/analytics/${playerId}`);
   };

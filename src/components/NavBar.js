@@ -6,7 +6,9 @@ function NavBar() {
   return (
     <div>
       <Navbar bg="dark" variant={"dark"} expand="lg">
-        <Navbar.Brand className="ms-2" href="#">GGAnalytics</Navbar.Brand>
+        <Navbar.Brand className="ms-2" href="#">
+          GGAnalytics
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
