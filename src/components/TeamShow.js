@@ -1,4 +1,4 @@
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function TeamShow({ team, onDelete }) {
@@ -23,33 +23,40 @@ function TeamShow({ team, onDelete }) {
   return (
     <div>
       {/* <Card className="mx-4 my-4 item-hover" onClick={handleClick}> */}
-      <Card className="mx-4 my-4 item-hover">
-        <Card.Body>
-          <Card.Title>{team.teamName}</Card.Title>
-          <Card.Text>{team.teamLevel}</Card.Text>
-          <Button
-            className="mx-1"
-            variant="outline-success"
-            onClick={handleAddPlayers}
-          >
-            Add players
-          </Button>
-          <Button
-            className="mx-1"
-            variant="outline-success"
-            onClick={handleViewPlayers}
-          >
-            View Players
-          </Button>
-          <Button
-            className="mx-1"
-            variant="outline-danger"
-            onClick={handleDelete}
-          >
-            Delete
-          </Button>
-        </Card.Body>
-      </Card>
+      <Col sm={{ span: 7 }} md={{ span: 7 }} lg={{ span: 7 }}>
+        <Card className="mx-4 my-4 item-hover">
+          <Card.Body>
+            <Card.Title>{team.teamName}</Card.Title>
+            <Card.Text>{team.teamLevel}</Card.Text>
+            <Row>
+            <Col className="d-flex justify-content-start">
+              <Button
+                className="styled-button mx-1"
+                variant="outline-primary"
+                onClick={handleAddPlayers}
+              >
+                Add players
+              </Button>
+              <Button
+                className="styled-button mx-1"
+                variant="outline-primary"
+                onClick={handleViewPlayers}
+              >
+                View Players
+              </Button>
+            </Col>
+            <Col className="d-flex justify-content-end">
+              <Button
+                className="styled-button mx-1"
+                variant="outline-danger"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
+            </Col></Row>
+          </Card.Body>
+        </Card>
+      </Col>
     </div>
   );
 }

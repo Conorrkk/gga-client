@@ -30,7 +30,7 @@ function MatchAnalytics() {
   const [userSelect, setUserSelect] = useState("");
   const { matchId } = useParams();
 
-  // vars to hold calculated stats
+  // const to hold calculated stats
   const totalGoalsPlayRef = useRef(0);
   const totalPointsPlayRef = useRef(0);
   const totalWidesRef = useRef(0);

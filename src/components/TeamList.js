@@ -23,8 +23,12 @@ function TeamList({ teams, onDelete }) {
   return (
     <div>
       <Row>
-        <Col xs={2} sm={3} md={4} lg={4}>
-          <Card className="mx-4 my-4">
+        <Col
+          sm={{ span: 10, offset: 1 }}
+          md={{ span: 10, offset: 1 }}
+          lg={{ span: 10, offset: 1 }}
+        >
+          <Card className="styled-card mx-4 my-4">
             <Card.Body>
               <Card.Title>Teams Info</Card.Title>
               <Card.Text>
@@ -33,24 +37,38 @@ function TeamList({ teams, onDelete }) {
               </Card.Text>
             </Card.Body>
           </Card>
-          <Card className="mx-4 my-4">
+        </Col>
+        <Col
+          sm={{ span: 4, offset: 1 }}
+          md={{ span: 4, offset: 1 }}
+          lg={{ span: 4, offset: 1 }}
+        >
+          <Card className="styled-card mx-4 my-4">
             <Card.Body>
               <Card.Title>New Team</Card.Title>
               <Card.Text>
                 Create a new team and add players to its panel
               </Card.Text>
-              <Button variant="outline-success" onClick={handleNewTeam}>
+              <Button
+                className="styled-button"
+                variant="outline-primary"
+                onClick={handleNewTeam}
+              >
                 New Team
               </Button>
             </Card.Body>
           </Card>
-          <Card className="mx-4 my-4">
+          <Card className="styled-card mx-4 my-4">
             <Card.Body>
               <Card.Title>New Match</Card.Title>
               <Card.Text>
                 Create a new match and start recording stats
               </Card.Text>
-              <Button variant="outline-success" onClick={handleNewMatch}>
+              <Button
+                className="styled-button"
+                variant="outline-primary"
+                onClick={handleNewMatch}
+              >
                 New Match
               </Button>
             </Card.Body>

@@ -68,18 +68,25 @@ function Login() {
     <>
       {success ? (
         <Col
-          className="my-4"
+          className="styled-card my-4"
           sm={{ span: 6 }}
           md={{ span: 6, offset: 3 }}
           lg={{ span: 6, offset: 3 }}
         >
           <Card>
-            <Card.Body >
-              <Card.Title className="d-flex justify-content-center">Successfully logged in</Card.Title>
-              <Card.Text className="d-flex justify-content-center"> <Button variant="success" onClick={handleClick}>
-                Dashboard
-              </Button></Card.Text>
-             
+            <Card.Body>
+              <Card.Title className="d-flex justify-content-center">
+                Successfully logged in
+              </Card.Title>
+              <Card.Text className="d-flex justify-content-center">
+                <Button
+                  className="styled-button"
+                  variant="outline-primary"
+                  onClick={handleClick}
+                >
+                  Dashboard
+                </Button>
+              </Card.Text>
             </Card.Body>
           </Card>
         </Col>

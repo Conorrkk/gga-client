@@ -14,11 +14,11 @@ function PlayerCard({ player }) {
   };
 
   return (
-    <Card className="player-card">
+    <Card className="styled-card">
       <Card.Body>
         <Card.Title>{player.playerName}</Card.Title>
         <Card.Text>{player.playerPosition}</Card.Text>
-        <Button variant="outline-success" onClick={handleAnalytics}>
+        <Button className="styled-button" variant="outline-primary" onClick={handleAnalytics}>
           Analytics
         </Button>
       </Card.Body>

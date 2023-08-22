@@ -18,7 +18,7 @@ function MatchTotals({ data }) {
     labels: data.map((item) => item.name),
     datasets: [
       {
-        label: "Team totals",
+        label: "Team total",
         data: data.map((item) => item.amount),
         backgroundColor: "red",
         borderColor: "black",
@@ -42,7 +42,7 @@ function MatchTotals({ data }) {
 
   return (
     <div>
-      <Bar style={{ width: "100%" }} data={statData} options={options}></Bar>
+      <Bar style={{ width: "90%", margin: "10px" }} data={statData} options={options}></Bar>
     </div>
   );
 }
