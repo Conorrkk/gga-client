@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { getMatchById } from "../api";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 import NavBar from "../components/NavBar";
 import PlayerList from "../components/PlayerList";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function ChoosePanel() {
   // get the match id from URL parameter
@@ -13,7 +13,7 @@ function ChoosePanel() {
 
   // for setting the context to the match we want to record stats for
   const [currentMatch, setCurrentMatch] = useContext(CurrentMatchContext);
-  console.log(currentMatch)
+  console.log(currentMatch);
   // for nav
   const navigate = useNavigate();
   //update match on click
@@ -35,14 +35,17 @@ function ChoosePanel() {
   return (
     <div>
       <NavBar />
-      <PlayerList teamId={teamId} matchId={matchId} />
-      <Button
-        onClick={handleClick}
-        variant="outline-primary"
-        className="mx-4 my-4"
-      >
-        Start recording stats
-      </Button>
+   
+        <PlayerList teamId={teamId} matchId={matchId} />
+        <Button
+          onClick={handleClick}
+          variant="outline-primary"
+          className="mx-4 my-4"
+        >
+          Start recording stats
+        </Button>
+
+      <Footer />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { getPlayerById, getTeamById, getPlayersMatches } from "../api";
 import { Card, Row, Col, Form, Container } from "react-bootstrap";
 import AccuracyChart from "../components/AccuracyChart";
 import StatTotalsChart from "../components/StatTotalsChart";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function PlayerAnalytics() {
   const { playerId } = useParams();
@@ -389,7 +389,7 @@ function PlayerAnalytics() {
   return (
     <div>
       <NavBar />
-      <Container fluid className="mt-2">
+      <Container fluid className={"mt-2"} style={{height: "100vh"}}>
         <Row>
           <Col className="mx-1 my-1">
             <Card className="styled-card">
@@ -461,6 +461,7 @@ function PlayerAnalytics() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </div>
   );
 }

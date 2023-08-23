@@ -4,7 +4,7 @@ import { getMatches, deleteMatch, getTotalGoals, getTotalPoints } from "../api";
 import MatchList from "../components/MatchList";
 import NavBar from "../components/NavBar";
 import { FaSearch } from "react-icons/fa";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function MatchHistory() {
   // store all of the users matches
@@ -132,7 +132,7 @@ function MatchHistory() {
         </Row>
       </Container>
       <MatchList matches={filteredMatches} onDelete={handleDeleteMatch} />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

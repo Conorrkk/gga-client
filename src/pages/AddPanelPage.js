@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { postPlayer } from "../api";
 import NavBar from "../components/NavBar";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function AddPanel() {
   // get the team id from URL parameter
@@ -95,7 +95,7 @@ function AddPanel() {
   return (
     <div>
       <NavBar />
-      <Container fluid>
+      <Container fluid style={{height: "100vh"}}>
         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
           {errMsg}
         </p>
@@ -182,6 +182,7 @@ function AddPanel() {
           </Card>
         </Col>
       </Container>
+      <Footer />
       <ToastContainer />
     </div>
   );

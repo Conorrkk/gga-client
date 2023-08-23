@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Col, Form, Row } from "react-bootstrap";
+import { Card, Col, Form, Row, Container } from "react-bootstrap";
 import {
   getMatchById,
   getPlayerById,
@@ -11,6 +11,7 @@ import {
 import NavBar from "../components/NavBar";
 import MatchTotals from "../components/MatchTotalsChart";
 import PerformanceChart from "../components/PerformanceChart";
+import Footer from "../components/Footer";
 
 function MatchAnalytics() {
   // the current match
@@ -266,69 +267,72 @@ function MatchAnalytics() {
   return (
     <div>
       <NavBar />
-      <Col
-        sm={{ span: 6 }}
-        md={{ span: 8, offset: 2 }}
-        lg={{ span: 8, offset: 2 }}
-      >
-        <Card className="styled-card mx-4 my-4">
-          <Card.Body>
-            <Card.Title className="d-flex justify-content-center">
-              {team.teamName} {team.teamLevel} vs {match.teams.oppositionTeam}
-            </Card.Title>
-            <Card.Text className="d-flex justify-content-center">
-              {userGoals}-{userPoints} : {match.goalAgainst}-
-              {match.pointAgainst}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-
-      <Col
-        className="my-2"
-        sm={{ span: 6 }}
-        md={{ span: 8, offset: 2 }}
-        lg={{ span: 8, offset: 2 }}
-      >
-        <Card className="styled-card ">
-          <Card.Body>
-            <Card.Title className="d-flex justify-content-center">
-              Overall Team Stats
-            </Card.Title>
-            <MatchTotals data={totalsChart} />
-          </Card.Body>
-        </Card>
-      </Col>
-
-      <Col
-        className="my-4"
-        sm={{ span: 6 }}
-        md={{ span: 8, offset: 2 }}
-        lg={{ span: 8, offset: 2 }}
-      >
-        <Card className="styled-card ">
-          <Card.Body>
-            <Row>
+      <Container fluid style={{ height: "100vh" }}>
+        <Col
+          sm={{ span: 6 }}
+          md={{ span: 8, offset: 2 }}
+          lg={{ span: 8, offset: 2 }}
+        >
+          <Card className="styled-card mx-4 my-4">
+            <Card.Body>
               <Card.Title className="d-flex justify-content-center">
-                Player Performance
+                {team.teamName} {team.teamLevel} vs {match.teams.oppositionTeam}
               </Card.Title>
-              <Col className="d-flex justify-content-center">
-                <Form>
-                  <Form.Select onChange={onUserSelect} value={userSelect}>
-                    <option value="">Select stat</option>
-                    {options.map((option) => (
-                      <option key={option.id} value={option.id}>
-                        {option.stat}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form>
-              </Col>
-            </Row>
-            <PerformanceChart data={performanceData} />
-          </Card.Body>
-        </Card>
-      </Col>
+              <Card.Text className="d-flex justify-content-center">
+                {userGoals}-{userPoints} : {match.goalAgainst}-
+                {match.pointAgainst}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col
+          className="my-2"
+          sm={{ span: 6 }}
+          md={{ span: 8, offset: 2 }}
+          lg={{ span: 8, offset: 2 }}
+        >
+          <Card className="styled-card ">
+            <Card.Body>
+              <Card.Title className="d-flex justify-content-center">
+                Overall Team Stats
+              </Card.Title>
+              <MatchTotals data={totalsChart} />
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col
+          className="my-4"
+          sm={{ span: 6 }}
+          md={{ span: 8, offset: 2 }}
+          lg={{ span: 8, offset: 2 }}
+        >
+          <Card className="styled-card ">
+            <Card.Body>
+              <Row>
+                <Card.Title className="d-flex justify-content-center">
+                  Player Performance
+                </Card.Title>
+                <Col className="d-flex justify-content-center">
+                  <Form>
+                    <Form.Select onChange={onUserSelect} value={userSelect}>
+                      <option value="">Select stat</option>
+                      {options.map((option) => (
+                        <option key={option.id} value={option.id}>
+                          {option.stat}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form>
+                </Col>
+              </Row>
+              <PerformanceChart data={performanceData} />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Container>
+      <Footer />
     </div>
   );
 }

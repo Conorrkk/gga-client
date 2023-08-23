@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 import MatchTotals from "../components/MatchTotalsChart";
 import { getMatches, getTeamById } from "../api";
 import { FaHistory } from "react-icons/fa";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function Dashboard() {
   // all user matches
@@ -244,7 +244,7 @@ function Dashboard() {
           </Col>
         </Row>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

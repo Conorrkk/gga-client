@@ -134,7 +134,7 @@ function Registration() {
                 />
               </Form.Group>
               <div className="d-grid mb-2">
-                <Button variant="success" type="submit">
+                <Button className="styled-button" variant="outline-primary" type="submit">
                   Register
                 </Button>
               </div>

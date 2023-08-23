@@ -3,7 +3,7 @@ import { Form, Button, Col, Card, Container } from "react-bootstrap";
 import { getUserClub, postTeam } from "../api";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function CreateTeam() {
   const errRef = useRef();
@@ -66,7 +66,9 @@ function CreateTeam() {
       if (!err?.response) {
         setErrMsg("No server response");
       } else if (err.response?.status === 400) {
-        setErrMsg("You already have a team at this level. Delete it to create a new one");
+        setErrMsg(
+          "You already have a team at this level. Delete it to create a new one"
+        );
       } else {
         setErrMsg("Unauthorised");
       }
@@ -80,9 +82,7 @@ function CreateTeam() {
   return (
     <div>
       <NavBar />
-      {/* <Footer /> */}
-      <Container fluid>
-   
+      <Container fluid style={{ height: "100vh" }}>
         <Card.Title ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
           {errMsg}
         </Card.Title>
@@ -145,6 +145,7 @@ function CreateTeam() {
           </Card>
         </Col>
       </Container>
+      <Footer />
     </div>
   );
 }

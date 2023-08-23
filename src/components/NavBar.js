@@ -19,9 +19,6 @@ function NavBar() {
             <Nav.Link as={Link} to="/dashboard">
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/createTeam">
-              Create Team
-            </Nav.Link>
             <Nav.Link as={Link} to="/teams">
               Teams
             </Nav.Link>
@@ -30,6 +27,9 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link as={Link} to="/matchHistory">
               Match History
+            </Nav.Link>
+            <Nav.Link >
+              Logout
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

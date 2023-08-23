@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getMatchById, getPlayerById } from "../api";
 import ShowOverview from "../components/ShowOverview";
 import NavBar from "../components/NavBar";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function MatchOverview() {
   // current match
@@ -53,8 +53,9 @@ function MatchOverview() {
   return (
     <div>
       <NavBar />
+      
       <ShowOverview match={match} loadedPlayers={loadedPlayers} />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

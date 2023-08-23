@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { getPlayerById } from "../api";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 import RecordPlayerList from "../components/RecordPlayerList";
 import NavBar from "../components/NavBar";
 import "../styles.css";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function RecordStats() {
   // get the global match context and use it as currentMatch
@@ -37,12 +38,14 @@ function RecordStats() {
   return (
     <div>
       <NavBar />
+      <Container fluid style={{height: "100vh"}}>
       <div className="stats-container">
         <div className="player-section">
           <RecordPlayerList loadedPlayers={loadedPlayers} />
         </div>
       </div>
-      {/* <Footer /> */}
+      </Container>
+      <Footer />
     </div>
   );
 }

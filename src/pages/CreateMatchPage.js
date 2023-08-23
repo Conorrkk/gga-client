@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 import NavBar from "../components/NavBar";
 import { FaCheckSquare } from "react-icons/fa";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function CreateMatchPage() {
   // array of users teams
@@ -69,7 +69,7 @@ function CreateMatchPage() {
   return (
     <div>
       <NavBar />
-      <Container fluid>
+      <Container fluid style={{height: "100vh"}}>
         <Col
           sm={{ span: 6, offset: 3 }}
           md={{ span: 6, offset: 3 }}
@@ -129,7 +129,7 @@ function CreateMatchPage() {
           </Card>
         </Col>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

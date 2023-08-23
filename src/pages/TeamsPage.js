@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { getTeams, deleteTeam } from "../api";
+import { Container } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 import TeamList from "../components/TeamList";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function Teams() {
   // users teams
@@ -28,8 +29,10 @@ function Teams() {
   return (
     <div>
       <NavBar />
+      <Container fluid style={{height: "100vh"}}>
       <TeamList teams={teams} onDelete={handleDeleteTeam}/>
-      {/* <Footer /> */}
+      </Container>
+      <Footer />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 import PlayerCard from "../components/PlayerCard";
 import { FaRegPlusSquare } from "react-icons/fa";
 
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 
 function ViewPlayers() {
   // state to store an array of players
@@ -89,7 +89,7 @@ function ViewPlayers() {
                       variant="outline-primary"
                       onClick={handleNewMatch}
                     >
-                     <FaRegPlusSquare />
+                      <FaRegPlusSquare />
                     </Button>
                   </Col>
                 </Row>
@@ -113,7 +113,7 @@ function ViewPlayers() {
           ))}
         </Row>
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
