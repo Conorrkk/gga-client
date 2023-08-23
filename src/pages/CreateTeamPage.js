@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col, Card, Container } from "react-bootstrap";
 import { getUserClub, postTeam } from "../api";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
@@ -59,14 +59,14 @@ function CreateTeam() {
         club: userClub,
         teamLevel: teamLevel,
       };
-      postTeam(teamData);
+      await postTeam(teamData);
       setTeamLevel("Senior");
       navigate("/teams");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No server response");
       } else if (err.response?.status === 400) {
-        setErrMsg("Issue with data");
+        setErrMsg("You already have a team at this level. Delete it to create a new one");
       } else {
         setErrMsg("Unauthorised");
       }
@@ -80,47 +80,71 @@ function CreateTeam() {
   return (
     <div>
       <NavBar />
-      <div className="login d-flex justify-content-center align-items-center vh-100 bg-white">
-        <div className="form_container p-5 rounded bg-white border border-dark border-2">
-          <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
-            {errMsg}
-          </p>
-          <Form onSubmit={handleSubmit}>
-            <h3 className="text-center">Create Team</h3>
-            <Form.Group
-              className="mb-3"
-              controlId="createTeamForm.ControlInput1"
-            >
-              <Form.Label>Club</Form.Label>
-              <Form.Control
-                type="text"
-                value={userClub}
-                autoComplete=""
-                disabled
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="createTeamForm.ControlSelect1"
-            >
-              <Form.Label>Level</Form.Label>
-              <Form.Select value={teamLevel} onChange={handleLevelChange}>
-                {teamLevels.map((teamLevel) => (
-                  <option key={teamLevel.value} value={teamLevel.value}>
-                    {teamLevel.label}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-            <div className="d-grid">
-              <Button variant="outline-success" type="submit">
-                Create Team
-              </Button>
-            </div>
-          </Form>
-        </div>
-      </div>
       {/* <Footer /> */}
+      <Container fluid>
+   
+        <Card.Title ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
+          {errMsg}
+        </Card.Title>
+
+        <Col
+          sm={{ span: 6, offset: 3 }}
+          md={{ span: 6, offset: 3 }}
+          lg={{ span: 6, offset: 3 }}
+          xl={{ span: 6, offset: 3 }}
+        >
+          <Card className="styled-card" style={{ marginTop: "10vh" }}>
+            <Card.Body>
+              <Card.Title>Create Team</Card.Title>
+              <Card.Text>
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="createTeamForm.ControlInput1"
+                  >
+                    <Form.Label>Club</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={userClub}
+                      autoComplete=""
+                      disabled
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="createTeamForm.ControlSelect1"
+                  >
+                    <Form.Label>Level</Form.Label>
+                    <Form.Select value={teamLevel} onChange={handleLevelChange}>
+                      {teamLevels.map((teamLevel) => (
+                        <option key={teamLevel.value} value={teamLevel.value}>
+                          {teamLevel.label}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                  <div className="d-grid mb-3">
+                    <Col
+                      sm={{ span: 2, offset: 10 }}
+                      md={{ span: 2, offset: 10 }}
+                      lg={{ span: 2, offset: 10 }}
+                      xl={{ span: 2, offset: 10 }}
+                    >
+                      <Button
+                        className="styled-button"
+                        variant="outline-primary"
+                        type="submit"
+                      >
+                        Create
+                      </Button>
+                    </Col>
+                  </div>
+                </Form>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Container>
     </div>
   );
 }

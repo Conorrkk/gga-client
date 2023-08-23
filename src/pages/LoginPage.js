@@ -59,6 +59,15 @@ function Login() {
     }
   };
 
+  // ones login is successful nav to dboard
+  useEffect(() => {
+    if (success) {
+      navigate("/dashBoard")
+    }
+  })
+
+
+
   // navigates user to dashboard
   const handleClick = () => {
     navigate("/dashboard");
@@ -117,7 +126,7 @@ function Login() {
                 />
               </Form.Group>
               <div className="d-grid mb-3">
-                <Button variant="success" type="submit">
+                <Button className="styled-button" variant="outline-primary" type="submit">
                   Login
                 </Button>
               </div>

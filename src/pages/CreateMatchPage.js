@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getTeams, postMatch } from "../api";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Col, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 import NavBar from "../components/NavBar";
@@ -68,50 +68,66 @@ function CreateMatchPage() {
   return (
     <div>
       <NavBar />
-      <div className="login d-flex justify-content-center align-items-center vh-100 bg-white">
-        <div className="form_container p-5 rounded bg-white border border-dark border-2">
-          <Form onSubmit={handleSubmit}>
-            <div className="mx-2 my-2">
-              <Form.Group className="mb-2" controlId="team">
-                <Form.Label>Choose your team</Form.Label>
-                <Form.Select
-                  value={team ? team._id : ""}
-                  onChange={handleTeamChange}
-                >
-                  <option value="">Select team</option>
-                  {usersTeams.map((team) => (
-                    <option key={team._id} value={team._id}>
-                      {team.teamName} {team.teamLevel} Team
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </div>
-            <div className="mx-2 my-2">
-              <Form.Group className="mb-2" controlId="opponentName">
-                <Form.Label>Opposing team</Form.Label>
-                <Form.Control
-                  value={opponent}
-                  onChange={handleChangeOpponent}
-                  type="text"
-                  autoComplete="off"
-                  placeholder="Team Name"
-                />
-              </Form.Group>
-            </div>
-            <div className="mx-2 my-2">
-              {/* <Link to={`/chooseMatchPanel/${team._id}`}>
-                <Button variant="outline-success" type="submit">
-                  Select panel
-                </Button>
-              </Link> */}
-              <Button variant="outline-success" type="submit">
-                Select panel
-              </Button>
-            </div>
-          </Form>
-        </div>
-      </div>
+      <Container fluid>
+        <Col
+          sm={{ span: 6, offset: 3 }}
+          md={{ span: 6, offset: 3 }}
+          lg={{ span: 6, offset: 3 }}
+          xl={{ span: 6, offset: 3 }}
+        >
+          <Card className="styled-card" style={{ marginTop: "10vh" }}>
+            <Card.Header as="h5">New Match</Card.Header>
+            <Card.Body>
+              <Card.Text>
+                <Form onSubmit={handleSubmit}>
+                  <div className="mx-2 my-2">
+                    <Form.Group className="mb-2" controlId="team">
+                      <Form.Label>Select match team</Form.Label>
+                      <Form.Select
+                        value={team ? team._id : ""}
+                        onChange={handleTeamChange}
+                        required
+                      >
+                        <option value="">Select team</option>
+                        {usersTeams.map((team) => (
+                          <option key={team._id} value={team._id}>
+                            {team.teamName} {team.teamLevel} Team
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </Form.Group>
+                  </div>
+                  <div className="mx-2 my-2">
+                    <Form.Group className="mb-2" controlId="opponentName">
+                      <Form.Label>Opposing team</Form.Label>
+                      <Form.Control
+                        value={opponent}
+                        onChange={handleChangeOpponent}
+                        type="text"
+                        autoComplete="off"
+                        placeholder="Team Name"
+                        pattern="[a-zA-Z0-9\s]+"
+                        maxLength="60"
+                        title="Only letters and numbers(max 60 chars)"
+                        required
+                      />
+                    </Form.Group>
+                  </div>
+                  <div className="mx-2 my-2">
+                    <Button
+                      className="styled-button"
+                      variant="outline-primary"
+                      type="submit"
+                    >
+                      Done
+                    </Button>
+                  </div>
+                </Form>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Container>
       {/* <Footer /> */}
     </div>
   );

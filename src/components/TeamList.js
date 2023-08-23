@@ -1,6 +1,7 @@
 import TeamShow from "./TeamShow";
 import { Card, Col, Row, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaRegPlusSquare } from "react-icons/fa";
 
 function TeamList({ teams, onDelete }) {
   // for nav
@@ -24,9 +25,9 @@ function TeamList({ teams, onDelete }) {
     <div>
       <Row>
         <Col
-          sm={{ span: 10, offset: 1 }}
-          md={{ span: 10, offset: 1 }}
-          lg={{ span: 10, offset: 1 }}
+          sm={{ span: 8, offset: 1 }}
+          md={{ span: 8, offset: 1 }}
+          lg={{ span: 8, offset: 1 }}
         >
           <Card className="styled-card mx-4 my-4">
             <Card.Body>
@@ -45,32 +46,66 @@ function TeamList({ teams, onDelete }) {
         >
           <Card className="styled-card mx-4 my-4">
             <Card.Body>
-              <Card.Title>New Team</Card.Title>
-              <Card.Text>
-                Create a new team and add players to its panel
-              </Card.Text>
-              <Button
-                className="styled-button"
-                variant="outline-primary"
-                onClick={handleNewTeam}
-              >
-                New Team
-              </Button>
+              <Row>
+                <Col
+                  sm={{ span: 8 }}
+                  md={{ span: 8 }}
+                  lg={{ span: 8 }}
+                  xl={{ span: 8 }}
+                >
+                  <Card.Title>New Team</Card.Title>
+                  <Card.Text>
+                    Create one team for senior, minor and u20s.
+                  </Card.Text>
+                </Col>
+                <Col
+                  className="mt-2"
+                  sm={{ span: 2, offset: 2 }}
+                  md={{ span: 2, offset: 2 }}
+                  lg={{ span: 2, offset: 2 }}
+                  xl={{ span: 2, offset: 2 }}
+                >
+                  <Button
+                    className="styled-icon-button"
+                    variant="outline-primary"
+                    onClick={handleNewTeam}
+                  >
+                    <FaRegPlusSquare />
+                  </Button>
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
           <Card className="styled-card mx-4 my-4">
             <Card.Body>
-              <Card.Title>New Match</Card.Title>
-              <Card.Text>
-                Create a new match and start recording stats
-              </Card.Text>
-              <Button
-                className="styled-button"
-                variant="outline-primary"
-                onClick={handleNewMatch}
-              >
-                New Match
-              </Button>
+              <Row>
+                <Col
+                  sm={{ span: 8 }}
+                  md={{ span: 8 }}
+                  lg={{ span: 8 }}
+                  xl={{ span: 8 }}
+                >
+                  <Card.Title>New Match</Card.Title>
+                  <Card.Text>
+                    Create a new match to start tracking stats.
+                  </Card.Text>
+                </Col>
+                <Col
+                  className="mt-2"
+                  sm={{ span: 2, offset: 2 }}
+                  md={{ span: 2, offset: 2 }}
+                  lg={{ span: 2, offset: 2 }}
+                  xl={{ span: 2, offset: 2 }}
+                >
+                  <Button
+                    className="styled-icon-button"
+                    variant="outline-primary"
+                    onClick={handleNewMatch}
+                  >
+                    <FaRegPlusSquare />
+                  </Button>
+                </Col>
+              </Row>
             </Card.Body>
           </Card>
         </Col>

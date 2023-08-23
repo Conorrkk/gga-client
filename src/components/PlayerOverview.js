@@ -1,5 +1,6 @@
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaChartLine } from "react-icons/fa";
 
 function PlayerOverview({ player, match }) {
   // returns player where playerId from match in match collection and _id in player collection are equal
@@ -23,7 +24,7 @@ function PlayerOverview({ player, match }) {
 
   return (
     <div>
-      <Card className="mx-2 my-2">
+      <Card className="styled-card mx-2 my-2">
         <Card.Body>
           <Card.Title>{player.playerName}</Card.Title>
           <Card.Text>
@@ -35,7 +36,13 @@ function PlayerOverview({ player, match }) {
             <br></br>
             Wides: {playerStats.wide}
             <br></br>
-            <Button onClick={handleClick}>Player Analytics</Button>
+            <Button
+              className="styled-button"
+              variant="outline-primary"
+              onClick={handleClick}
+            >
+             <FaChartLine />
+            </Button>
           </Card.Text>
         </Card.Body>
       </Card>

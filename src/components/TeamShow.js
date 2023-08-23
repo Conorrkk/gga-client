@@ -1,5 +1,6 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
 
 function TeamShow({ team, onDelete }) {
   // for nav
@@ -10,7 +11,7 @@ function TeamShow({ team, onDelete }) {
     navigate(`/addPanel/${team._id}`);
   };
 
-  // deletes a team
+  // deletes a team and matches associated
   const handleDelete = () => {
     onDelete(team._id);
   };
@@ -24,7 +25,7 @@ function TeamShow({ team, onDelete }) {
     <div>
       {/* <Card className="mx-4 my-4 item-hover" onClick={handleClick}> */}
       <Col sm={{ span: 7 }} md={{ span: 7 }} lg={{ span: 7 }}>
-        <Card className="mx-4 my-4 item-hover">
+        <Card className="styled-card mx-4 my-4 item-hover">
           <Card.Body>
             <Card.Title>{team.teamName}</Card.Title>
             <Card.Text>{team.teamLevel}</Card.Text>
@@ -47,11 +48,12 @@ function TeamShow({ team, onDelete }) {
             </Col>
             <Col className="d-flex justify-content-end">
               <Button
-                className="styled-button mx-1"
+                className="styled-icon-button mx-1"
                 variant="outline-danger"
                 onClick={handleDelete}
               >
-                Delete
+                <FaTrashAlt style={{color: 'red'}}></FaTrashAlt>
+             
               </Button>
             </Col></Row>
           </Card.Body>

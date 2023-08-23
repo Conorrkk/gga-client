@@ -18,6 +18,10 @@
     border-radius: 0 !important;
 }
 
+.player-accordion{
+  border-radius: 0 !important;
+}
+
 .match-title {
     font-size: 200%;
     border-width: 0;
@@ -110,6 +114,12 @@
 .styled-button {
   border-radius: 0 !important;
   color: #007bff;
+}
+
+.styled-icon-button {
+  border-radius: 0 !important;
+  border: none;
+  font-size: x-large;
 }
 
 .styled-title {

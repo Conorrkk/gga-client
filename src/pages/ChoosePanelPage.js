@@ -13,7 +13,7 @@ function ChoosePanel() {
 
   // for setting the context to the match we want to record stats for
   const [currentMatch, setCurrentMatch] = useContext(CurrentMatchContext);
-
+  console.log(currentMatch)
   // for nav
   const navigate = useNavigate();
   //update match on click

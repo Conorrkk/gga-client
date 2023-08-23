@@ -37,6 +37,8 @@ function PlayerAnalytics() {
   const [averageCatches, setAverageCatches] = useState(null);
   const [averageDrops, setAverageDrops] = useState(null);
   const [avgToDisplay, setAvgToDisplay] = useState(null);
+  const [averageShots, setAverageShots] = useState(null);
+  const [averageScores, setAverageScores] = useState(null);
 
   // vars to hold calculated stats
   const totalGoalsPlayRef = useRef(0);
@@ -163,6 +165,21 @@ function PlayerAnalytics() {
           const calcAvrgDrops = (totalDropRef.current / matchesPlayed).toFixed(
             2
           );
+          const calcAvrgShots = (
+            (totalGoalsPlayRef.current +
+              totalGoalsDeadRef.current +
+              totalPointsPlayRef.current +
+              totalPointsDeadRef.current +
+              totalWidesRef.current) /
+            matchesPlayed
+          ).toFixed(2);
+          const calcAvrgScores = (
+            (totalGoalsPlayRef.current +
+              totalGoalsDeadRef.current +
+              totalPointsPlayRef.current +
+              totalPointsDeadRef.current) /
+            matchesPlayed
+          ).toFixed(2);
           // setting the calculated stats as state
           setAccuracy(calculatedAccuracy);
           setAveragePointsPlay(calcAvrgPointsPlay);
@@ -173,6 +190,8 @@ function PlayerAnalytics() {
           setAverageBlocks(calcAvrgBlocks);
           setAverageCatches(calcAvrgCatches);
           setAverageDrops(calcAvrgDrops);
+          setAverageShots(calcAvrgShots);
+          setAverageScores(calcAvrgScores);
         }
         setStatsCalculated(true);
       };
@@ -373,7 +392,7 @@ function PlayerAnalytics() {
       <Container fluid className="mt-2">
         <Row>
           <Col className="mx-1 my-1">
-            <Card className="player-analytics-card">
+            <Card className="styled-card">
               <Card.Body>
                 <Card.Title>{player.playerName}</Card.Title>
                 <Card.Text>{player.playerPosition}</Card.Text>
@@ -381,7 +400,7 @@ function PlayerAnalytics() {
             </Card>
           </Col>
           <Col className="mx-1 my-1">
-            <Card className="player-analytics-card">
+            <Card className="styled-card">
               <Card.Body>
                 <Card.Title>{team.teamName}</Card.Title>
                 <Card.Text>{team.teamLevel}</Card.Text>
@@ -391,16 +410,20 @@ function PlayerAnalytics() {
         </Row>
         <Row>
           <Col className="mx-1 my-1">
-            <Card>
+            <Card className="styled-card">
               <Card.Body>
                 <Card.Title>Shot Accuracy</Card.Title>
-                <Card.Text>Average: {statsCalculated && accuracy}%</Card.Text>
+                <Card.Text>
+                  <div>Average accuracy: {statsCalculated && accuracy}%</div>
+                  <div>Average shots: {statsCalculated && averageShots}</div>
+                  <div>Average scores: {statsCalculated && averageScores}</div>
+                </Card.Text>
                 <AccuracyChart data={accChartData}></AccuracyChart>
               </Card.Body>
             </Card>
           </Col>
           <Col className="mx-1 my-1">
-            <Card>
+            <Card className="styled-card">
               <Card.Body>
                 <Row>
                   <Col

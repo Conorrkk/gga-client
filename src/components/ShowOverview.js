@@ -3,6 +3,7 @@ import { getTeamById, getTotalPoints, getTotalGoals } from "../api";
 import { Col, Container, Row, Button, Card } from "react-bootstrap";
 import PlayerOverview from "./PlayerOverview";
 import { useNavigate } from "react-router-dom";
+import { FaChartBar } from "react-icons/fa";
 
 function ShowOverview({ match, loadedPlayers }) {
   // state to hold match team
@@ -84,7 +85,7 @@ function ShowOverview({ match, loadedPlayers }) {
   return (
     <div>
       <Container fluid>
-        <Card className="mx-4 mt-4">
+        <Card className="styled-card mx-4 mt-4">
           <Card.Header>Match Overview</Card.Header>
           <Card.Body>
             <Card.Title>
@@ -101,10 +102,16 @@ function ShowOverview({ match, loadedPlayers }) {
               Total Wides: {totalWides}
               <br></br>
             </Card.Text>
-            <Button onClick={handleClick}>Analytics</Button>
+            <Button
+              className="styled-button"
+              variant="outline-primary"
+              onClick={handleClick}
+            >
+              <FaChartBar />
+            </Button>
           </Card.Body>
         </Card>
-        <Card className="mx-4 my-4">
+        <Card className=" styled-card mx-4 my-4">
           <Card.Header>Player Overview</Card.Header>
           <Row>{playerStatsCards}</Row>
         </Card>

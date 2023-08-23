@@ -206,7 +206,7 @@ function MatchAnalytics() {
               }
               break;
             case "5":
-              statTotal = player.stats.wides;
+              statTotal = player.stats.wide;
               statName = "Wides";
               if (isNaN(statTotal)) {
                 statTotal = 0;
@@ -271,7 +271,7 @@ function MatchAnalytics() {
         md={{ span: 8, offset: 2 }}
         lg={{ span: 8, offset: 2 }}
       >
-        <Card className="mx-4 my-4">
+        <Card className="styled-card mx-4 my-4">
           <Card.Body>
             <Card.Title className="d-flex justify-content-center">
               {team.teamName} {team.teamLevel} vs {match.teams.oppositionTeam}
@@ -290,7 +290,7 @@ function MatchAnalytics() {
         md={{ span: 8, offset: 2 }}
         lg={{ span: 8, offset: 2 }}
       >
-        <Card>
+        <Card className="styled-card ">
           <Card.Body>
             <Card.Title className="d-flex justify-content-center">
               Overall Team Stats
@@ -306,7 +306,7 @@ function MatchAnalytics() {
         md={{ span: 8, offset: 2 }}
         lg={{ span: 8, offset: 2 }}
       >
-        <Card>
+        <Card className="styled-card ">
           <Card.Body>
             <Row>
               <Card.Title className="d-flex justify-content-center">

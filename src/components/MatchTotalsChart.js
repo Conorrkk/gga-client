@@ -20,7 +20,7 @@ function MatchTotals({ data }) {
       {
         label: "Team total",
         data: data.map((item) => item.amount),
-        backgroundColor: "red",
+        backgroundColor: "blue",
         borderColor: "black",
         borderWidth: 1,
       },

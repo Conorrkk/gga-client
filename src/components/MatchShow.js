@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Button, Col, Card } from "react-bootstrap";
+import { Button, Col, Card, Row } from "react-bootstrap";
 import { getTeamById, getTotalGoals, getTotalPoints } from "../api";
 import { useNavigate } from "react-router-dom";
+import { FaTrashAlt, FaEye } from "react-icons/fa";
 import "../styles.css";
 
 function MatchShow({ match, onDelete }) {
@@ -66,22 +67,39 @@ function MatchShow({ match, onDelete }) {
 
   return (
     <Col
-      sm={{ span: 6 }}
+      sm={{ span: 8 }}
       md={{ span: 8, offset: 2 }}
       lg={{ span: 8, offset: 2 }}
     >
-      <Card className="mx-4 my-4 item-hover">
-        <Card.Header onClick={handleClick}>{configuredDate}</Card.Header>
-        <Card.Body>
-          <Card.Title onClick={handleClick}>
-            {team.teamName} {team.teamLevel} vs {oppositionName}
+      <Card className="styled-card mx-4 my-4 item-hover">
+        <Card.Header>{configuredDate}</Card.Header>
+        <Card.Body >
+          <Card.Title>
+            {team && team.teamName} {team && team.teamLevel} vs {oppositionName}
           </Card.Title>
           <Card.Text>
             {userGoals}-{userPoints} : {match.goalAgainst}-{match.pointAgainst}
           </Card.Text>
-          <Button variant="outline-danger" onClick={handleDelete}>
-            Delete
-          </Button>
+          <Row>
+            <Col className="d-flex justify-content-start">
+              <Button
+                variant="outline-dark"
+                onClick={handleClick}
+                className="styled-icon-button mx-1"
+              >
+                <FaEye />
+              </Button>
+            </Col>
+            <Col className="d-flex justify-content-end">
+              <Button
+                variant="outline-danger"
+                onClick={handleDelete}
+                className="styled-icon-button mx-1"
+              >
+                <FaTrashAlt style={{ color: "red" }}></FaTrashAlt>
+              </Button>
+            </Col>
+          </Row>
         </Card.Body>
       </Card>
     </Col>

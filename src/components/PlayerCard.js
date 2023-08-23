@@ -1,5 +1,6 @@
-import {Card, Button} from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaChartLine } from "react-icons/fa";
 
 function PlayerCard({ player }) {
   // for nav
@@ -14,13 +15,29 @@ function PlayerCard({ player }) {
   };
 
   return (
-    <Card className="styled-card">
+    <Card className="styled-card item-hover">
       <Card.Body>
-        <Card.Title>{player.playerName}</Card.Title>
-        <Card.Text>{player.playerPosition}</Card.Text>
-        <Button className="styled-button" variant="outline-primary" onClick={handleAnalytics}>
-          Analytics
-        </Button>
+        <Row>
+          <Col
+            sm={{ span: 8 }}
+            md={{ span: 8 }}
+            lg={{ span: 8 }}
+            xl={{ span: 8 }}
+          >
+            <Card.Title>{player.playerName}</Card.Title>
+
+            <Card.Text>{player.playerPosition}</Card.Text>
+          </Col>
+          <Col className="mt-2" md={1}>
+            <Button
+              className="styled-button"
+              variant="outline-primary"
+              onClick={handleAnalytics}
+            >
+              <FaChartLine />
+            </Button>
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   );

@@ -158,16 +158,37 @@ function RecordPlayerList({ loadedPlayers }) {
           </Col>
         </Row>
         <div className="stats-section ">
-          <Stack gap={3} className="Stats col-md-3 mx-auto">
+          <Stack gap={3} className="Stats mx-auto">
             {statsToDisplay.map((item) => {
-              return <Stat key={item.id} stat={item.stat} id={item.id} />;
+              return (
+                <Col
+                  sm={{ span: 4, offset: 1 }}
+                  md={{ span: 4, offset: 1 }}
+                  lg={{ span: 4, offset: 1 }}
+                  xl={{ span: 4, offset: 1 }}
+                >
+                  <Stat key={item.id} stat={item.stat} id={item.id} />
+                </Col>
+              );
             })}
           </Stack>
         </div>
-        <Row>{playerCards}</Row>
-        <Button variant="outline-primary" onClick={() => handleFinish()}>
-          Finish
-        </Button>
+        <Row>
+          <Row>{playerCards}</Row>
+          <Row>
+            <Col sm={12} className="text-center">
+              <Col sm={{ span: 3, offset: 10 }}>
+                <Button
+                  className="styled-button mb-4"
+                  variant="outline-primary"
+                  onClick={() => handleFinish()}
+                >
+                  Finish
+                </Button>
+              </Col>
+            </Col>
+          </Row>
+        </Row>
       </Container>
     </div>
   );

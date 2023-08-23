@@ -37,7 +37,7 @@ function PerformanceChart({ data }) {
       {
         label: `${stat}`,
         data: data.map((item) => item.amount),
-        backgroundColor: "red",
+        backgroundColor: "blue",
         borderColor: "black",
         borderWidth: 1,
       },

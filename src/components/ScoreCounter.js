@@ -72,14 +72,14 @@ function ScoreCounter({ onUpdateGoalAgainst, onUpdatePointAgainst }) {
             <div className="score-actions">
               <Button
                 className="scoreline-button"
-                variant="outline-warning me-2"
+                variant="outline-danger me-2"
                 onClick={decrementGoals}
               >
                 -
               </Button>
               <Button
                 className="scoreline-button"
-                variant="outline-warning"
+                variant="outline-danger"
                 onClick={decrementPoints}
               >
                 -
