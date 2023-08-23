@@ -4,6 +4,7 @@ import { Form, Button, Col, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import CurrentMatchContext from "../context/CurrentMatchProvider";
 import NavBar from "../components/NavBar";
+import { FaCheckSquare } from "react-icons/fa";
 // import Footer from "../components/Footer";
 
 function CreateMatchPage() {
@@ -115,11 +116,11 @@ function CreateMatchPage() {
                   </div>
                   <div className="mx-2 my-2">
                     <Button
-                      className="styled-button"
+                      className="styled-icon-button"
                       variant="outline-primary"
                       type="submit"
                     >
-                      Done
+                    <FaCheckSquare />
                     </Button>
                   </div>
                 </Form>

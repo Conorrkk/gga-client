@@ -2,6 +2,7 @@ import { Form, Card, Button } from "react-bootstrap";
 import { updatePanel } from "../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaUserPlus } from "react-icons/fa";
 
 function PlayerShow({
   player,
@@ -31,7 +32,7 @@ function PlayerShow({
     }
   };
   // for checking if add players should be disabled
-  const isButtonDisabled = (matchPanelCount >= maxPanelSize);
+  const isButtonDisabled = matchPanelCount >= maxPanelSize;
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -39,8 +40,13 @@ function PlayerShow({
         <Card.Body>
           <Card.Title>{player.playerName}</Card.Title>
           <Card.Text>{player.playerPosition}</Card.Text>
-          <Button variant="success" type="submit" disabled={isButtonDisabled}>
-            Add player
+          <Button
+            className="styled-icon-button"
+            variant="outline-primary"
+            type="submit"
+            disabled={isButtonDisabled}
+          >
+            <FaUserPlus />
           </Button>
         </Card.Body>
       </Card>

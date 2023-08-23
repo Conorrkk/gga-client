@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import MatchTotals from "../components/MatchTotalsChart";
 import { getMatches, getTeamById } from "../api";
+import { FaHistory } from "react-icons/fa";
 // import Footer from "../components/Footer";
 
 function Dashboard() {
@@ -236,7 +237,7 @@ function Dashboard() {
                   variant="outline-primary"
                   onClick={handleHistory}
                 >
-                  History
+                  <FaHistory />
                 </Button>
               </Card.Body>
             </Card>
