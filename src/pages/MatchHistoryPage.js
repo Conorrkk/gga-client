@@ -67,7 +67,7 @@ function MatchHistory() {
     }
   };
 
-  // when delete button is clicked this method handles that action and makes call to delete match by id
+  // when delete button clicked this method handles that action and makes call to delete match by id
   const handleDeleteMatch = (id) => {
     deleteMatch(id)
       .then(() => {
