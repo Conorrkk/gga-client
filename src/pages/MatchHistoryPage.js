@@ -81,8 +81,7 @@ function MatchHistory() {
   return (
     <div>
       <NavBar />
-
-      <Container fluid className="mt-4">
+      <Container fluid className="mt-4" style={{ height: "100vh" }}>
         <Col
           sm={{ span: 8, offset: 2 }}
           md={{ span: 8, offset: 2 }}
@@ -100,16 +99,15 @@ function MatchHistory() {
         </Col>
         <Row>
           <Row>
-            <Col className="d-flex justify-content-end"
+            <Col
+              className="d-flex justify-content-end"
               sm={{ span: 1 }}
               md={{ span: 1, offset: 2 }}
               lg={{ span: 1, offset: 2 }}
             >
               <FaSearch className="mt-2" />
             </Col>
-            <Col  sm={{ span: 7 }}
-              md={{ span: 7 }}
-              lg={{ span: 7}}>
+            <Col sm={{ span: 7 }} md={{ span: 7 }} lg={{ span: 7 }}>
               <FormControl
                 type="text"
                 placeholder="Search by opponent"
