@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/",
@@ -16,16 +15,11 @@ export const registerUser = (userData) => {
     });
 };
 
-// checks to see if the email and password provided return true and allow a user to login, creating a cookie to store session in browser
+// check to see if the email and password provided return true and allow a user to login, cookie created in server to store session in browser
 export const checkLogin = (loginData) => {
   return api
-    .post("/login", loginData, {
-      withCredentials: true,
-    })
+    .post("/login", loginData)
     .then((response) => {
-      const token = response.data.token;
-      const tokenExpiry = 2 * 60 * 60;
-      Cookies.set("jwt", token, { expires: tokenExpiry });
       return response.data;
     })
     .catch((error) => {
@@ -36,13 +30,9 @@ export const checkLogin = (loginData) => {
 
 // get user's club
 export const getUserClub = () => {
-  // gets jwt from client to be passed to backend and then be decoded
-  const accessToken = Cookies.get("jwt");
   return api
     .get("/users/club", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data.club;
@@ -55,12 +45,9 @@ export const getUserClub = () => {
 
 // get user's teams
 export const getTeams = () => {
-  const accessToken = Cookies.get("jwt");
   return api
     .get("/teams", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -72,12 +59,9 @@ export const getTeams = () => {
 
 // create new team
 export const postTeam = (teamData) => {
-  const accessToken = Cookies.get("jwt");
   return api
     .post("/teams", teamData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -90,12 +74,9 @@ export const postTeam = (teamData) => {
 
 // create new player
 export const postPlayer = (playerData) => {
-  const accessToken = Cookies.get("jwt");
   return api
     .post("/players", playerData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -108,14 +89,11 @@ export const postPlayer = (playerData) => {
 
 // gets players for a team
 export const getPlayers = async (team) => {
-  const accessToken = Cookies.get("jwt");
   const teamId = team;
   return api
     .get("/players", {
       params: { teamId },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -127,12 +105,9 @@ export const getPlayers = async (team) => {
 
 // creates a new match
 export const postMatch = (matchData) => {
-  const accessToken = Cookies.get("jwt");
   return api
     .post("/matches", matchData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -145,15 +120,12 @@ export const postMatch = (matchData) => {
 
 // create the panel for a team through a patch req
 export const updatePanel = (matchId, playerId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId: [playerId],
   };
   return api
     .patch(`/matches/${matchId}/addPlayers`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -163,13 +135,10 @@ export const updatePanel = (matchId, playerId) => {
 
 // gets one match
 export const getMatchById = async (matchId) => {
-  const accessToken = Cookies.get("jwt");
   const id = matchId;
   return api
     .get(`/matches/${id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -181,13 +150,10 @@ export const getMatchById = async (matchId) => {
 
 // gets one player
 export const getPlayerById = async (playerId) => {
-  const accessToken = Cookies.get("jwt");
   const id = playerId;
   return api
     .get(`/players/${id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -199,16 +165,13 @@ export const getPlayerById = async (playerId) => {
 
 // records a goal scored by a player from play
 export const addGoalPlay = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addGoal`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -220,16 +183,13 @@ export const addGoalPlay = (playerId, matchId) => {
 
 // records a goal scored by a player from dead ball
 export const addGoalDead = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addGoalDead`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -241,16 +201,13 @@ export const addGoalDead = (playerId, matchId) => {
 
 // records a point scored by a player from play
 export const addPointPlay = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addPoint`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -262,16 +219,13 @@ export const addPointPlay = (playerId, matchId) => {
 
 // records a point scored by a player from dead ball
 export const addPointDead = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addPointDead`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -283,16 +237,13 @@ export const addPointDead = (playerId, matchId) => {
 
 // records a player's wide
 export const addWide = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addWide`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -304,16 +255,13 @@ export const addWide = (playerId, matchId) => {
 
 // records a player's block
 export const addBlock = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addBlock`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -325,16 +273,13 @@ export const addBlock = (playerId, matchId) => {
 
 // records a player's catch
 export const addCatch = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addCatch`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -346,16 +291,13 @@ export const addCatch = (playerId, matchId) => {
 
 // records a player's dropped ball
 export const addDrop = (playerId, matchId) => {
-  const accessToken = Cookies.get("jwt");
   const data = {
     playerId,
   };
   const id = matchId;
   return api
     .patch(`/matches/${id}/addDrop`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -367,13 +309,10 @@ export const addDrop = (playerId, matchId) => {
 
 // gets total goals scored by a team in a match
 export const getTotalGoals = (matchId) => {
-  const accessToken = Cookies.get("jwt");
   const id = matchId;
   return api
     .get(`/matches/${id}/totalGoals`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -385,13 +324,10 @@ export const getTotalGoals = (matchId) => {
 
 // gets total points scored by a team in a match
 export const getTotalPoints = (matchId) => {
-  const accessToken = Cookies.get("jwt");
   const id = matchId;
   return api
     .get(`/matches/${id}/totalPoints`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -403,12 +339,9 @@ export const getTotalPoints = (matchId) => {
 
 // gets all user's matches
 export const getMatches = () => {
-  const accessToken = Cookies.get("jwt");
   return api
     .get("/matches", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -420,13 +353,10 @@ export const getMatches = () => {
 
 // gets all of a player's matches
 export const getPlayersMatches = (playerId) => {
-  const accessToken = Cookies.get("jwt");
   const id = playerId;
   return api
     .get(`/matches/player/${id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -438,18 +368,13 @@ export const getPlayersMatches = (playerId) => {
 
 // records opponent's total points in a match
 export const addOpponentPoints = (id, pointsAgainst) => {
-  const accessToken = Cookies.get("jwt");
   const matchId = id;
-  console.log("matchid", matchId);
   const data = {
     pointsAgainst,
   };
-  console.log("point data:", data);
   return api
     .patch(`/matches/${matchId}/addOpponentPoints`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -461,16 +386,13 @@ export const addOpponentPoints = (id, pointsAgainst) => {
 
 // records opponent's total goals in a match
 export const addOpponentGoals = (id, goalsAgainst) => {
-  const accessToken = Cookies.get("jwt");
   const matchId = id;
   const data = {
     goalsAgainst,
   };
   return api
     .patch(`/matches/${matchId}/addOpponentGoals`, data, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -481,20 +403,21 @@ export const addOpponentGoals = (id, goalsAgainst) => {
 };
 
 // deletes a match
-export const deleteMatch = (id) => api.delete(`/matches/${id}`);
+export const deleteMatch = (id) => api.delete(`/matches/${id}`, {
+  withCredentials: true,
+});
 
 // deletes a team
-export const deleteTeam = (id) => api.delete(`/teams/${id}`);
+export const deleteTeam = (id) => api.delete(`/teams/${id}`, {
+  withCredentials: true,
+});
 
 // gets one team
 export const getTeamById = (id) => {
-  const accessToken = Cookies.get("jwt");
   const teamId = id;
   return api
     .get(`teams/${teamId}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      withCredentials: true,
     })
     .then((response) => {
       return response.data;
@@ -502,4 +425,15 @@ export const getTeamById = (id) => {
     .catch((error) => {
       console.error("Error getting team by id:", error);
     });
+};
+
+export const logout = async () => {
+  try {
+    const response = await api.post("/login/logout", {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error logging out:", error);
+  }
 };

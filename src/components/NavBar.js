@@ -1,8 +1,21 @@
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../api";
 
 function NavBar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+      navigate("/")
+    } catch (error) {
+      console.error("Logout error:", error)
+    }
+  }
+
   return (
     <div>
       <Navbar bg="dark" className="custom-navbar" variant={"dark"} expand="lg">
@@ -28,7 +41,7 @@ function NavBar() {
             <Nav.Link as={Link} to="/matchHistory">
               Match History
             </Nav.Link>
-            <Nav.Link >
+            <Nav.Link onClick={handleLogout}>
               Logout
             </Nav.Link>
           </Nav>

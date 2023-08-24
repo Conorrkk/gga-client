@@ -38,8 +38,8 @@ function ShowOverview({ match, loadedPlayers }) {
       let totalGoals = 0;
       let totalWides = 0;
       match.teams.players.forEach((player) => {
-        totalPoints += player.stats.point_from_play;
-        totalGoals += player.stats.goal_from_play;
+        totalPoints += (player.stats.point_from_play + player.stats.point_from_dead);
+        totalGoals += (player.stats.goal_from_play + player.stats.goal_from_dead);
         totalWides += player.stats.wide;
       });
       // setting the totals as state

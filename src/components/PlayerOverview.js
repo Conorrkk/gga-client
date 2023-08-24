@@ -30,9 +30,9 @@ function PlayerOverview({ player, match }) {
           <Card.Text>
             Position: {player.playerPosition}
             <br></br>
-            Goals scored: {playerStats.goal_from_play}
+            Goals scored: {(playerStats.goal_from_play + playerStats.goal_from_dead)}
             <br></br>
-            Points scored: {playerStats.point_from_play}
+            Points scored: {(playerStats.point_from_play + playerStats.point_from_dead)}
             <br></br>
             Wides: {playerStats.wide}
             <br></br>

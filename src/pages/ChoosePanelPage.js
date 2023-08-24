@@ -35,7 +35,7 @@ function ChoosePanel() {
   return (
     <div>
       <NavBar />
-   
+      <Container fluid style={{ height: "100vh" }}>
         <PlayerList teamId={teamId} matchId={matchId} />
         <Button
           onClick={handleClick}
@@ -44,7 +44,7 @@ function ChoosePanel() {
         >
           Start recording stats
         </Button>
-
+      </Container>
       <Footer />
     </div>
   );
