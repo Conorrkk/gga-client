@@ -71,7 +71,7 @@ function MatchShow({ match, onDelete }) {
       md={{ span: 8, offset: 2 }}
       lg={{ span: 8, offset: 2 }}
     >
-      <Card className="styled-card mx-4 my-4 item-hover">
+      <Card className="styled-card mx-4 my-4">
         <Card.Header>{configuredDate}</Card.Header>
         <Card.Body >
           <Card.Title>
@@ -83,7 +83,7 @@ function MatchShow({ match, onDelete }) {
           <Row>
             <Col className="d-flex justify-content-start">
               <Button
-                variant="outline-dark"
+                variant="outline-primary"
                 onClick={handleClick}
                 className="styled-icon-button mx-1"
               >

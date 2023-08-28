@@ -403,14 +403,16 @@ export const addOpponentGoals = (id, goalsAgainst) => {
 };
 
 // deletes a match
-export const deleteMatch = (id) => api.delete(`/matches/${id}`, {
-  withCredentials: true,
-});
+export const deleteMatch = (id) =>
+  api.delete(`/matches/${id}`, {
+    withCredentials: true,
+  });
 
 // deletes a team
-export const deleteTeam = (id) => api.delete(`/teams/${id}`, {
-  withCredentials: true,
-});
+export const deleteTeam = (id) =>
+  api.delete(`/teams/${id}`, {
+    withCredentials: true,
+  });
 
 // gets one team
 export const getTeamById = (id) => {
@@ -427,6 +429,7 @@ export const getTeamById = (id) => {
     });
 };
 
+// sends logout request to backend where session will be destroyed
 export const logout = async () => {
   try {
     const response = await api.post("/login/logout", {
@@ -437,3 +440,19 @@ export const logout = async () => {
     console.error("Error logging out:", error);
   }
 };
+
+// sends matchId to backend where we create the schema used for creating a csv for a match
+export const createExportDoc = async (matchId) => {
+  const data = {
+    matchId,
+  };
+  try {
+    const response = await api.post("/exportmatch", data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error creating export doc:", error);
+  }
+};
+

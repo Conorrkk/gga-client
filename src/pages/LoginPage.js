@@ -1,11 +1,13 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Col } from "react-bootstrap";
 import { checkLogin } from "../api";
 import "../styles.css";
-// import Footer from "../components/Footer";
+import { AuthProvider } from "../context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
 
 function Login() {
+  const { login } = useAuth();
   // email the user enters
   const [email, setEmail] = useState("");
   // password the users enters
@@ -45,6 +47,7 @@ function Login() {
       setEmail("");
       setPassword("");
       setSucces(true);
+      login();
     } catch (err) {
       console.log(err);
       if (err?.response) {
@@ -62,7 +65,7 @@ function Login() {
   // ones login is successful nav to dboard
   useEffect(() => {
     if (success) {
-      navigate("/dashBoard")
+      navigate("/dashboard")
     }
   })
 

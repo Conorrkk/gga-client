@@ -18,6 +18,7 @@ function CreateTeam() {
 
   // get and set the users club
   useEffect(() => {
+    console.log("CREATE TEAM PAGE");
     getUserClub()
       .then((club) => setUserClub(club))
       .catch((error) => {

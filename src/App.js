@@ -15,29 +15,63 @@ import MatchHistory from "./pages/MatchHistoryPage";
 import ViewPlayers from "./pages/ViewPlayersPage";
 import PlayerAnalytics from "./pages/PlayerAnalyticsPage";
 import MatchAnalytics from "./pages/MatchAnalytics";
+import RouteProtection from "./components/RouteProtection";
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<LandingPage />}></Route>
-      <Route path="/register" element={<Registration/>}></Route>
-      <Route path="/login" element={<Login/>}></Route>
-      <Route path="/dashboard" element={<Dashboard/>}></Route>
-      <Route path="/teams" element={<Teams/>}></Route>
-      <Route path="/createTeam" element={<CreateTeam/>}></Route>
-      <Route path="/addPanel/:teamId" element={<AddPanel/>}></Route>
-      <Route path="/createMatch" element={<CreateMatchPage/>}></Route>
-      <Route path="/match/:matchId/team/:teamId" element={<ChoosePanel />}></Route>
-      <Route path="/recordStats" element={<RecordStats />}></Route>
-      <Route path="/matchOverview/:id" element={<MatchOverview />}></Route>
-      <Route path="/matchHistory" element={<MatchHistory />}></Route>
-      <Route path="/viewPlayers/:teamId" element={<ViewPlayers />}></Route>
-      <Route path ="/player/analytics/:playerId" element={<PlayerAnalytics />}></Route>
-      <Route path ="/match/analytics/:matchId" element={<MatchAnalytics />}></Route>
-    </Routes>
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/register" element={<Registration />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route
+          path="/dashboard/*"
+          element={<RouteProtection><Dashboard/></RouteProtection>}
+        />
+        <Route path="/teams" element={<RouteProtection><Teams/></RouteProtection>} />
+        <Route
+          path="/createTeam/*"
+          element={<RouteProtection><CreateTeam/></RouteProtection>}
+        />
+        <Route
+          path="/addPanel/:teamId"
+          element={<RouteProtection><AddPanel/></RouteProtection>}
+        />
+        <Route
+          path="/createMatch"
+          element={<RouteProtection><CreateMatchPage/></RouteProtection>}
+        />
+        <Route
+          path="/match/:matchId/team/:teamId"
+          element={<RouteProtection><ChoosePanel/></RouteProtection>}
+        />
+        <Route
+          path="/recordStats"
+          element={<RouteProtection><RecordStats/></RouteProtection>}
+        />
+        <Route
+          path="/matchOverview/:id"
+          element={<RouteProtection><MatchOverview/></RouteProtection>}
+        />
+        <Route
+          path="/matchHistory/*"
+          element={<RouteProtection><MatchHistory/></RouteProtection>}
+        />
+        <Route
+          path="/viewPlayers/:teamId"
+          element={<RouteProtection><ViewPlayers/></RouteProtection>}
+        />
+        <Route
+          path="/player/analytics/:playerId"
+          element={<RouteProtection><PlayerAnalytics/></RouteProtection>}
+        />
+        <Route
+          path="/match/analytics/:matchId"
+          element={<RouteProtection><MatchAnalytics/></RouteProtection>}
+        />
+      </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

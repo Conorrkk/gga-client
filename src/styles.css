@@ -57,12 +57,6 @@
   float: left;
 }
 
-.item-hover:hover {
-  transform: scale(1.01);
-  border: 2px solid #007bff;
-  transition: transform 0.3s ease;
-}
-
 .footer {
   position: absolute;
   bottom: 0;

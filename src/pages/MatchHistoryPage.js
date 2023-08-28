@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, FormControl, Card } from "react-bootstrap";
+import { Container, Row, Col, FormControl, Card, Form } from "react-bootstrap";
 import { getMatches, deleteMatch, getTotalGoals, getTotalPoints } from "../api";
 import MatchList from "../components/MatchList";
 import NavBar from "../components/NavBar";
@@ -15,6 +15,12 @@ function MatchHistory() {
   const [query, setQuery] = useState("");
   // selected filter by result
   const [selectedResult, setSelectedResult] = useState("");
+  // array for match wins
+  const [wins, setWins] = useState([]);
+  // array for match draws
+  const [draws, setDraws] = useState([]);
+  // array for match losses
+  const [losses, setLosses] = useState([]);
 
   // get all matches to be displayed
   useEffect(() => {
@@ -25,6 +31,39 @@ function MatchHistory() {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+  // creates w/l/d match results arrays
+  useEffect(() => {
+    const currentWins = [];
+    const currentLosses = [];
+    const currentDraws = [];
+    matches.forEach(async (match) => {
+      const result = await calculateResult(match);
+      if (result === "win") {
+        currentWins.push(match);
+      } else if (result === "draw") {
+        currentDraws.push(match);
+      } else {
+        currentLosses.push(match);
+      }
+    });
+    setWins(currentWins);
+    setLosses(currentLosses);
+    setDraws(currentDraws);
+  }, [selectedResult, matches]);
+
+  // setting the matches to be displayed
+  useEffect(() => {
+    if (selectedResult === "win") {
+      setFilteredMatches(wins);
+    } else if (selectedResult === "draw") {
+      setFilteredMatches(draws);
+    } else if (selectedResult === "loss") {
+      setFilteredMatches(losses);
+    } else {
+      setFilteredMatches(matches);
+    }
+  }, [selectedResult]);
 
   // if there's a query set filtered matches to ones which include the query - if no query set fm as matches
   useEffect(() => {
@@ -39,30 +78,17 @@ function MatchHistory() {
     }
   }, [query, matches]);
 
-  const handleFilterByResult = (result) => {
-    if (result === "all") {
-      setFilteredMatches(matches);
-    } else {
-      const filteredMatchArray = matches.filter(
-        (match) => calculateResult(match) === result
-      );
-      setFilteredMatches(filteredMatchArray);
-    }
-  };
-
+  // logic to calculate whether the match was a win, loss or draw
   const calculateResult = async (match) => {
     const goalScored = await getTotalGoals(match._id);
     const pointScored = await getTotalPoints(match._id);
     const totalScore = goalScored.totalGoals * 3 + pointScored.totalPoints;
     const oppositionScore = match.goalAgainst * 3 + match.pointAgainst;
     if (totalScore > oppositionScore) {
-      console.log("Win");
       return "win";
     } else if (totalScore === oppositionScore) {
-      console.log("draw");
       return "draw";
     } else {
-      console.log("loss");
       return "loss";
     }
   };
@@ -81,7 +107,7 @@ function MatchHistory() {
   return (
     <div>
       <NavBar />
-      <Container fluid className="mt-4" style={{ height: "100vh" }}>
+      <Container fluid className="mt-4" style={{}}>
         <Col
           sm={{ span: 8, offset: 2 }}
           md={{ span: 8, offset: 2 }}
@@ -107,7 +133,7 @@ function MatchHistory() {
             >
               <FaSearch className="mt-2" />
             </Col>
-            <Col sm={{ span: 7 }} md={{ span: 7 }} lg={{ span: 7 }}>
+            <Col sm={{ span: 5 }} md={{ span: 5 }} lg={{ span: 5 }}>
               <FormControl
                 type="text"
                 placeholder="Search by opponent"
@@ -115,18 +141,20 @@ function MatchHistory() {
                 onChange={(e) => setQuery(e.target.value)}
               />
             </Col>
+            <Col sm={{ span: 2 }} md={{ span: 2 }} lg={{ span: 2 }}>
+              <Form>
+                <Form.Select
+                  onChange={(e) => setSelectedResult(e.target.value)}
+                  defaultValue={""}
+                >
+                  <option value="all">All</option>
+                  <option value="win">Win</option>
+                  <option value="loss">Loss</option>
+                  <option value="draw">Draw</option>
+                </Form.Select>
+              </Form>
+            </Col>
           </Row>
-          <Col sm={{ span: 4 }} md={{ span: 4 }} lg={{ span: 4 }}>
-            <select
-              defaultValue={""}
-              onChange={(e) => handleFilterByResult(e.target.value)}
-            >
-              <option value="all">All</option>
-              <option value="win">Win</option>
-              <option value="loss">Loss</option>
-              <option value="draw">Draw</option>
-            </select>
-          </Col>
         </Row>
       </Container>
       <MatchList matches={filteredMatches} onDelete={handleDeleteMatch} />
