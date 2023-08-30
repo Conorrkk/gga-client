@@ -116,11 +116,11 @@ function CreateMatchPage() {
                   </div>
                   <div className="mx-2 my-2">
                     <Button
-                      className="styled-icon-button"
+                      className="styled-button"
                       variant="outline-primary"
                       type="submit"
-                    >
-                    <FaCheckSquare />
+                    >Create 
+                    <FaCheckSquare className="styled-icon-button"/>
                     </Button>
                   </div>
                 </Form>

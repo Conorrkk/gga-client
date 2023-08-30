@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <nav
+    className="custom-navbar navbar navbar-expand-lg navbar-dark bg-dark"
+  >
+    <a
+      className="ms-2 navbar-brand"
+      href="#"
+    >
+      GGAnalytics
+    </a>
+    <button
+      aria-controls="navbarScroll"
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      aria-expanded={null}
+      className="navbar-collapse collapse"
+      id="navbarScroll"
+    >
+      <div
+        className="mr-auto my-2 my-lg-0 navbar-nav navbar-nav-scroll"
+        onKeyDown={[Function]}
+        style={
+          Object {
+            "maxHeight": "100px",
+          }
+        }
+      >
+        <a
+          className="nav-link"
+          data-rr-ui-event-key={null}
+          disabled={false}
+          href="/dashboard"
+          onClick={[Function]}
+        >
+          Dashboard
+        </a>
+        <a
+          className="nav-link"
+          data-rr-ui-event-key={null}
+          disabled={false}
+          href="/teams"
+          onClick={[Function]}
+        >
+          Teams
+        </a>
+        <a
+          className="nav-link"
+          data-rr-ui-event-key={null}
+          disabled={false}
+          href="/createMatch"
+          onClick={[Function]}
+        >
+          Create Match
+        </a>
+        <a
+          className="nav-link"
+          data-rr-ui-event-key={null}
+          disabled={false}
+          href="/matchHistory"
+          onClick={[Function]}
+        >
+          Match History
+        </a>
+        <a
+          className="nav-link"
+          data-rr-ui-event-key={null}
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+`;

@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div>
+    <nav
+      className="custom-navbar navbar navbar-expand-lg navbar-dark bg-dark"
+    >
+      <a
+        className="ms-2 navbar-brand"
+        href="#"
+      >
+        GGAnalytics
+      </a>
+      <button
+        aria-controls="navbarScroll"
+        aria-label="Toggle navigation"
+        className="navbar-toggler collapsed"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        aria-expanded={null}
+        className="navbar-collapse collapse"
+        id="navbarScroll"
+      >
+        <div
+          className="mr-auto my-2 my-lg-0 navbar-nav navbar-nav-scroll"
+          onKeyDown={[Function]}
+          style={
+            Object {
+              "maxHeight": "100px",
+            }
+          }
+        >
+          <a
+            className="nav-link"
+            data-rr-ui-event-key={null}
+            disabled={false}
+            href="/dashboard"
+            onClick={[Function]}
+          >
+            Dashboard
+          </a>
+          <a
+            className="nav-link"
+            data-rr-ui-event-key={null}
+            disabled={false}
+            href="/teams"
+            onClick={[Function]}
+          >
+            Teams
+          </a>
+          <a
+            className="nav-link"
+            data-rr-ui-event-key={null}
+            disabled={false}
+            href="/createMatch"
+            onClick={[Function]}
+          >
+            Create Match
+          </a>
+          <a
+            className="nav-link"
+            data-rr-ui-event-key={null}
+            disabled={false}
+            href="/matchHistory"
+            onClick={[Function]}
+          >
+            Match History
+          </a>
+          <a
+            className="nav-link"
+            data-rr-ui-event-key={null}
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div
+    className="container-fluid"
+    style={
+      Object {
+        "height": "100vh",
+      }
+    }
+  >
+    <div
+      className="col-xl-6 col-lg-6 col-md-6 col-sm-6 offset-xl-3 offset-lg-3 offset-md-3 offset-sm-3"
+    >
+      <div
+        className="styled-card card"
+        style={
+          Object {
+            "marginTop": "10vh",
+          }
+        }
+      >
+        <h5
+          className="card-header"
+        >
+          New Match
+        </h5>
+        <div
+          className="card-body"
+        >
+          <p
+            className="card-text"
+          >
+            <form
+              className=""
+              onSubmit={[Function]}
+            >
+              <div
+                className="mx-2 my-2"
+              >
+                <div
+                  className="mb-2"
+                >
+                  <label
+                    className="form-label"
+                    htmlFor="team"
+                  >
+                    Select match team
+                  </label>
+                  <select
+                    className="form-select"
+                    id="team"
+                    onChange={[Function]}
+                    required={true}
+                    value=""
+                  >
+                    <option
+                      value=""
+                    >
+                      Select team
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div
+                className="mx-2 my-2"
+              >
+                <div
+                  className="mb-2"
+                >
+                  <label
+                    className="form-label"
+                    htmlFor="opponentName"
+                  >
+                    Opposing team
+                  </label>
+                  <input
+                    autoComplete="off"
+                    className="form-control"
+                    id="opponentName"
+                    maxLength="60"
+                    onChange={[Function]}
+                    pattern="[a-zA-Z0-9\\\\s]+"
+                    placeholder="Team Name"
+                    required={true}
+                    title="Only letters and numbers(max 60 chars)"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                className="mx-2 my-2"
+              >
+                <button
+                  className="styled-button btn btn-outline-primary"
+                  disabled={false}
+                  type="submit"
+                >
+                  Create
+                  <svg
+                    className="styled-icon-button"
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 448 512"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="main-footer bg-dark text-white"
+  >
+    <div
+      className="mt-2 container"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col"
+        >
+          <p>
+            © 
+            2023
+             GGAnalytics
+          </p>
+        </div>
+        <div
+          className="col"
+        >
+          <div
+            className="vstack gap-2"
+          >
+            <h3>
+              Quick Links
+            </h3>
+            <a
+              href="/dashboard"
+              onClick={[Function]}
+            >
+              <div
+                className="p-2"
+              >
+                Dashboard
+              </div>
+            </a>
+            <a
+              href="/teams"
+              onClick={[Function]}
+            >
+              <div
+                className="p-2"
+              >
+                Teams
+              </div>
+            </a>
+            <a
+              href="/matchHistory"
+              onClick={[Function]}
+            >
+              <div
+                className="p-2"
+              >
+                Match History
+              </div>
+            </a>
+          </div>
+        </div>
+        <div
+          className="col"
+        >
+          <div
+            className="vstack gap-2"
+          >
+            <h3>
+              Contact
+            </h3>
+            <div
+              className="p-2"
+            >
+              +353863032593
+            </div>
+            <div
+              className="p-2"
+            >
+              gganalytics@gga.project
+            </div>
+            <div
+              className="p-2"
+            >
+              Computer Science Building, Belfast, United Kingdom, BT9 5AF
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+`;

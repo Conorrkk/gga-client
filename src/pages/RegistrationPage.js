@@ -80,10 +80,10 @@ function Registration() {
           md={{ span: 6, offset: 2 }}
           lg={{ span: 6, offset: 2 }}
         >
-          <Card>
+          <Card className="styled-card">
             <Card.Body>
               <Card.Title>Successfully registered</Card.Title>
-              <Button variant="outline-success" onClick={handleClick}>
+              <Button className="styled-button" variant="outline-primary" onClick={handleClick}>
                 Login
               </Button>
             </Card.Body>
@@ -100,8 +100,12 @@ function Registration() {
                   value={username}
                   onChange={handleUsernameChange}
                   type="text"
+                  pattern="[a-zA-Z\s]+"
+                  title="Only accept letters(max 50 chars)"
+                  maxLength="50"
                   autoComplete="off"
                   placeholder="Username"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-2" controlId="Club">
@@ -111,7 +115,11 @@ function Registration() {
                   onChange={handleClubChange}
                   type="text"
                   autoComplete="off"
+                  pattern="[a-zA-Z0-9\s]+"
+                  maxLength="60"
+                  title="Only accepts letter and numbers (max 60 chars)"
                   placeholder="Club"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-2" controlId="email">
@@ -121,7 +129,9 @@ function Registration() {
                   onChange={handleEmailChange}
                   type="email"
                   autoComplete="off"
+                  maxLength="60"
                   placeholder="Enter Email"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-2" controlId="password">
@@ -130,7 +140,10 @@ function Registration() {
                   value={password}
                   onChange={handlePasswordChange}
                   type="password"
+                  maxLength="50"
+                  title="Max length 50 characters"
                   placeholder="Enter Password"
+                  required
                 />
               </Form.Group>
               <div className="d-grid mb-2">

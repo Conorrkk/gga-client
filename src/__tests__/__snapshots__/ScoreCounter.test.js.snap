@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="scoreline-against card"
+>
+  <div
+    className="card-body"
+  >
+    <div
+      className="mb-2 row"
+    >
+      <div
+        className="score-section"
+      >
+        <div
+          className="score-actions"
+        >
+          <button
+            className="scoreline-button btn btn-outline-dark me-1"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            0
+          </button>
+          <button
+            className="scoreline-button btn btn-outline-dark"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            0
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="score-section"
+      >
+        <div
+          className="score-actions"
+        >
+          <button
+            className="scoreline-button btn btn-outline-danger me-2"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+          <button
+            className="scoreline-button btn btn-outline-danger"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

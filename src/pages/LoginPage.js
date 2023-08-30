@@ -125,6 +125,7 @@ function Login() {
                   value={password}
                   onChange={handlePasswordChange}
                   type="password"
+                  maxLength="60"
                   placeholder="Enter Password"
                 />
               </Form.Group>
