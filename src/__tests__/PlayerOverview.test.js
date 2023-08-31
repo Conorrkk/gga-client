@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MatchList from '../components/MatchList';
-import { match, matches, player1 } from '../__mocks__/mocks';
+import { match, player1 } from '../__mocks__/mocks';
 import { BrowserRouter } from 'react-router-dom';
 import PlayerOverview from '../components/PlayerOverview';
 

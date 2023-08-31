@@ -29,7 +29,7 @@ function Teams() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{height: "100vh"}}>
+      <Container fluid className="main-container">
       <TeamList teams={teams} onDelete={handleDeleteTeam}/>
       </Container>
       <Footer />

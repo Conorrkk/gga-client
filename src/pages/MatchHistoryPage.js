@@ -107,7 +107,7 @@ function MatchHistory() {
   return (
     <div>
       <NavBar />
-      <Container fluid className="mt-4" style={{}}>
+      <Container fluid className="mt-4 main-container" >
         <Col
           sm={{ span: 8, offset: 2 }}
           md={{ span: 8, offset: 2 }}
@@ -155,9 +155,9 @@ function MatchHistory() {
               </Form>
             </Col>
           </Row>
-        </Row>
+        </Row><MatchList matches={filteredMatches} onDelete={handleDeleteMatch} />
       </Container>
-      <MatchList matches={filteredMatches} onDelete={handleDeleteMatch} />
+      
       <Footer />
     </div>
   );

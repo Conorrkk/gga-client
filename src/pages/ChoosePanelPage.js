@@ -60,8 +60,8 @@ function ChoosePanel() {
       });
   };
 
-   // for checking if start recording stats button should be disabled
-   const isButtonDisabled = matchPanelCount < minPanelSize;
+  // for checking if start recording stats button should be disabled
+  const isButtonDisabled = matchPanelCount < minPanelSize;
 
   // give time to set loaded players state
   if (loadedPlayers === null) {
@@ -71,7 +71,7 @@ function ChoosePanel() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{ height: "100vh" }}>
+      <Container fluid className="main-container">
         <Row>
           <Col
             className="mx-4 my-4"
@@ -85,7 +85,7 @@ function ChoosePanel() {
               <Card.Body>
                 <Card.Title>Add players...</Card.Title>
                 <Card.Text>
-                  Add up to 15 players to make up your match day team
+                  Add from 5 to 15 players to make up your match day panel
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -111,14 +111,21 @@ function ChoosePanel() {
             </Col>
           ))}
         </Row>
-        <Button
-          onClick={handleClick}
-          variant="outline-primary"
-          className="mx-4 my-4 styled-button"
-          disabled={isButtonDisabled}
+        <Col
+          sm={{ span: 6 }}
+          md={{ span: 6 }}
+          lg={{ span: 6 }}
+          xl={{ span: 6 }}
         >
-          Start recording stats
-        </Button>
+          <Button
+            onClick={handleClick}
+            variant="outline-primary"
+            className="mx-4 my-4 styled-button"
+            disabled={isButtonDisabled}
+          >
+            Start recording stats
+          </Button>
+        </Col>
       </Container>
       <Footer />
     </div>

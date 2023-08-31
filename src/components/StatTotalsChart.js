@@ -41,10 +41,10 @@ function StatTotalsChart({ data }) {
       {
         label: `${statName}`,
         data: data.map((item) => item.stat),
-        backgroundColor: "red",
+        backgroundColor: "blue",
         borderColor: "black",
-        pointBorderColor: "red",
-        fill: false,
+        pointBorderColor: "blue",
+        fill: true,
         tension: 0.4,
       },
     ],

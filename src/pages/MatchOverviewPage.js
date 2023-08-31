@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import { getMatchById, getPlayerById } from "../api";
 import ShowOverview from "../components/ShowOverview";
 import NavBar from "../components/NavBar";
@@ -53,8 +54,9 @@ function MatchOverview() {
   return (
     <div>
       <NavBar />
-      
-      <ShowOverview match={match} loadedPlayers={loadedPlayers} />
+      <Container fluid className="main-container">
+        <ShowOverview match={match} loadedPlayers={loadedPlayers} />
+      </Container>
       <Footer />
     </div>
   );

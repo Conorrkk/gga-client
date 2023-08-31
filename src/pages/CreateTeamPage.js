@@ -83,7 +83,7 @@ function CreateTeam() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{ height: "100vh" }}>
+      <Container fluid className="main-container">
         <Card.Title ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
           {errMsg}
         </Card.Title>

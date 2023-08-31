@@ -134,7 +134,7 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <NavBar />
-      <Container className="mt-5" fluid>
+      <Container className="mt-5 main-container" fluid>
         <Row className="my-5">
           <Col  sm={{ span: 4, offset: 1 }}
             md={{ span: 4, offset: 1 }}
@@ -181,7 +181,7 @@ function Dashboard() {
                 <Card.Title>Teams</Card.Title>
                 <Card.Text>
                   Create new teams, browse teams, manage panels, and analyse
-                  individual an players performances
+                  individual players performances
                 </Card.Text>
                 <Button
                   className="styled-button"

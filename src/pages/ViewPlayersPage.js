@@ -38,7 +38,7 @@ function ViewPlayers() {
   return (
     <div>
       <NavBar></NavBar>
-      <Container fluid>
+      <Container fluid className="main-container">
         <Row>
           <Col
             sm={{ span: 4, offset: 2 }}

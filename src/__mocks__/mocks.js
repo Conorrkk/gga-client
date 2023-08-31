@@ -33,7 +33,7 @@ export const match = {
         oppositionTeam: "Galway",
         players: [player1, player2]
     },
-    matchDate: new Date(),
+    matchDate: 8/30/2023,
     goalAgainst: 1,
     pointAgainst: 14
 };

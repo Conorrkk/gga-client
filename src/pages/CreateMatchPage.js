@@ -69,7 +69,7 @@ function CreateMatchPage() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{height: "100vh"}}>
+      <Container fluid className="main-container">
         <Col
           sm={{ span: 6, offset: 3 }}
           md={{ span: 6, offset: 3 }}

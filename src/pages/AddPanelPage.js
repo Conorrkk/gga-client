@@ -38,7 +38,7 @@ function AddPanel() {
   // success and failure pop up notifications
   const notifySuccess = () => toast("Player added successfully!");
   const notifyFailure = () => toast("Could not add player");
-  
+
   // on submission of the form, create this player in the db
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -95,7 +95,7 @@ function AddPanel() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{height: "100vh"}}>
+      <Container fluid className="main-container">
         <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>
           {errMsg}
         </p>

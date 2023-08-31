@@ -38,7 +38,7 @@ function RecordStats() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{height: "100vh"}}>
+      <Container fluid className="main-container">
       <div className="stats-container">
         <div className="player-section">
           <RecordPlayerList loadedPlayers={loadedPlayers} />

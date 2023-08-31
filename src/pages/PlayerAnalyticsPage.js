@@ -389,7 +389,7 @@ function PlayerAnalytics() {
   return (
     <div>
       <NavBar />
-      <Container fluid className={"mt-2"} style={{height: "100vh"}}>
+      <Container fluid className="mt-2 main-container">
         <Row>
           <Col className="mx-1 my-1">
             <Card className="styled-card">

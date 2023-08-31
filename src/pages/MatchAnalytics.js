@@ -267,7 +267,7 @@ function MatchAnalytics() {
   return (
     <div>
       <NavBar />
-      <Container fluid style={{ height: "100vh" }}>
+      <Container fluid className="main-container">
         <Col
           sm={{ span: 6 }}
           md={{ span: 8, offset: 2 }}
