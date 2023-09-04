@@ -38,4 +38,9 @@ export const match = {
     pointAgainst: 14
 };
 
+export const teamMock = {
+    teamName: 'Bredagh',
+    teamLevel: 'Senior',
+}
+
 export const matches = [match];

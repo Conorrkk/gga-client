@@ -136,14 +136,18 @@ function Dashboard() {
       <NavBar />
       <Container className="mt-5 main-container" fluid>
         <Row className="my-5">
-          <Col  sm={{ span: 4, offset: 1 }}
+          <Col
+            sm={{ span: 4, offset: 1 }}
             md={{ span: 4, offset: 1 }}
             lg={{ span: 4, offset: 1 }}
-            xl={{ span: 4, offset: 1 }}>
-            <Card.Title className="styled-title d-flex justify-content-left">Welcome back!</Card.Title>
+            xl={{ span: 4, offset: 1 }}
+          >
+            <Card.Title className="styled-title d-flex justify-content-left">
+              Welcome back!
+            </Card.Title>
             <Card.Header className="styled-header d-flex justify-content-left">
-              Pick up where you left off - create a match by clicking below or scroll
-              down and view your last recorded match
+              Pick up where you left off - create a match by clicking below or
+              scroll down and view your last recorded match
             </Card.Header>
           </Col>
         </Row>
@@ -158,7 +162,8 @@ function Dashboard() {
               <Card.Body>
                 <Card.Title>Create Matches</Card.Title>
                 <Card.Text>
-                  Create matches and record stats. We'll generate graphical analytics based on these.
+                  Create matches and record stats. We'll generate graphical
+                  analytics based on these.
                 </Card.Text>
                 <Button
                   className="styled-button"
@@ -216,7 +221,6 @@ function Dashboard() {
               <MatchTotals data={prevMatchChart} />
             </Card>
           </Col>
-
           <Col
             className="mt-5"
             sm={{ span: 3 }}

@@ -48,10 +48,10 @@ function Registration() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const userData = {
-      username: username,
-      club: club,
-      email: email,
-      password: password,
+      username,
+      club,
+      email,
+      password,
     };
     handleRegistration(userData);
     registerUser(userData)

@@ -9,7 +9,6 @@ function Stat({ id, stat }) {
     type: "button",
     item: { id: id },
     // collect function lets us define diff states & props that are accessible when we call useDrag hook
-    // optional and can be deleted once we have everything set up and working - only needed if we want to access isDragging boolean
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),

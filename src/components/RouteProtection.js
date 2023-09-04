@@ -1,7 +1,6 @@
 import React from "react";
-import { Route, Navigate, Routes } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
-import Dashboard from "../pages/Dashboard";
 
 const RouteProtection = ({ children }) => {
     const { auth } = useAuth();
