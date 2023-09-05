@@ -16,6 +16,7 @@ exports[`renders correctly 1`] = `
       className="card-body"
     >
       <div
+        aria-label="card-title"
         className="card-title h5"
       >
          
@@ -40,6 +41,7 @@ exports[`renders correctly 1`] = `
           className="d-flex justify-content-start col"
         >
           <button
+            aria-label="ViewMatch"
             className="styled-icon-button mx-1 btn btn-outline-primary"
             disabled={false}
             onClick={[Function]}
@@ -69,6 +71,7 @@ exports[`renders correctly 1`] = `
           className="d-flex justify-content-end col"
         >
           <button
+            aria-label="Delete"
             className="styled-icon-button mx-1 btn btn-outline-danger"
             disabled={false}
             onClick={[Function]}

@@ -38,9 +38,21 @@ export const match = {
     pointAgainst: 14
 };
 
+export const match2 = {
+    _id: "321",
+    teams: {
+        teamId: "321",
+        oppositionTeam: "Kilkenny",
+        players: [player1, player2]
+    },
+    matchDate: 8/30/2023,
+    goalAgainst: 2,
+    pointAgainst: 10
+};
+
 export const teamMock = {
     teamName: 'Bredagh',
     teamLevel: 'Senior',
 }
 
-export const matches = [match];
+export const matches = [match, match2];

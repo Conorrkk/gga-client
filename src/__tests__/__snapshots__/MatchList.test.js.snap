@@ -19,6 +19,7 @@ exports[`renders correctly 1`] = `
         className="card-body"
       >
         <div
+          aria-label="card-title"
           className="card-title h5"
         >
            
@@ -43,6 +44,7 @@ exports[`renders correctly 1`] = `
             className="d-flex justify-content-start col"
           >
             <button
+              aria-label="ViewMatch"
               className="styled-icon-button mx-1 btn btn-outline-primary"
               disabled={false}
               onClick={[Function]}
@@ -72,6 +74,107 @@ exports[`renders correctly 1`] = `
             className="d-flex justify-content-end col"
           >
             <button
+              aria-label="Delete"
+              className="styled-icon-button mx-1 btn btn-outline-danger"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                strokeWidth="0"
+                style={
+                  Object {
+                    "color": "red",
+                  }
+                }
+                viewBox="0 0 448 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="col-lg-8 col-md-8 col-sm-8 offset-lg-2 offset-md-2"
+  >
+    <div
+      className="styled-card mx-4 my-4 card"
+    >
+      <div
+        className="card-header"
+      >
+        1/1/1970
+      </div>
+      <div
+        className="card-body"
+      >
+        <div
+          aria-label="card-title"
+          className="card-title h5"
+        >
+           
+           vs 
+          Kilkenny
+        </div>
+        <p
+          className="card-text"
+        >
+          0
+          -
+          0
+           : 
+          2
+          -
+          10
+        </p>
+        <div
+          className="row"
+        >
+          <div
+            className="d-flex justify-content-start col"
+          >
+            <button
+              aria-label="ViewMatch"
+              className="styled-icon-button mx-1 btn btn-outline-primary"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                strokeWidth="0"
+                style={
+                  Object {
+                    "color": undefined,
+                  }
+                }
+                viewBox="0 0 576 512"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            className="d-flex justify-content-end col"
+          >
+            <button
+              aria-label="Delete"
               className="styled-icon-button mx-1 btn btn-outline-danger"
               disabled={false}
               onClick={[Function]}

@@ -50,6 +50,7 @@ function TeamShow({ team, onDelete }) {
               <Button
                 className="styled-icon-button mx-1"
                 variant="outline-danger"
+                aria-label="Delete"
                 onClick={handleDelete}
               >
                 <FaTrashAlt style={{color: 'red'}}></FaTrashAlt>

@@ -57,6 +57,7 @@ function MatchShow({ match, onDelete }) {
       try {
         const teamId = match.teams.teamId;
         const response = await getTeamById(teamId);
+        console.log(response);
         setTeam(response);
       } catch (error) {
         console.error("Error getting team name:", error);
@@ -74,7 +75,7 @@ function MatchShow({ match, onDelete }) {
       <Card className="styled-card mx-4 my-4">
         <Card.Header>{configuredDate}</Card.Header>
         <Card.Body >
-          <Card.Title>
+          <Card.Title aria-label="card-title">
             {team && team.teamName} {team && team.teamLevel} vs {oppositionName}
           </Card.Title>
           <Card.Text>
@@ -85,6 +86,7 @@ function MatchShow({ match, onDelete }) {
               <Button
                 variant="outline-primary"
                 onClick={handleClick}
+                aria-label="ViewMatch"
                 className="styled-icon-button mx-1"
               >
                 <FaEye />
@@ -94,6 +96,7 @@ function MatchShow({ match, onDelete }) {
               <Button
                 variant="outline-danger"
                 onClick={handleDelete}
+                aria-label="Delete"
                 className="styled-icon-button mx-1"
               >
                 <FaTrashAlt style={{ color: "red" }}></FaTrashAlt>
