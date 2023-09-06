@@ -441,7 +441,7 @@ export const logout = async () => {
   }
 };
 
-// sends matchId to backend where we create the schema used for creating a csv for a match
+// sends matchId to backend where we get the csv data
 export const createExportDoc = async (matchId) => {
   const data = {
     matchId,
